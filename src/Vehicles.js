@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import VehiclesContainer from './components/VehiclesContainer';
-import './App.css';
 
-class App extends Component {
+class Vehicles extends Component {
   render() {
     return (
       <VehiclesContainer />
@@ -10,4 +9,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Vehicles;
