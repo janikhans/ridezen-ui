@@ -9,7 +9,6 @@ class VehiclesContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      newVehicleFormVisible: false,
       vehicles: [],
       editingVehicleId: null
     }
@@ -23,20 +22,13 @@ class VehiclesContainer extends Component {
     .catch(error => console.log(error))
   }
 
-  showNewVehicleForm = () => {
-    this.setState({ newVehicleFormVisible: true })
-  }
-
-  hideNewVehicleForm = () => {
-    this.setState({ newVehicleFormVisible: false })
-  }
-
   addNewVehicle = (vehicle) => {
     const vehicles = update(this.state.vehicles, {
-      $splice: [[0, 0, vehicle]]
+      $push: [vehicle]
     })
     this.setState({
-      vehicles: vehicles
+      vehicles: vehicles,
+      newVehicleFormVisible: false
     })
   }
 
@@ -45,34 +37,30 @@ class VehiclesContainer extends Component {
   }
 
   updateVehicle = (vehicle) => {
-    console.log(vehicle.id)
     const vehicleIndex = this.state.vehicles.findIndex(x => x.id === vehicle.id)
     const vehicles = update(this.state.vehicles, {
       [vehicleIndex]: { $set: vehicle }
     })
-    console.log(this.state.vehicles)
-    console.log(vehicles)
     this.setState({
       vehicles: vehicles,
       editingVehicleId: null
     })
   }
 
-  render () {
-    let button = null;
-    if (this.state.newVehicleFormVisible) {
-      button = <button className="newVehicleButton" onClick={this.hideNewVehicleForm}>Cancel Vehicle</button>
-    } else {
-      button = <button className="newVehicleButton" onClick={this.showNewVehicleForm}>New Vehicle</button>
-    }
+  deleteVehicle = (id) => {
+    axios.delete(`http://localhost:3001/api/v1/vehicles/${id}`)
+    .then(response => {
+      const vehicleIndex = this.state.vehicles.findIndex(x => x.id === id)
+      const vehicles = update(this.state.vehicles, { $splice: [[vehicleIndex, 1]]})
+      this.setState({vehicles: vehicles})
+    })
+    .catch(error => console.log(error))
+  }
 
+  render () {
     return (
       <div>
         <div>
-          {button}
-        </div>
-        <div>
-          {this.state.newVehicleFormVisible && <NewVehicleForm addNewVehicle={this.addNewVehicle}/>}
           {this.state.vehicles.map((vehicle) => {
             if(this.state.editingVehicleId === vehicle.id) {
               return(<ExistingVehicleForm vehicle={vehicle} key={vehicle.id}
@@ -83,6 +71,7 @@ class VehiclesContainer extends Component {
                        onDelete={this.deleteVehicle} />)
             }
           })}
+          <NewVehicleForm addNewVehicle={this.addNewVehicle}/>
         </div>
       </div>
     )
