@@ -17,6 +17,11 @@ class ExistingVehicleForm extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  hideForm = (e) => {
+    this.props.disableEditing(this.props.vehicle.id)
+    e.preventDefault();
+  }
+
   handleSubmit = (e) => {
     const vehicle = {
       make: this.state.make,
@@ -54,6 +59,7 @@ class ExistingVehicleForm extends Component {
             placeholder='What year?'
             value={this.state.year} onChange={this.handleChange} />
           <input type="submit" value="Submit" />
+          <button onClick={this.hideForm}>Cancel</button>
         </form>
       </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
-import Vehicle from './Vehicle';
+import VehicleCard from './VehicleCard';
 import ExistingVehicleForm from './ExistingVehicleForm';
 import NewVehicleForm from './NewVehicleForm';
 
@@ -36,6 +36,10 @@ class VehiclesContainer extends Component {
     this.setState({editingVehicleId: id})
   }
 
+  disableEditing = (id) => {
+    this.setState({editingVehicleId: null})
+  }
+
   updateVehicle = (vehicle) => {
     const vehicleIndex = this.state.vehicles.findIndex(x => x.id === vehicle.id)
     const vehicles = update(this.state.vehicles, {
@@ -64,9 +68,10 @@ class VehiclesContainer extends Component {
           {this.state.vehicles.map((vehicle) => {
             if(this.state.editingVehicleId === vehicle.id) {
               return(<ExistingVehicleForm vehicle={vehicle} key={vehicle.id}
-                      updateVehicle={this.updateVehicle} />)
+                      updateVehicle={this.updateVehicle}
+                      disableEditing={this.disableEditing} />)
             } else {
-              return (<Vehicle vehicle={vehicle} key={vehicle.id}
+              return (<VehicleCard vehicle={vehicle} key={vehicle.id}
                        onClick={this.enableEditing}
                        onDelete={this.deleteVehicle} />)
             }
