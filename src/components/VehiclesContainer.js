@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
 import Vehicle from './Vehicle';
-// import VehicleForm from './VehicleForm';
+import ExistingVehicleForm from './ExistingVehicleForm';
 import NewVehicleForm from './NewVehicleForm';
 
 class VehiclesContainer extends Component {
@@ -10,7 +10,8 @@ class VehiclesContainer extends Component {
     super(props)
     this.state = {
       newVehicleFormVisible: false,
-      vehicles: []
+      vehicles: [],
+      editingVehicleId: null
     }
   }
 
@@ -39,12 +40,30 @@ class VehiclesContainer extends Component {
     })
   }
 
+  enableEditing = (id) => {
+    this.setState({editingVehicleId: id})
+  }
+
+  updateVehicle = (vehicle) => {
+    console.log(vehicle.id)
+    const vehicleIndex = this.state.vehicles.findIndex(x => x.id === vehicle.id)
+    const vehicles = update(this.state.vehicles, {
+      [vehicleIndex]: { $set: vehicle }
+    })
+    console.log(this.state.vehicles)
+    console.log(vehicles)
+    this.setState({
+      vehicles: vehicles,
+      editingVehicleId: null
+    })
+  }
+
   render () {
     let button = null;
     if (this.state.newVehicleFormVisible) {
-      button = <button className="newIdeaButton" onClick={this.hideNewVehicleForm}>Hide Vehicle Form</button>
+      button = <button className="newVehicleButton" onClick={this.hideNewVehicleForm}>Cancel Vehicle</button>
     } else {
-      button = <button className="newIdeaButton" onClick={this.showNewVehicleForm}>New Vehicle</button>
+      button = <button className="newVehicleButton" onClick={this.showNewVehicleForm}>New Vehicle</button>
     }
 
     return (
@@ -55,7 +74,14 @@ class VehiclesContainer extends Component {
         <div>
           {this.state.newVehicleFormVisible && <NewVehicleForm addNewVehicle={this.addNewVehicle}/>}
           {this.state.vehicles.map((vehicle) => {
-            return (<Vehicle vehicle={vehicle} key={vehicle.id} />)
+            if(this.state.editingVehicleId === vehicle.id) {
+              return(<ExistingVehicleForm vehicle={vehicle} key={vehicle.id}
+                      updateVehicle={this.updateVehicle} />)
+            } else {
+              return (<Vehicle vehicle={vehicle} key={vehicle.id}
+                       onClick={this.enableEditing}
+                       onDelete={this.deleteVehicle} />)
+            }
           })}
         </div>
       </div>
