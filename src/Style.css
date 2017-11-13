@@ -1,8 +1,9 @@
 body {
-  background-color: #ececec;
+  background-color: #eeeeee;
   padding: 20px;
   margin: 0;
 }
+
 h1, h2, p, ul, li {
   font-family: sans-serif;
 }
@@ -33,11 +34,21 @@ ul.header li a {
   margin-bottom: 10px;
 }
 
+.paper {
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
 .active {
   background-color: #0099FF;
 }
 
-.card {
+.no-decoration {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*.card {
   min-height: 150px;
   padding: 10px;
   height: 100%;
@@ -47,6 +58,11 @@ ul.header li a {
   display: inline-block;
   font-size: 11px;
   text-align: left;
+}*/
+
+.card-list-item {
+  display: inline-block;
+  margin: 5px;
 }
 
 .newVehicleButton {

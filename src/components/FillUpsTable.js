@@ -3,6 +3,9 @@ import axios from 'axios';
 import update from 'immutability-helper'
 import FillUpRow from './FillUpRow';
 import NewFillUpForm from './NewFillUpForm';
+import { withStyles } from 'material-ui/styles';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
 
 class FillUpsTable extends Component {
   constructor(props) {
@@ -44,27 +47,29 @@ class FillUpsTable extends Component {
 
   render () {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Mileage</th>
-            <th>Volume</th>
-            <th>Price</th>
-            <th>Topped Off</th>
-            <th>Note</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <NewFillUpForm vehicle={this.state.vehicle}
-            addNewFillUp={this.addNewFillUp} />
-          {this.state.fillUps.map((fillUp) => {
-            return(<FillUpRow key={fillUp.id} fillUp={fillUp}
-              deleteFillUp={this.deleteFillUp}/>)
-          })}
-        </tbody>
-      </table>
+      <Paper>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell numeric>Mileage</TableCell>
+              <TableCell numeric>Volume</TableCell>
+              <TableCell numeric>Price</TableCell>
+              <TableCell>Topped Off</TableCell>
+              <TableCell>Note</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {this.state.fillUps.map((fillUp) => {
+              return(
+                <FillUpRow key={fillUp.id} fillUp={fillUp}
+                  deleteFillUp={this.deleteFillUp} />
+              )
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
     )
   }
 }

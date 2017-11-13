@@ -3,7 +3,9 @@ import axios from 'axios';
 import update from 'immutability-helper'
 import VehicleCard from './VehicleCard';
 import ExistingVehicleForm from './ExistingVehicleForm';
-import NewVehicleForm from './NewVehicleForm';
+import NewVehicleDialog from './NewVehicleDialog';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 
 class VehiclesContainer extends Component {
   constructor(props) {
@@ -27,8 +29,7 @@ class VehiclesContainer extends Component {
       $push: [vehicle]
     })
     this.setState({
-      vehicles: vehicles,
-      newVehicleFormVisible: false
+      vehicles: vehicles
     })
   }
 
@@ -65,6 +66,14 @@ class VehiclesContainer extends Component {
     return (
       <div>
         <div>
+          <Paper className="paper" elevation={1}>
+            <Typography type="headline" component="h2">
+              Your Garage
+              <NewVehicleDialog addNewVehicle={this.addNewVehicle} />
+            </Typography>
+          </Paper>
+        </div>
+        <div>
           {this.state.vehicles.map((vehicle) => {
             if(this.state.editingVehicleId === vehicle.id) {
               return(<ExistingVehicleForm vehicle={vehicle} key={vehicle.id}
@@ -76,7 +85,6 @@ class VehiclesContainer extends Component {
                        onDelete={this.deleteVehicle} />)
             }
           })}
-          <NewVehicleForm addNewVehicle={this.addNewVehicle}/>
         </div>
       </div>
     )

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Table, { TableCell, TableRow } from 'material-ui/Table';
+import Button from 'material-ui/Button';
 
 class FillUpRow extends Component {
 
@@ -8,17 +10,19 @@ class FillUpRow extends Component {
 
   render () {
     return (
-      <tr className='fill-up'>
-        <td>{this.props.fillUp.date}</td>
-        <td>{this.props.fillUp.mileage}</td>
-        <td>{this.props.fillUp.volume}</td>
-        <td>{this.props.fillUp.price}</td>
-        <td>{this.props.fillUp.topped_off ? 'Yes' : 'No'}</td>
-        <td>{this.props.fillUp.note}</td>
-        <td>
-          <span onClick={this.handleDelete}>x</span>
-        </td>
-      </tr>
+      <TableRow>
+        <TableCell>{this.props.fillUp.date}</TableCell>
+        <TableCell numeric>{this.props.fillUp.mileage}</TableCell>
+        <TableCell numeric>{this.props.fillUp.volume}</TableCell>
+        <TableCell numeric>{this.props.fillUp.price}</TableCell>
+        <TableCell>{this.props.fillUp.topped_off ? 'Yes' : 'No'}</TableCell>
+        <TableCell>{this.props.fillUp.note}</TableCell>
+        <TableCell>
+          <Button raised color="accent" onClick={this.handleDelete}>
+            Delete
+          </Button>
+        </TableCell>
+      </TableRow>
     )
   }
 }
