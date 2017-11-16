@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Table, { TableCell, TableRow } from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 import ErrorsContainer from './ErrorsContainer'
 
 class NewFillUpForm extends Component {
@@ -59,50 +62,80 @@ class NewFillUpForm extends Component {
 
   render() {
     return (
-      <tr>
-        <form onSubmit={this.handleSubmit}>
-          <td>
-            <input className='input' type="date"
-              name="date" placeholder='Date'
-              value={this.state.date} onChange={this.handleChange}
-            />
-          </td>
-          <td>
-            <input className='input' type="number"
-              name="mileage" placeholder='Mileage'
-              value={this.state.mileage} onChange={this.handleChange}
-            />
-          </td>
-          <td>
-            <input className='input' type="number"
-              name="volume" placeholder='Volume'
-              value={this.state.volume} onChange={this.handleChange}
-            />
-          </td>
-          <td>
-            <input className='input' type="number"
-              name="price" placeholder='Price'
-              value={this.state.price} onChange={this.handleChange}
-            />
-          </td>
-          <td>
-            <input className='input' type="checkbox"
-              name="topped_off"
-              value={this.state.topped_off} onChange={this.handleChange}
-            />
-          </td>
-          <td>
-            <input className='input' type="input"
-              name="note" placeholder="Additional Notes?"
-              value={this.state.note} onChange={this.handleChange}
-            />
-          </td>
-          <td>
-            {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
-            <input type="submit" value="Submit" />
-          </td>
-        </form>
-      </tr>
+      <TableRow>
+        <TableCell>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="date"
+            placeholder="Date"
+            type="date"
+            value={this.state.date}
+            onChange={this.handleChange}
+          />
+        </TableCell>
+        <TableCell>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="mileage"
+            placeholder="Mileage"
+            type="number"
+            value={this.state.mileage}
+            onChange={this.handleChange}
+          />
+        </TableCell>
+        <TableCell>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="volume"
+            placeholder="Volume"
+            type="number"
+            value={this.state.volume}
+            onChange={this.handleChange}
+          />
+        </TableCell>
+        <TableCell>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="price"
+            placeholder="Price"
+            type="number"
+            value={this.state.price}
+            onChange={this.handleChange}
+          />
+        </TableCell>
+        <TableCell>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="topped_off"
+            placeholder="Topped Off"
+            type="checkbox"
+            value={this.state.topped_off}
+            onChange={this.handleChange}
+          />
+        </TableCell>
+        <TableCell>
+          <TextField
+            autoFocus
+            margin="dense"
+            name="note"
+            placeholder="Additional Notes"
+            type="text"
+            value={this.state.note}
+            onChange={this.handleChange}
+          />
+        </TableCell>
+        <TableCell>
+          {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
+          <Button raised onClick={this.handleSubmit} color="primary">
+            Create
+          </Button>
+        </TableCell>
+      </TableRow>
     )
   }
 }

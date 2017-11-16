@@ -8,8 +8,9 @@ import Home from "./Home";
 import Vehicles from "./Vehicles";
 import Contact from "./Contact";
 import Vehicle from "./components/Vehicle";
+import Drawer from "./components/Drawer";
 
-class Main extends Component {
+class App extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -32,4 +33,4 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default App;

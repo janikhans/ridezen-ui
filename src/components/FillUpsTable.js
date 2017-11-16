@@ -61,6 +61,7 @@ class FillUpsTable extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
+            <NewFillUpForm vehicle={this.state.vehicle} addNewFillUp={this.addNewFillUp} />
             {this.state.fillUps.map((fillUp) => {
               return(
                 <FillUpRow key={fillUp.id} fillUp={fillUp}

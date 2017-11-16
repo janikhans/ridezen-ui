@@ -54,11 +54,11 @@ class NewVehicleDialog extends Component {
 
   resetForm = () => {
     this.setState({
+      open: false,
       make: '',
       model: '',
       year: '',
-      errors: null,
-      open: false
+      errors: null
     })
   }
 

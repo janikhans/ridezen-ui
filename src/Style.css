@@ -1,6 +1,6 @@
 body {
   background-color: #eeeeee;
-  padding: 20px;
+  padding: 10px;
   margin: 0;
 }
 
@@ -23,13 +23,7 @@ ul.header li a {
   padding: 20px;
   display: inline-block;
 }
-.content {
-  padding: 20px;
-}
-.content h2 {
-  padding: 0;
-  margin: 0;
-}
+
 .content li {
   margin-bottom: 10px;
 }
@@ -48,62 +42,7 @@ ul.header li a {
   color: inherit;
 }
 
-/*.card {
-  min-height: 150px;
-  padding: 10px;
-  height: 100%;
-  width: 150px;
-  margin: 10px;
-  background: lightyellow;
-  display: inline-block;
-  font-size: 11px;
-  text-align: left;
-}*/
-
 .card-list-item {
   display: inline-block;
   margin: 5px;
-}
-
-.newVehicleButton {
-  background: darkblue;
-  color: white;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  margin-right: 10px;
-  margin-left: 10px;
-  padding:10px;
-}
-
-.input {
-  border: 0;
-  background: none;
-  outline: none;
-  margin-top:10px;
-  width: 140px;
-  font-size: 11px;
-}
-
-.input:focus {
-  border: solid 1px lightgrey;
-}
-
-textarea {
-  resize: none;
-  height: 90px;
-  font-size: 11px;
-}
-
-.deleteButton {
-  visibility: hidden;
-  float: right;
-  margin: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  color: red;
-}
-
-.card:hover .deleteButton {
-  visibility: visible;
 }
