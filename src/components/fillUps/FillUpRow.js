@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Table, { TableCell, TableRow } from 'material-ui/Table';
+import { TableCell, TableRow } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 

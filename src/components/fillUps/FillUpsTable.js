@@ -3,7 +3,6 @@ import axios from 'axios';
 import update from 'immutability-helper'
 import FillUpRow from './FillUpRow';
 import FillUpCreateDialog from './FillUpCreateDialog';
-import { withStyles } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 

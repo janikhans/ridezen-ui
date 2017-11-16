@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add'
 import TextField from 'material-ui/TextField';
 import Dialog, {
   DialogActions,
@@ -18,6 +17,7 @@ class VehicleCreateDialog extends Component {
       make: '',
       model: '',
       year: '',
+      startingMileage: '',
       errors: null,
       open: false
     }
@@ -35,7 +35,8 @@ class VehicleCreateDialog extends Component {
     const vehicle = {
       make: this.state.make,
       model: this.state.model,
-      year: this.state.year
+      year: this.state.year,
+      starting_mileage: this.state.startingMileage
     }
 
     axios.post(
@@ -103,6 +104,15 @@ class VehicleCreateDialog extends Component {
               type="text"
               fullWidth
               value={this.state.model}
+              onChange={this.handleChange}
+            />
+            <TextField
+              margin="dense"
+              name="startingMileage"
+              label="Starting Mileage"
+              type="number"
+              fullWidth
+              value={this.state.startingMileage}
               onChange={this.handleChange}
             />
           </DialogContent>

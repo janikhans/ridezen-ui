@@ -6,18 +6,7 @@ import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 
 class VehicleCard extends Component {
-
-  handleClick = (e) => {
-    this.props.onClick(this.props.vehicle.id)
-    e.preventDefault()
-  }
-
   render () {
-    let links = [
-      <Button dense color="primary" component={Link} to={'/vehicles/' + this.props.vehicle.id}>View</Button>,
-      <Button dense color="primary" onClick={this.handleClick}>Edit</Button>
-    ]
-
     return (
       <Grid item md={3} sm={6} xs={12}>
         <Card>
@@ -30,7 +19,7 @@ class VehicleCard extends Component {
             </Typography>
           </CardContent>
           <CardActions>
-            {links}
+            <Button dense color="primary" component={Link} to={'/vehicles/' + this.props.vehicle.id}>View</Button>
           </CardActions>
         </Card>
       </Grid>

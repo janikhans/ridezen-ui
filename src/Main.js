@@ -10,11 +10,11 @@ import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import List, { ListItem, ListItemIcon } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
+import Divider from 'material-ui/Divider'
 import Hidden from 'material-ui/Hidden';
-import Divider from 'material-ui/Divider';
 import MenuIcon from 'material-ui-icons/Menu';
 import InboxIcon from 'material-ui-icons/Inbox';
 import DraftsIcon from 'material-ui-icons/Drafts';
@@ -30,9 +30,8 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     width: '100%',
-    height: '100vh',
-    zIndex: 1,
-    overflow: 'hidden',
+    height: '100%',
+    zIndex: 1
   },
   appFrame: {
     position: 'relative',
@@ -52,7 +51,13 @@ const styles = theme => ({
       display: 'none',
     },
   },
-  drawerHeader: theme.mixins.toolbar,
+  drawerHeader: {
+    'text-align': 'center',
+    height: '56px',
+    [theme.breakpoints.up('sm')]: {
+      height: '64px;'
+    },
+  },
   drawerPaper: {
     width: 250,
     [theme.breakpoints.up('md')]: {
@@ -69,7 +74,7 @@ const styles = theme => ({
     marginTop: 56,
     [theme.breakpoints.up('sm')]: {
       height: 'calc(100% - 64px)',
-      marginTop: 64,
+      marginTop: 64
     },
   },
 });
@@ -87,26 +92,34 @@ class ResponsiveDrawer extends React.Component {
     const { classes, theme } = this.props;
 
     const drawer = (
-      <List>
-        <ListItem button component={NavLink} to='/'>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          Home
-        </ListItem>
-        <ListItem button component={NavLink} to="/garage">
-          <ListItemIcon>
-            <DirectionsCar />
-          </ListItemIcon>
-          Garage
-        </ListItem>
-        <ListItem button component={NavLink} to="/contact">
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          Contact
-        </ListItem>
-      </List>
+      <div>
+        <div className={classes.drawerHeader} >
+          <Typography type="display1" component="h2" noWrap>
+            TrackR
+          </Typography>
+        </div>
+        <Divider />
+        <List>
+          <ListItem button component={NavLink} to='/'>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            Home
+          </ListItem>
+          <ListItem button component={NavLink} to="/garage">
+            <ListItemIcon>
+              <DirectionsCar />
+            </ListItemIcon>
+            Garage
+          </ListItem>
+          <ListItem button component={NavLink} to="/contact">
+            <ListItemIcon>
+              <DraftsIcon />
+            </ListItemIcon>
+            Contact
+          </ListItem>
+        </List>
+      </div>
     );
 
     return (
@@ -123,9 +136,6 @@ class ResponsiveDrawer extends React.Component {
                 >
                   <MenuIcon />
                 </IconButton>
-                <Typography type="title" color="inherit" noWrap>
-                  TrackR
-                </Typography>
               </Toolbar>
             </AppBar>
             <Hidden mdUp>

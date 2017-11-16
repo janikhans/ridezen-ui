@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
 import VehicleCard from './VehicleCard';
-import VehicleEditDialog from './VehicleEditDialog';
 import VehicleCreateDialog from './VehicleCreateDialog';
 
 import Grid from 'material-ui/Grid';
@@ -13,8 +12,7 @@ class VehicleIndex extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      vehicles: [],
-      editingVehicleId: null
+      vehicles: []
     }
   }
 
@@ -35,35 +33,6 @@ class VehicleIndex extends Component {
     })
   }
 
-  enableEditing = (id) => {
-    this.setState({editingVehicleId: id})
-  }
-
-  disableEditing = (id) => {
-    this.setState({editingVehicleId: null})
-  }
-
-  updateVehicle = (vehicle) => {
-    const vehicleIndex = this.state.vehicles.findIndex(x => x.id === vehicle.id)
-    const vehicles = update(this.state.vehicles, {
-      [vehicleIndex]: { $set: vehicle }
-    })
-    this.setState({
-      vehicles: vehicles,
-      editingVehicleId: null
-    })
-  }
-
-  deleteVehicle = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/vehicles/${id}`)
-    .then(response => {
-      const vehicleIndex = this.state.vehicles.findIndex(x => x.id === id)
-      const vehicles = update(this.state.vehicles, { $splice: [[vehicleIndex, 1]]})
-      this.setState({vehicles: vehicles})
-    })
-    .catch(error => console.log(error))
-  }
-
   render () {
     return (
       <div>
@@ -77,16 +46,12 @@ class VehicleIndex extends Component {
         </div>
         <Grid container spacing={24}>
           {this.state.vehicles.map((vehicle) => {
-            if(this.state.editingVehicleId === vehicle.id) {
-              return(<VehicleEditDialog vehicle={vehicle} key={vehicle.id}
-                      updateVehicle={this.updateVehicle}
-                      disableEditing={this.disableEditing} />)
-            } else {
-              return (<VehicleCard vehicle={vehicle} key={vehicle.id}
-                       onClick={this.enableEditing}
-                       onDelete={this.deleteVehicle} />)
-            }
-          })}
+            return (
+              <VehicleCard vehicle={vehicle} key={vehicle.id}
+                onClick={this.enableEditing}
+                onDelete={this.deleteVehicle} />
+            )}
+          )}
         </Grid>
       </div>
     )

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import VehicleDeleteDialog from './VehicleDeleteDialog';
+import VehicleEditDialog from './VehicleEditDialog';
 import FillUpsTable from '../fillUps/FillUpsTable'
 import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
 class VehicleShow extends Component {
@@ -33,19 +35,32 @@ class VehicleShow extends Component {
     .catch(error => console.log(error))
   }
 
+  updateVehicle = (vehicle) => {
+    this.setState({
+      vehicle: vehicle
+    })
+  }
+
   render () {
+    const styles = {
+      button: { margin: '5px' }
+    }
     if (this.state.redirect) {
       return (
-        <Redirect to='/vehicles'/>
+        <Redirect to='/garage'/>
       )
     } else if (this.state.vehicle) {
       return (
         <div>
           <Paper className="paper-header" elevation={1}>
-            <Typography type="headline" component="h2">
+            <Typography type="display1" component="h2">
               {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}
-              <VehicleDeleteDialog vehicle={this.state.vehicle} deleteVehicle={this.deleteVehicle} />
             </Typography>
+            <Typography type="subheading" component="p">
+              Starting Mileage: {this.state.vehicle.starting_mileage}
+            </Typography>
+            <VehicleEditDialog vehicle={this.state.vehicle} updateVehicle={this.updateVehicle} />
+            <VehicleDeleteDialog vehicle={this.state.vehicle} deleteVehicle={this.deleteVehicle} />
           </Paper>
           <FillUpsTable vehicle={this.state.vehicle} />
         </div>

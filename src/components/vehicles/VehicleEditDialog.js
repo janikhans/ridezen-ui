@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import ErrorsContainer from '../shared/ErrorsContainer'
+import Button from 'material-ui/Button';
+import TextField from 'material-ui/TextField';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 class VehicleEditDialog extends Component {
   constructor(props) {
@@ -9,7 +17,8 @@ class VehicleEditDialog extends Component {
       make: this.props.vehicle.make,
       model: this.props.vehicle.model,
       year: this.props.vehicle.year,
-      errors: null
+      errors: null,
+      open: false
     }
   }
 
@@ -17,10 +26,9 @@ class VehicleEditDialog extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  hideForm = (e) => {
-    this.props.disableEditing(this.props.vehicle.id)
-    e.preventDefault();
-  }
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
   handleSubmit = (e) => {
     const vehicle = {
@@ -35,8 +43,8 @@ class VehicleEditDialog extends Component {
         vehicle: vehicle
       })
     .then(response => {
-      this.setState({ errors: null })
       this.props.updateVehicle(response.data)
+      this.resetForm()
     })
     .catch(error => {
       this.setState({ errors: error.response.data })
@@ -44,23 +52,67 @@ class VehicleEditDialog extends Component {
     e.preventDefault();
   }
 
+  resetForm = () => {
+    this.setState({
+      open: false,
+      make: this.props.vehicle.make,
+      model: this.props.vehicle.model,
+      year: this.props.vehicle.year,
+      errors: null
+    })
+  }
+
   render() {
     return (
-      <div className="card">
-        {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
-        <form onSubmit={this.handleSubmit}>
-          <input className='input' type="text"
-            name="make" placeholder='Enter a Make'
-            value={this.state.make} onChange={this.handleChange} />
-          <input className='input'  type="text" name="model"
-            placeholder='Enter a Model'
-            value={this.state.model} onChange={this.handleChange} />
-          <input className='input' type="number" name="year"
-            placeholder='What year?'
-            value={this.state.year} onChange={this.handleChange} />
-          <input type="submit" value="Submit" />
-          <button onClick={this.hideForm}>Cancel</button>
-        </form>
+      <div>
+        <Button dense raised color="primary" className="pull-right" onClick={this.handleClickOpen}>
+          Edit
+        </Button>
+        <Dialog open={this.state.open} onRequestClose={this.resetForm}>
+          <DialogTitle>Edit Vehicle</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {`Edit your vehicle. You will not be able to edit all fields such as starting mileage.`}
+            </DialogContentText>
+            {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
+            <TextField
+              autoFocus
+              margin="dense"
+              name="year"
+              label="Vehicle Year"
+              type="number"
+              fullWidth
+              value={this.state.year}
+              onChange={this.handleChange}
+            />
+            <TextField
+              margin="dense"
+              name="make"
+              label="Vehicle Make"
+              type="text"
+              fullWidth
+              value={this.state.make}
+              onChange={this.handleChange}
+            />
+            <TextField
+              margin="dense"
+              name="model"
+              label="Vehicle Model"
+              type="text"
+              fullWidth
+              value={this.state.model}
+              onChange={this.handleChange}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.resetForm} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleSubmit} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
