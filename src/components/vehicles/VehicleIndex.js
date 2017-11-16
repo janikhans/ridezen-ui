@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
 import VehicleCard from './VehicleCard';
-import ExistingVehicleForm from './ExistingVehicleForm';
-import NewVehicleDialog from './NewVehicleDialog';
+import VehicleEditDialog from './VehicleEditDialog';
+import VehicleCreateDialog from './VehicleCreateDialog';
+
+import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
-class VehiclesContainer extends Component {
+class VehicleIndex extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -66,17 +68,17 @@ class VehiclesContainer extends Component {
     return (
       <div>
         <div>
-          <Paper className="paper" elevation={1}>
+          <Paper className="paper-header" elevation={1}>
             <Typography type="headline" component="h2">
               Your Garage
-              <NewVehicleDialog addNewVehicle={this.addNewVehicle} />
+              <VehicleCreateDialog addNewVehicle={this.addNewVehicle} />
             </Typography>
           </Paper>
         </div>
-        <div>
+        <Grid container spacing={24}>
           {this.state.vehicles.map((vehicle) => {
             if(this.state.editingVehicleId === vehicle.id) {
-              return(<ExistingVehicleForm vehicle={vehicle} key={vehicle.id}
+              return(<VehicleEditDialog vehicle={vehicle} key={vehicle.id}
                       updateVehicle={this.updateVehicle}
                       disableEditing={this.disableEditing} />)
             } else {
@@ -85,10 +87,10 @@ class VehiclesContainer extends Component {
                        onDelete={this.deleteVehicle} />)
             }
           })}
-        </div>
+        </Grid>
       </div>
     )
   }
 }
 
-export default VehiclesContainer;
+export default VehicleIndex;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
 import FillUpRow from './FillUpRow';
-import NewFillUpForm from './NewFillUpForm';
+import FillUpCreateDialog from './FillUpCreateDialog';
 import { withStyles } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
@@ -47,30 +47,31 @@ class FillUpsTable extends Component {
 
   render () {
     return (
-      <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell numeric>Mileage</TableCell>
-              <TableCell numeric>Volume</TableCell>
-              <TableCell numeric>Price</TableCell>
-              <TableCell>Topped Off</TableCell>
-              <TableCell>Note</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <NewFillUpForm vehicle={this.state.vehicle} addNewFillUp={this.addNewFillUp} />
-            {this.state.fillUps.map((fillUp) => {
-              return(
-                <FillUpRow key={fillUp.id} fillUp={fillUp}
-                  deleteFillUp={this.deleteFillUp} />
-              )
-            })}
-          </TableBody>
-        </Table>
-      </Paper>
+      <div>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell numeric>Mileage</TableCell>
+                <TableCell numeric>Volume</TableCell>
+                <TableCell numeric>Price</TableCell>
+                <TableCell>Topped Off</TableCell>
+                <TableCell>Note</TableCell>
+                <TableCell><FillUpCreateDialog vehicle={this.state.vehicle} addNewFillUp={this.addNewFillUp} /></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.fillUps.map((fillUp) => {
+                return(
+                  <FillUpRow key={fillUp.id} fillUp={fillUp}
+                    deleteFillUp={this.deleteFillUp} />
+                )
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
+      </div>
     )
   }
 }

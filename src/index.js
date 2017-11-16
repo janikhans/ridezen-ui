@@ -5,14 +5,10 @@ import './Style.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 
-const Main = () => (
+ReactDOM.render(
   <MuiThemeProvider>
     <App />
-  </MuiThemeProvider>
-);
-
-ReactDOM.render(
-  <Main />,
+  </MuiThemeProvider>,
   document.getElementById('root')
 );
 registerServiceWorker();

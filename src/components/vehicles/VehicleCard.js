@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+import Grid from 'material-ui/Grid';
 
 class VehicleCard extends Component {
 
@@ -13,12 +14,12 @@ class VehicleCard extends Component {
 
   render () {
     let links = [
-      <Button dense color="primary"><Link className="no-decoration" to={'/vehicles/' + this.props.vehicle.id} >View</Link></Button>,
+      <Button dense color="primary" component={Link} to={'/vehicles/' + this.props.vehicle.id}>View</Button>,
       <Button dense color="primary" onClick={this.handleClick}>Edit</Button>
     ]
 
     return (
-      <div className="card-list-item">
+      <Grid item md={3} sm={6} xs={12}>
         <Card>
           <CardContent>
             <Typography type="body1">
@@ -32,7 +33,7 @@ class VehicleCard extends Component {
             {links}
           </CardActions>
         </Card>
-      </div>
+      </Grid>
     )
   }
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import ErrorsContainer from './ErrorsContainer'
+import ErrorsContainer from '../shared/ErrorsContainer'
 
-class ExistingVehicleForm extends Component {
+class VehicleEditDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -66,4 +66,4 @@ class ExistingVehicleForm extends Component {
   }
 }
 
-export default ExistingVehicleForm
+export default VehicleEditDialog

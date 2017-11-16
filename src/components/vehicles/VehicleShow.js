@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import VehicleDeleteDialog from './VehicleDeleteDialog';
-import FillUpsTable from './FillUpsTable'
+import FillUpsTable from '../fillUps/FillUpsTable'
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
-class Vehicle extends Component {
+class VehicleShow extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -41,7 +41,7 @@ class Vehicle extends Component {
     } else if (this.state.vehicle) {
       return (
         <div>
-          <Paper className="paper" elevation={1}>
+          <Paper className="paper-header" elevation={1}>
             <Typography type="headline" component="h2">
               {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}
               <VehicleDeleteDialog vehicle={this.state.vehicle} deleteVehicle={this.deleteVehicle} />
@@ -59,4 +59,4 @@ class Vehicle extends Component {
   }
 }
 
-export default Vehicle;
+export default VehicleShow;

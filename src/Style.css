@@ -4,9 +4,9 @@ body {
   margin: 0;
 }
 
-.paper {
+.paper-header {
   padding: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 24px;
 }
 
 .active {
@@ -18,7 +18,10 @@ body {
   color: inherit;
 }
 
-.card-list-item {
+.text-right {
+  text-align: right;
+}
+
+.inline-block {
   display: inline-block;
-  margin: 5px;
 }

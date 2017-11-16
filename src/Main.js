@@ -20,10 +20,10 @@ import InboxIcon from 'material-ui-icons/Inbox';
 import DraftsIcon from 'material-ui-icons/Drafts';
 import DirectionsCar from 'material-ui-icons/DirectionsCar';
 
-import Home from "./Home";
-import Vehicles from "./Vehicles";
-import Contact from "./Contact";
-import Vehicle from "./components/Vehicle";
+import Home from "./views/Home";
+import Garage from "./views/Garage";
+import Contact from "./views/Contact";
+import VehicleShow from "./components/vehicles/VehicleShow"
 
 const drawerWidth = 240;
 
@@ -94,11 +94,11 @@ class ResponsiveDrawer extends React.Component {
           </ListItemIcon>
           Home
         </ListItem>
-        <ListItem button component={NavLink} to="/vehicles">
+        <ListItem button component={NavLink} to="/garage">
           <ListItemIcon>
             <DirectionsCar />
           </ListItemIcon>
-          Vehicles
+          Garage
         </ListItem>
         <ListItem button component={NavLink} to="/contact">
           <ListItemIcon>
@@ -157,9 +157,9 @@ class ResponsiveDrawer extends React.Component {
             </Hidden>
             <main className={classes.content}>
               <Route exact path="/" component={Home} />
-              <Route exact path="/vehicles" component={Vehicles} />
+              <Route exact path="/garage" component={Garage} />
               <Route path="/contact" component={Contact} />
-              <Route exact path="/vehicles/:vehicleId" component={Vehicle} />
+              <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
             </main>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table, { TableCell, TableRow } from 'material-ui/Table';
-import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
 
 class FillUpRow extends Component {
 
@@ -18,9 +19,9 @@ class FillUpRow extends Component {
         <TableCell>{this.props.fillUp.topped_off ? 'Yes' : 'No'}</TableCell>
         <TableCell>{this.props.fillUp.note}</TableCell>
         <TableCell>
-          <Button raised color="accent" onClick={this.handleDelete}>
-            Delete
-          </Button>
+          <IconButton onClick={this.handleDelete}>
+            <DeleteIcon />
+          </IconButton>
         </TableCell>
       </TableRow>
     )
