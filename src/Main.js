@@ -24,8 +24,11 @@ import Home from "./views/Home";
 import Garage from "./views/Garage";
 import Contact from "./views/Contact";
 import Vehicles from "./views/Vehicles";
+import ServiceItems from "./views/ServiceItems";
+
 import RideShow from "./components/rides/RideShow"
 import VehicleShow from "./components/vehicles/VehicleShow"
+import ServiceItemShow from "./components/serviceItems/ServiceItemShow"
 
 const drawerWidth = 240;
 
@@ -130,6 +133,12 @@ class ResponsiveDrawer extends React.Component {
             </ListItemIcon>
             Vehicles
           </ListItem>
+          <ListItem button component={NavLink} to="/service-items">
+            <ListItemIcon>
+              <DraftsIcon />
+            </ListItemIcon>
+            Service Items
+          </ListItem>
         </List>
       </div>
     );
@@ -182,8 +191,10 @@ class ResponsiveDrawer extends React.Component {
               <Route exact path="/garage" component={Garage} />
               <Route path="/contact" component={Contact} />
               <Route exact path="/vehicles" component={Vehicles} />
+              <Route exact path="/service-items" component={ServiceItems} />
               <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
               <Route exact path="/rides/:rideId" component={RideShow} />
+              <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
             </main>
           </div>
         </div>

@@ -7,7 +7,7 @@ class ErrorsContainer extends Component {
       <div className='error-container'>
         <h3>The Following Errors Occured:</h3>
         {Object.keys(errors).map(function(key,index) {
-          return (<div><strong>{key}:</strong> {errors[key].join(', ')}</div>);
+          return (<div key={index}><strong>{key}:</strong> {errors[key].join(', ')}</div>);
         })}
       </div>
     )

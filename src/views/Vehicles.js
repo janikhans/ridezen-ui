@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import VehicleIndex from '../components/vehicles/VehicleIndex';
 
-class Garage extends Component {
+class Vehicles extends Component {
   render() {
     return (
       <VehicleIndex />
@@ -9,4 +9,4 @@ class Garage extends Component {
   }
 }
 
-export default Garage;
+export default Vehicles;
