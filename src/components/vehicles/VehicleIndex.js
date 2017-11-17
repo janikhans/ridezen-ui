@@ -38,7 +38,7 @@ class VehicleIndex extends Component {
       <div>
         <Paper className="paper-header" elevation={1}>
           <Typography type="headline" component="h2">
-            TrackR Vehicles
+            Vehicles
           </Typography>
         </Paper>
         <Paper>

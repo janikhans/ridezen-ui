@@ -39,7 +39,7 @@ class ServiceItemIndex extends Component {
       <div>
         <Paper className="paper-header" elevation={1}>
           <Typography type="headline" component="h2">
-            TrackR Service Items
+            Service Items
           </Typography>
         </Paper>
         <Paper>
@@ -55,8 +55,7 @@ class ServiceItemIndex extends Component {
             <TableBody>
               {this.state.serviceItems.map((serviceItem) => {
                 return(
-                  <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}
-                    deleteServiceItem={this.deleteServiceItem} />
+                  <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}/>
                 )
               })}
             </TableBody>

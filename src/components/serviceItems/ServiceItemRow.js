@@ -5,11 +5,6 @@ import { TableCell, TableRow } from 'material-ui/Table';
 import Button from 'material-ui/Button';
 
 class ServiceItemRow extends Component {
-
-  handleDelete = () => {
-    this.props.deleteServiceItem(this.props.serviceItem.id)
-  }
-
   render () {
     return (
       <TableRow>
