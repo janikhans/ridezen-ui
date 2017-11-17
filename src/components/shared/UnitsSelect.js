@@ -21,7 +21,7 @@ class UnitsSelect extends Component {
       'years'
     ]
     return (
-      <FormControl>
+      <FormControl style={{minWidth: '100%'}}>
         <InputLabel htmlFor="units">Units</InputLabel>
         <Select value={this.props.units}
           autoWidth

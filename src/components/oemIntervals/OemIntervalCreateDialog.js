@@ -60,8 +60,12 @@ class OemIntervalCreateDialog extends Component {
     this.setState({ units: units })
   }
 
-  updateServiceItem = (serviceItemId) => {
-    this.setState({ serviceItemId: serviceItemId })
+  updateServiceItem = (serviceItem) => {
+    this.setState({
+      serviceItemId: serviceItem.id,
+      units: serviceItem.units,
+      distance: serviceItem.distance
+    })
   }
 
   resetForm = () => {
@@ -87,7 +91,7 @@ class OemIntervalCreateDialog extends Component {
               Add an OEM interval for this vehicle.
             </DialogContentText>
             {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
-            <div><ServiceItemSelect serviceItemId={this.state.serviceItemId} updateServiceItem={this.updateServiceItem}/></div>
+            <ServiceItemSelect serviceItemId={this.state.serviceItemId} updateServiceItem={this.updateServiceItem}/>
             <UnitsSelect units={this.state.units} updateUnits={this.updateUnits}/>
             <TextField
               margin="dense"

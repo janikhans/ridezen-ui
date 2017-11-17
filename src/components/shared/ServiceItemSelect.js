@@ -25,26 +25,30 @@ class ServiceItemSelect extends Component {
   }
 
   handleChange = (e) => {
-    this.props.updateServiceItem(e.target.value);
+    const serviceItemIndex = this.state.serviceItems.findIndex(x => x.id === e.target.value)
+    const serviceItem = this.state.serviceItems[serviceItemIndex]
+    this.props.updateServiceItem(serviceItem);
   };
 
   render() {
     return (
-      <FormControl>
-        <InputLabel htmlFor="serviceItem">Service Item</InputLabel>
-        <Select value={this.props.serviceItemId}
-          autoWidth
-          name="serviceItem"
-          onChange={this.handleChange}
-          input={<Input id="serviceItem" />}
-        >
-          {this.state.serviceItems.map((serviceItem, index) => {
-            return (
-              <MenuItem key={index} value={serviceItem.id}>{serviceItem.name}</MenuItem>
+      <div>
+        <FormControl style={{minWidth: '100%'}}>
+          <InputLabel htmlFor="serviceItem">Service Item</InputLabel>
+          <Select value={this.props.serviceItemId}
+            autoWidth
+            name="serviceItem"
+            onChange={this.handleChange}
+            input={<Input id="serviceItem" />}
+          >
+            {this.state.serviceItems.map((serviceItem, index) => {
+              return (
+                <MenuItem key={index} value={serviceItem.id}>{serviceItem.name}</MenuItem>
+              )}
             )}
-          )}
-        </Select>
-      </FormControl>
+          </Select>
+        </FormControl>
+      </div>
     );
   }
 }
