@@ -63,7 +63,7 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
       position: 'relative',
-      height: '100vh',
+      'min-height': '100%',
     },
   },
   content: {
@@ -156,7 +156,7 @@ class ResponsiveDrawer extends React.Component {
             </Hidden>
             <Hidden mdDown implementation="css">
               <Drawer
-                type="permanent"
+                type="persistent"
                 open
                 classes={{
                   paper: classes.drawerPaper,
