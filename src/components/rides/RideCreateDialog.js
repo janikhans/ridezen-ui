@@ -9,17 +9,31 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl } from 'material-ui/Form';
 
-class VehicleCreateDialog extends Component {
+
+class RideCreateDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      make: '',
-      model: '',
-      year: '',
+      vehicles: [],
+      vehicleId: '',
+      name: '',
+      startingMileage: '',
       errors: null,
       open: false
     }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/v1/vehicles.json')
+    .then(response => {
+      this.setState({vehicles: response.data})
+    })
+    .catch(error => console.log(error))
   }
 
   handleClickOpen = () => {
@@ -30,20 +44,24 @@ class VehicleCreateDialog extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  handleSelect = (name) => (event) => {
+    this.setState({[name]: event.target.value });
+  };
+
   handleSubmit = (e) => {
-    const vehicle = {
-      make: this.state.make,
-      model: this.state.model,
-      year: this.state.year
+    const ride = {
+      vehicle_id: this.state.vehicleId,
+      name: this.state.name,
+      starting_mileage: this.state.startingMileage
     }
 
     axios.post(
-      `http://localhost:3001/api/v1/vehicles`,
+      `http://localhost:3001/api/v1/rides`,
       {
-        vehicle: vehicle
+        ride: ride
       })
     .then(response => {
-      this.props.addNewVehicle(response.data)
+      this.props.addNewRide(response.data)
       this.resetForm()
     })
     .catch(error => {
@@ -55,9 +73,9 @@ class VehicleCreateDialog extends Component {
   resetForm = () => {
     this.setState({
       open: false,
-      make: '',
-      model: '',
-      year: '',
+      vehicleId: null,
+      name: '',
+      startingMileage: '',
       errors: null
     })
   }
@@ -72,36 +90,45 @@ class VehicleCreateDialog extends Component {
           <DialogTitle>Add to Garage</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {`By adding a new vehicle to your garage, you'll be able to track mileage, get
+              {`By adding a new ride to your garage, you'll be able to track mileage, get
               updates on maintenance and other goodness.`}
             </DialogContentText>
             {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
+            <FormControl>
+              <InputLabel htmlFor="vehicle-id">Vehicle</InputLabel>
+              <Select value={this.state.vehicleId}
+                autoWidth
+                placeholder="Select Vehicle"
+                name="vehicleId"
+                onChange={this.handleSelect('vehicleId')}
+                input={<Input id="vehicle-id" />}
+              >
+                if (this.state.vehicles){
+                  this.state.vehicles.map((vehicle) => {
+                    return (
+                      <MenuItem key={vehicle.id} value={vehicle.id}>{vehicle.year + " " + vehicle.make + " " + vehicle.model}</MenuItem>
+                    )}
+                  )
+                }
+              </Select>
+            </FormControl>
             <TextField
               autoFocus
               margin="dense"
-              name="year"
-              label="Vehicle Year"
+              name="name"
+              label="Ride Name"
+              type="text"
+              fullWidth
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+            <TextField
+              margin="dense"
+              name="startingMileage"
+              label="Starting Mileage"
               type="number"
               fullWidth
-              value={this.state.year}
-              onChange={this.handleChange}
-            />
-            <TextField
-              margin="dense"
-              name="make"
-              label="Vehicle Make"
-              type="text"
-              fullWidth
-              value={this.state.make}
-              onChange={this.handleChange}
-            />
-            <TextField
-              margin="dense"
-              name="model"
-              label="Vehicle Model"
-              type="text"
-              fullWidth
-              value={this.state.model}
+              value={this.state.startingMileage}
               onChange={this.handleChange}
             />
           </DialogContent>
@@ -119,4 +146,4 @@ class VehicleCreateDialog extends Component {
   }
 }
 
-export default VehicleCreateDialog;
+export default RideCreateDialog;

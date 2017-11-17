@@ -1,59 +1,64 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
-import VehicleDeleteDialog from './VehicleDeleteDialog';
-import VehicleEditDialog from './VehicleEditDialog';
+import RideDeleteDialog from './RideDeleteDialog';
+import RideEditDialog from './RideEditDialog';
+import FillUpsTable from '../fillUps/FillUpsTable'
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
-class VehicleShow extends Component {
+class RideShow extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      vehicle: null,
+      ride: null,
       redirect: false
     }
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/v1/vehicles/${this.props.match.params.vehicleId}.json`)
+    axios.get(`http://localhost:3001/api/v1/rides/${this.props.match.params.rideId}.json`)
     .then(response => {
       this.setState({
-        vehicle: response.data
+        ride: response.data
       })
     })
     .catch(error => console.log(error))
   }
 
-  deleteVehicle = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/vehicles/${id}`)
+  deleteRide = (id) => {
+    axios.delete(`http://localhost:3001/api/v1/rides/${id}`)
     .then(response => {
       this.setState({ redirect: true })
     })
     .catch(error => console.log(error))
   }
 
-  updateVehicle = (vehicle) => {
+  updateRide = (ride) => {
     this.setState({
-      vehicle: vehicle
+      ride: ride
     })
   }
 
   render () {
     if (this.state.redirect) {
       return (
-        <Redirect to='/vehicles'/>
+        <Redirect to='/garage'/>
       )
-    } else if (this.state.vehicle) {
+    } else if (this.state.ride) {
       return (
         <div>
           <Paper className="paper-header" elevation={1}>
             <Typography type="display1" component="h2">
-              {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}
+              {this.state.ride.name}
             </Typography>
-            <VehicleEditDialog vehicle={this.state.vehicle} updateVehicle={this.updateVehicle} />
-            <VehicleDeleteDialog vehicle={this.state.vehicle} deleteVehicle={this.deleteVehicle} />
+            <Typography type="subheading" component="p">
+              Starting Mileage: {this.state.ride.starting_mileage}
+            </Typography>
+            <RideEditDialog ride={this.state.ride} updateRide={this.updateRide} />
+            <RideDeleteDialog ride={this.state.ride} deleteRide={this.deleteRide} />
           </Paper>
+          <FillUpsTable ride={this.state.ride} />
         </div>
       )
     } else {
@@ -65,4 +70,4 @@ class VehicleShow extends Component {
   }
 }
 
-export default VehicleShow;
+export default RideShow;

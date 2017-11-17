@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import RideIndex from '../components/rides/RideIndex';
+import VehicleIndex from '../components/vehicles/VehicleIndex';
 
 class Garage extends Component {
   render() {
     return (
-      <RideIndex />
+      <VehicleIndex />
     );
   }
 }

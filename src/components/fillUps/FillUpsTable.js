@@ -10,13 +10,13 @@ class FillUpsTable extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      vehicle: this.props.vehicle,
+      ride: this.props.ride,
       fillUps: []
     }
   }
 
   componentDidMount = () => {
-    axios.get(`http://localhost:3001/api/v1/vehicles/${this.state.vehicle.id}/fill_ups.json`)
+    axios.get(`http://localhost:3001/api/v1/rides/${this.state.ride.id}/fill_ups.json`)
     .then(response => {
       this.setState({
         fillUps: response.data
@@ -35,7 +35,7 @@ class FillUpsTable extends Component {
   }
 
   deleteFillUp = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/vehicles/${this.state.vehicle.id}/fill_ups/${id}`)
+    axios.delete(`http://localhost:3001/api/v1/rides/${this.state.ride.id}/fill_ups/${id}`)
     .then(response => {
       const fillUpIndex = this.state.fillUps.findIndex(x => x.id === id)
       const fillUps = update(this.state.fillUps, { $splice: [[fillUpIndex, 1]]})
@@ -57,7 +57,7 @@ class FillUpsTable extends Component {
                 <TableCell numeric>Price</TableCell>
                 <TableCell>Topped Off</TableCell>
                 <TableCell>Note</TableCell>
-                <TableCell><FillUpCreateDialog vehicle={this.state.vehicle} addNewFillUp={this.addNewFillUp} /></TableCell>
+                <TableCell><FillUpCreateDialog ride={this.state.ride} addNewFillUp={this.addNewFillUp} /></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

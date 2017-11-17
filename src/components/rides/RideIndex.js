@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
-import VehicleCard from './VehicleCard';
-import VehicleCreateDialog from './VehicleCreateDialog';
+import RideCard from './RideCard';
+import RideCreateDialog from './RideCreateDialog';
 
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
-class VehicleIndex extends Component {
+class RideIndex extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      vehicles: []
+      rides: []
     }
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/v1/vehicles.json')
+    axios.get('http://localhost:3001/api/v1/rides.json')
     .then(response => {
-      this.setState({vehicles: response.data})
+      this.setState({rides: response.data})
     })
     .catch(error => console.log(error))
   }
 
-  addNewVehicle = (vehicle) => {
-    const vehicles = update(this.state.vehicles, {
-      $push: [vehicle]
+  addNewRide = (ride) => {
+    const rides = update(this.state.rides, {
+      $push: [ride]
     })
     this.setState({
-      vehicles: vehicles
+      rides: rides
     })
   }
 
@@ -39,15 +39,17 @@ class VehicleIndex extends Component {
         <div>
           <Paper className="paper-header" elevation={1}>
             <Typography type="headline" component="h2">
-              TrackR Vehicles
-              <VehicleCreateDialog addNewVehicle={this.addNewVehicle} />
+              Your Garage
+              <RideCreateDialog addNewRide={this.addNewRide} />
             </Typography>
           </Paper>
         </div>
         <Grid container spacing={24}>
-          {this.state.vehicles.map((vehicle) => {
+          {this.state.rides.map((ride) => {
             return (
-              <VehicleCard vehicle={vehicle} key={vehicle.id} />
+              <RideCard ride={ride} key={ride.id}
+                onClick={this.enableEditing}
+                onDelete={this.deleteRide} />
             )}
           )}
         </Grid>
@@ -56,4 +58,4 @@ class VehicleIndex extends Component {
   }
 }
 
-export default VehicleIndex;
+export default RideIndex;

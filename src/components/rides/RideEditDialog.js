@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import axios from 'axios'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
@@ -10,40 +10,36 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
-class VehicleCreateDialog extends Component {
+class RideEditDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      make: '',
-      model: '',
-      year: '',
+      name: this.props.ride.name,
       errors: null,
       open: false
     }
+  }
+
+  handleChange = (e) => {
+    this.setState({[e.target.name]: e.target.value})
   }
 
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
-  handleChange = (e) => {
-    this.setState({[e.target.name]: e.target.value})
-  }
-
   handleSubmit = (e) => {
-    const vehicle = {
-      make: this.state.make,
-      model: this.state.model,
-      year: this.state.year
+    const ride = {
+      name: this.state.name
     }
 
-    axios.post(
-      `http://localhost:3001/api/v1/vehicles`,
+    axios.put(
+      `http://localhost:3001/api/v1/rides/${this.props.ride.id}`,
       {
-        vehicle: vehicle
+        ride: ride
       })
     .then(response => {
-      this.props.addNewVehicle(response.data)
+      this.props.updateRide(response.data)
       this.resetForm()
     })
     .catch(error => {
@@ -55,9 +51,7 @@ class VehicleCreateDialog extends Component {
   resetForm = () => {
     this.setState({
       open: false,
-      make: '',
-      model: '',
-      year: '',
+      name: this.props.ride.name,
       errors: null
     })
   }
@@ -65,43 +59,24 @@ class VehicleCreateDialog extends Component {
   render() {
     return (
       <div>
-        <Button dense raised color="primary" className="pull-right" aria-label="add" onClick={this.handleClickOpen}>
-          Add
+        <Button dense raised color="primary" className="pull-right" onClick={this.handleClickOpen}>
+          Edit
         </Button>
         <Dialog open={this.state.open} onRequestClose={this.resetForm}>
-          <DialogTitle>Add to Garage</DialogTitle>
+          <DialogTitle>Edit Ride</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {`By adding a new vehicle to your garage, you'll be able to track mileage, get
-              updates on maintenance and other goodness.`}
+              {`Edit your ride. You will not be able to edit all fields such as starting mileage.`}
             </DialogContentText>
             {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
             <TextField
               autoFocus
               margin="dense"
-              name="year"
-              label="Vehicle Year"
-              type="number"
-              fullWidth
-              value={this.state.year}
-              onChange={this.handleChange}
-            />
-            <TextField
-              margin="dense"
-              name="make"
-              label="Vehicle Make"
+              name="name"
+              label="Ride Name"
               type="text"
               fullWidth
-              value={this.state.make}
-              onChange={this.handleChange}
-            />
-            <TextField
-              margin="dense"
-              name="model"
-              label="Vehicle Model"
-              type="text"
-              fullWidth
-              value={this.state.model}
+              value={this.state.name}
               onChange={this.handleChange}
             />
           </DialogContent>
@@ -110,7 +85,7 @@ class VehicleCreateDialog extends Component {
               Cancel
             </Button>
             <Button onClick={this.handleSubmit} color="primary">
-              Create
+              Save
             </Button>
           </DialogActions>
         </Dialog>
@@ -119,4 +94,4 @@ class VehicleCreateDialog extends Component {
   }
 }
 
-export default VehicleCreateDialog;
+export default RideEditDialog
