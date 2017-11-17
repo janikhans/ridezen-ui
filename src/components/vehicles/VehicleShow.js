@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import VehicleDeleteDialog from './VehicleDeleteDialog';
 import VehicleEditDialog from './VehicleEditDialog';
+import OemIntervalsTable from '../oemIntervals/OemIntervalsTable'
+
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
@@ -47,13 +49,20 @@ class VehicleShow extends Component {
     } else if (this.state.vehicle) {
       return (
         <div>
+          <Typography type="display1" gutterBottom>
+            General
+          </Typography>
           <Paper className="paper-header" elevation={1}>
-            <Typography type="display1" component="h2">
+            <Typography type="display1">
               {this.state.vehicle.year} {this.state.vehicle.make} {this.state.vehicle.model}
             </Typography>
             <VehicleEditDialog vehicle={this.state.vehicle} updateVehicle={this.updateVehicle} />
             <VehicleDeleteDialog vehicle={this.state.vehicle} deleteVehicle={this.deleteVehicle} />
           </Paper>
+          <Typography type="display1" gutterBottom>
+            OEM Intervals
+          </Typography>
+          <OemIntervalsTable vehicle={this.state.vehicle} />
         </div>
       )
     } else {
