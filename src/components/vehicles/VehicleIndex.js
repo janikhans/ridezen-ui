@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
-import VehicleCard from './VehicleCard';
+import VehicleRow from './VehicleRow';
 import VehicleCreateDialog from './VehicleCreateDialog';
 
-import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class VehicleIndex extends Component {
   constructor(props) {
@@ -36,21 +36,30 @@ class VehicleIndex extends Component {
   render () {
     return (
       <div>
-        <div>
-          <Paper className="paper-header" elevation={1}>
-            <Typography type="headline" component="h2">
-              TrackR Vehicles
-              <VehicleCreateDialog addNewVehicle={this.addNewVehicle} />
-            </Typography>
-          </Paper>
-        </div>
-        <Grid container spacing={24}>
-          {this.state.vehicles.map((vehicle) => {
-            return (
-              <VehicleCard vehicle={vehicle} key={vehicle.id} />
-            )}
-          )}
-        </Grid>
+        <Paper className="paper-header" elevation={1}>
+          <Typography type="headline" component="h2">
+            TrackR Vehicles
+          </Typography>
+        </Paper>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Year</TableCell>
+                <TableCell numeric>Make</TableCell>
+                <TableCell numeric>Model</TableCell>
+                <TableCell numeric><VehicleCreateDialog addNewVehicle={this.addNewVehicle} /></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.vehicles.map((vehicle) => {
+                return(
+                  <VehicleRow key={vehicle.id} vehicle={vehicle}/>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
       </div>
     )
   }
