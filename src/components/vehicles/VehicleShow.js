@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
 import axios from 'axios';
+
 import VehicleDeleteDialog from './VehicleDeleteDialog';
 import VehicleEditDialog from './VehicleEditDialog';
-import OemIntervalsTable from '../oemIntervals/OemIntervalsTable'
+import VehicleIntervalsTable from '../vehicleIntervals/VehicleIntervalsTable'
+import NegativeIntervalsTable from '../negativeIntervals/NegativeIntervalsTable'
 
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
@@ -60,9 +62,13 @@ class VehicleShow extends Component {
             <VehicleDeleteDialog vehicle={this.state.vehicle} deleteVehicle={this.deleteVehicle} />
           </Paper>
           <Typography type="display1" gutterBottom>
-            OEM Intervals
+            Intervals
           </Typography>
-          <OemIntervalsTable vehicle={this.state.vehicle} />
+          <VehicleIntervalsTable vehicle={this.state.vehicle} />
+          <Typography type="display1" gutterBottom>
+            Negative Intervals
+          </Typography>
+          <NegativeIntervalsTable vehicle={this.state.vehicle} />
         </div>
       )
     } else {
