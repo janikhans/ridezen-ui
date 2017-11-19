@@ -55,6 +55,9 @@ class RideShow extends Component {
             <Typography type="subheading" component="p">
               Starting Mileage: {this.state.ride.starting_mileage}
             </Typography>
+            <Typography type="subheading" component="p">
+              Current Mileage: {this.state.ride.current_mileage}
+            </Typography>
             <RideEditDialog ride={this.state.ride} updateRide={this.updateRide} />
             <RideDeleteDialog ride={this.state.ride} deleteRide={this.deleteRide} />
           </Paper>
