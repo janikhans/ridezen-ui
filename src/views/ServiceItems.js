@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ServiceItemIndex from '../components/serviceItems/ServiceItemIndex';
+import ServiceItemIndex from '../containers/serviceItems/ServiceItemIndex';
 
 class ServiceItems extends Component {
   render() {

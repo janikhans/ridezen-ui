@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import update from 'immutability-helper'
+import { connect } from 'react-redux';
+import _ from 'lodash';
+
+import { fetchServiceItems } from '../../store/serviceItems/actions';
+import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
+
+import ServiceItemRow from '../../components/serviceItems/ServiceItemRow';
+import ServiceItemCreateDialog from '../../components/serviceItems/ServiceItemCreateDialog';
 
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
-import ServiceItemRow from './ServiceItemRow';
-import ServiceItemCreateDialog from './ServiceItemCreateDialog';
-
 class ServiceItemIndex extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      serviceItems: []
-    }
-  }
-
   componentDidMount() {
-    axios.get('http://localhost:3001/api/v1/service_items.json')
-    .then(response => {
-      this.setState({serviceItems: response.data})
-    })
-    .catch(error => console.log(error))
+    this.props.fetchData()
   }
 
   addNewServiceItem = (serviceItem) => {
@@ -53,17 +46,35 @@ class ServiceItemIndex extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.serviceItems.map((serviceItem) => {
-                return(
-                  <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}/>
-                )
-              })}
+              {_.map(this.props.serviceItemsIdArray, this.renderServiceItemById.bind(this))}
             </TableBody>
           </Table>
         </Paper>
       </div>
     )
   }
+  
+  renderServiceItemById(serviceItemId) {
+    const serviceItem = _.get(this.props.serviceItemsById, serviceItemId)
+    return (
+      <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}/>
+    )
+  }
 }
 
-export default ServiceItemIndex;
+const mapStateToProps = (state) => {
+  return {
+    hasErrored: state.serviceItems.hasErrored,
+    isLoading: state.serviceItems.isLoading,
+    serviceItemsById: state.serviceItems.serviceItemsById,
+    serviceItemsIdArray: serviceItemsSelectors.getServiceItemsIdArray(state)
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => dispatch(fetchServiceItems())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceItemIndex)

@@ -8,9 +8,13 @@ class Api {
     return axios.get(`${API_ENDPOINT}/rides.json`)
   }
   
-  // getVehicles() {
-  //   return axios.get(`${API_ENDPOINT}/vehicles.json`)
-  // };
+  getVehicles() {
+    return axios.get(`${API_ENDPOINT}/vehicles.json`)
+  };
+  
+  getServiceItems() {
+    return axios.get(`${API_ENDPOINT}/service_items.json`)
+  };
 }
 
 export default new Api();
