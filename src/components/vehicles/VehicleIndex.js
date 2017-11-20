@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import update from 'immutability-helper'
+import apiService from '../../services/api';
+
 import VehicleRow from './VehicleRow';
 import VehicleCreateDialog from './VehicleCreateDialog';
 
@@ -17,9 +18,9 @@ class VehicleIndex extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/v1/vehicles.json')
+    apiService.getVehicles()
     .then(response => {
-      this.setState({vehicles: response.data})
+      this.setState({vehicles: response.data })
     })
     .catch(error => console.log(error))
   }

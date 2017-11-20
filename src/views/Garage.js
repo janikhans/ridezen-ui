@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RideIndex from '../components/rides/RideIndex';
+import RideIndex from '../containers/rides/RideIndex';
 
 class Garage extends Component {
   render() {
