@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import update from 'immutability-helper'
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -18,15 +17,6 @@ class ServiceItemIndex extends Component {
     this.props.fetchData()
   }
 
-  addNewServiceItem = (serviceItem) => {
-    const serviceItems = update(this.state.serviceItems, {
-      $push: [serviceItem]
-    })
-    this.setState({
-      serviceItems: serviceItems
-    })
-  }
-
   render () {
     return (
       <div>
@@ -42,7 +32,7 @@ class ServiceItemIndex extends Component {
                 <TableCell>Name</TableCell>
                 <TableCell numeric>Distance</TableCell>
                 <TableCell numeric>Units</TableCell>
-                <TableCell numeric><ServiceItemCreateDialog addNewServiceItem={this.addNewServiceItem} /></TableCell>
+                <TableCell numeric><ServiceItemCreateDialog /></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -55,7 +45,7 @@ class ServiceItemIndex extends Component {
   }
   
   renderServiceItemById(serviceItemId) {
-    const serviceItem = _.get(this.props.serviceItemsById, serviceItemId)
+    const serviceItem = this.props.serviceItemsById[serviceItemId]
     return (
       <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}/>
     )

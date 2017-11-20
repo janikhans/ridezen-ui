@@ -26,7 +26,7 @@ class ServiceItemShow extends Component {
   }
 
   deleteServiceItem = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/serviceItems/${id}`)
+    axios.delete(`http://localhost:3001/api/v1/service_items/${id}`)
     .then(response => {
       this.setState({ redirect: true })
     })

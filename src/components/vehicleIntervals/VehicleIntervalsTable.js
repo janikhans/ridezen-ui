@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
+import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
@@ -64,6 +66,16 @@ class VehicleIntervalsTable extends Component {
     const vehicleIntervals = update(this.state.vehicleIntervals, { $splice: [[intervalIndex, 1]]})
     this.setState({vehicleIntervals: vehicleIntervals})
   }
+  
+  renderVehicleIntervalRow(vehicleInterval) {
+    const serviceItem = this.props.serviceItemsById[vehicleInterval.service_item_id]
+    return (
+      <VehicleIntervalRow key={vehicleInterval.service_item_id} vehicleInterval={vehicleInterval}
+        deleteOemInterval={this.deleteOemInterval}
+        createNegativeInterval={this.createNegativeInterval}
+        serviceItem={serviceItem} />
+    )
+  }
 
   render () {
     return (
@@ -80,13 +92,7 @@ class VehicleIntervalsTable extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.vehicleIntervals.map((vehicleInterval, index) => {
-                return(
-                  <VehicleIntervalRow key={index} vehicleInterval={vehicleInterval}
-                    deleteOemInterval={this.deleteOemInterval}
-                    createNegativeInterval={this.createNegativeInterval} />
-                )
-              })}
+              {_.map(this.state.vehicleIntervals, this.renderVehicleIntervalRow.bind(this))}
             </TableBody>
           </Table>
         </Paper>
@@ -95,4 +101,10 @@ class VehicleIntervalsTable extends Component {
   }
 }
 
-export default VehicleIntervalsTable;
+function mapStateToProps(state) {
+  return { 
+    serviceItemsById: state.serviceItems.serviceItemsById
+  };
+}
+
+export default connect(mapStateToProps)(VehicleIntervalsTable)

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import { connect } from 'react-redux';
+
+import { createServiceItem } from '../../store/serviceItems/actions';
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'
 
@@ -19,7 +21,6 @@ class ServiceItemCreateDialog extends Component {
       name: '',
       units: '',
       distance: '',
-      errors: null,
       open: false
     }
   }
@@ -38,19 +39,8 @@ class ServiceItemCreateDialog extends Component {
       units: this.state.units,
       distance: this.state.distance
     }
-
-    axios.post(
-      `http://localhost:3001/api/v1/service_items`,
-      {
-        service_item: serviceItem
-      })
-    .then(response => {
-      this.props.addNewServiceItem(response.data)
-      this.resetForm()
-    })
-    .catch(error => {
-      this.setState({ errors: error.response.data })
-    })
+    
+    this.props.createServiceItem(serviceItem)
     e.preventDefault();
   }
 
@@ -63,8 +53,7 @@ class ServiceItemCreateDialog extends Component {
       open: false,
       units: '',
       distance: '',
-      name: '',
-      errors: null
+      name: ''
     })
   }
 
@@ -80,7 +69,7 @@ class ServiceItemCreateDialog extends Component {
             <DialogContentText>
               {`Add new service items that will be used for all vehicles. Select the default distance and units.`}
             </DialogContentText>
-            {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
+            {this.props.errors && <ErrorsContainer errors={this.props.errors}/>}
             <TextField
               autoFocus
               margin="dense"
@@ -116,4 +105,18 @@ class ServiceItemCreateDialog extends Component {
   }
 }
 
-export default ServiceItemCreateDialog;
+const mapStateToProps = (state) => {
+  return {
+    isSaving: state.serviceItems.isSaving,
+    errors: state.serviceItems.errors
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createServiceItem: (serviceItem) => dispatch(createServiceItem(serviceItem))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceItemCreateDialog)
+

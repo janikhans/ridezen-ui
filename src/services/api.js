@@ -15,6 +15,10 @@ class Api {
   getServiceItems() {
     return axios.get(`${API_ENDPOINT}/service_items.json`)
   };
+  
+  createServiceItem(service_item) {
+    return axios.post(`${API_ENDPOINT}/service_items`, { service_item: service_item })
+  };
 }
 
 export default new Api();

@@ -32,7 +32,7 @@ class VehicleIntervalRow extends Component {
       <TableRow>
         <TableCell>
           <Link className="no-decoration" to={'/service-items/' + this.props.vehicleInterval.service_item_id}>
-            {this.props.vehicleInterval.service_item_id}
+            {this.props.serviceItem.name}
           </Link>
         </TableCell>
         <TableCell numeric>{this.props.vehicleInterval.units}</TableCell>
@@ -47,3 +47,5 @@ class VehicleIntervalRow extends Component {
 }
 
 export default VehicleIntervalRow;
+
+
