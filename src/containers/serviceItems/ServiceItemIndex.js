@@ -16,6 +16,13 @@ class ServiceItemIndex extends Component {
   componentDidMount() {
     this.props.fetchData()
   }
+  
+  renderServiceItemById(serviceItemId) {
+    const serviceItem = this.props.serviceItemsById[serviceItemId]
+    return (
+      <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}/>
+    )
+  }
 
   render () {
     return (
@@ -41,13 +48,6 @@ class ServiceItemIndex extends Component {
           </Table>
         </Paper>
       </div>
-    )
-  }
-  
-  renderServiceItemById(serviceItemId) {
-    const serviceItem = this.props.serviceItemsById[serviceItemId]
-    return (
-      <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}/>
     )
   }
 }

@@ -14,6 +14,7 @@ import Hidden from 'material-ui/Hidden';
 import MenuIcon from 'material-ui-icons/Menu';
 
 import Navigation from './components/layout/Navigation'
+import ModalRoot from './containers/modals/modalRoot';
 
 import Home from "./views/Home";
 import Garage from "./views/Garage";
@@ -138,6 +139,7 @@ class App extends React.Component {
               <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
             </main>
           </div>
+          <ModalRoot />
         </div>
       </BrowserRouter>
     );
