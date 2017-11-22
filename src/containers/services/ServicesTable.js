@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchRideServices } from '../../store/rides/actions';
+import { fetchRideServices, addRideService } from '../../store/rides/actions';
 import { fetchServiceItems } from '../../store/serviceItems/actions';
 import * as serviceSelectors from '../../store/rides/services/reducer';
 
 import ServiceRow from '../../components/services/ServiceRow';
+import ServiceCreateDialog from '../../components/services/ServiceCreateDialog';
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class ServicesTable extends Component {
   componentDidMount() {
-    if (this.props.serviceItemsById.length == 0){
+    if (this.props.serviceItemsById.length === 0){
       this.props.fetchServiceItemsData()
     }
     this.props.fetchServiceData(this.props.ride.id)
@@ -26,6 +27,10 @@ class ServicesTable extends Component {
     )
   }
 
+  addRideService = (rideId, new_service) => {
+    this.props.addRideService(rideId, new_service)
+  }
+
   render () {
     return (
       <Table>
@@ -36,7 +41,7 @@ class ServicesTable extends Component {
             <TableCell numeric>Distance</TableCell>
             <TableCell numeric>Price</TableCell>
             <TableCell numeric>Note</TableCell>
-            <TableCell numeric></TableCell>
+            <TableCell numeric><ServiceCreateDialog ride={this.props.ride} addRideService={this.addRideService} /></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -59,7 +64,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchServiceData: (rideId) => dispatch(fetchRideServices(rideId)),
-    fetchServiceItemsData: () => dispatch(fetchServiceItems())
+    fetchServiceItemsData: () => dispatch(fetchServiceItems()),
+    addRideService: (rideId, new_service) => dispatch(addRideService(rideId, new_service))
   };
 };
 

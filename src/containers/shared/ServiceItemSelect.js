@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import { connect } from 'react-redux';
+
+import * as serviceItemSelectors from '../../store/serviceItems/reducer';
 
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
@@ -10,18 +12,8 @@ class ServiceItemSelect extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      serviceItems: []
+      serviceItems: this.props.serviceItems
     }
-  }
-
-  componentDidMount() {
-    axios.get(`http://localhost:3001/api/v1/service_items.json`)
-    .then(response => {
-      this.setState({
-        serviceItems: response.data
-      })
-    })
-    .catch(error => console.log(error))
   }
 
   handleChange = (e) => {
@@ -53,4 +45,10 @@ class ServiceItemSelect extends Component {
   }
 }
 
-export default ServiceItemSelect;
+const mapStateToProps = (state) => {
+  return {
+    serviceItems: serviceItemSelectors.getServiceItems(state)
+  };
+};
+
+export default connect(mapStateToProps)(ServiceItemSelect)

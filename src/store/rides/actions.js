@@ -106,6 +106,16 @@ export function createRide(ride) {
   }
 }
 
+export function addRideService(rideId, new_service) {
+  console.log('in action')
+  var serviceById = { [new_service.id]: new_service }
+  return {
+    type: types.RIDE_SERVICE_ADDED,
+    rideId,
+    serviceById
+  }
+}
+
 export function fetchRideServices(rideId) {
   return (dispatch) => {
     apiService.getRideServices(rideId)

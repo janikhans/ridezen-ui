@@ -39,6 +39,10 @@ class Api {
   getRideServices(rideId) {
     return axios.get(`${API_ENDPOINT}/rides/${rideId}/services.json`)
   };
+
+  createRideService(rideId, service) {
+    return axios.post(`${API_ENDPOINT}/rides/${rideId}/services`, { service: service })
+  };
 }
 
 export default new Api();

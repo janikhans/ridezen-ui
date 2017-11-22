@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'
-import ServiceItemSelect from '../shared/ServiceItemSelect'
+import ServiceItemSelect from '../../containers/shared/ServiceItemSelect'
 
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';

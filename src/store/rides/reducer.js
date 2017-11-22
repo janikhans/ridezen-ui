@@ -1,6 +1,5 @@
 import * as types from './actionTypes';
 import _ from 'lodash';
-import { fetchRideServices } from './services/reducer'
 
 const initialState = {
   hasErrored: false,
@@ -9,6 +8,7 @@ const initialState = {
 }
 
 export default function ridesReducer(state = initialState, action = {}) {
+  var newRidesById = state.ridesById
   switch (action.type) {
     case types.RIDES_FETCHED:
       return {
@@ -26,25 +26,22 @@ export default function ridesReducer(state = initialState, action = {}) {
         isLoading: action.isLoading
       };
       case types.RIDE_INFO_FETCHED:
-        var ridesById = state.ridesById
-        ridesById[action.rideId] = Object.assign({}, ridesById[action.rideId], action.ride)
+        newRidesById[action.rideId] = Object.assign({}, newRidesById[action.rideId], action.ride)
         return {
           ...state,
-          ridesById: ridesById
+          ridesById: newRidesById
         };
       case types.RIDE_INFO_HAS_ERRORED:
-        var ridesById = state.ridesById
-        ridesById[action.rideId] = Object.assign({}, ridesById[action.rideId], {hasErrored: action.hasErrored})
+        newRidesById[action.rideId] = Object.assign({}, newRidesById[action.rideId], {hasErrored: action.hasErrored})
         return {
           ...state,
-          ridesById: ridesById
+          ridesById: newRidesById
         };
       case types.RIDE_INFO_IS_LOADING:
-        var ridesById = state.ridesById
-        ridesById[action.rideId] = Object.assign({}, ridesById[action.rideId], {isLoading: action.isLoading})
+        newRidesById[action.rideId] = Object.assign({}, newRidesById[action.rideId], {isLoading: action.isLoading})
         return {
           ...state,
-          ridesById: ridesById
+          ridesById: newRidesById
         };
       case types.RIDE_CREATED:
         return {
@@ -52,26 +49,31 @@ export default function ridesReducer(state = initialState, action = {}) {
           ridesById: Object.assign({}, state.ridesById, action.rideById)
         };
       case types.RIDE_UPDATED:
-        var ridesById = state.ridesById
         var ride = action.ride
-        ridesById[ride.id] = Object.assign({}, ridesById[ride.id], action.ride)
+        newRidesById[ride.id] = Object.assign({}, newRidesById[ride.id], action.ride)
         return {
           ...state,
-          ridesById: ridesById
+          ridesById: newRidesById
         };
       case types.RIDE_DELETED:
-        var ridesById = state.ridesById
-        _.omit(ridesById, action.rideId);
+        _.omit(newRidesById, action.rideId);
         return {
           ...state,
-          ridesById: ridesById
+          ridesById: newRidesById
         };
       case types.RIDE_SERVICES_FETCHED:
-        var ridesById = state.ridesById
-        ridesById[action.rideId] = Object.assign({}, ridesById[action.rideId], {servicesById: action.servicesById})
+        newRidesById[action.rideId] = Object.assign({}, newRidesById[action.rideId], {servicesById: action.servicesById})
         return {
           ...state,
-          ridesById: ridesById
+          ridesById: newRidesById
+        };
+      case types.RIDE_SERVICE_ADDED:
+        var servicesById = newRidesById[action.rideId].servicesById
+        servicesById = Object.assign({}, servicesById, action.serviceById)
+        newRidesById[action.rideId].servicesById = servicesById
+        return {
+          ...state,
+          ridesById: newRidesById
         };
     default:
       return state;

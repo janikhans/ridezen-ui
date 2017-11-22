@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { TableCell, TableRow } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
-import RemoveIcon from 'material-ui-icons/NotInterested';
 
 class NegativeIntervalRow extends Component {
 
