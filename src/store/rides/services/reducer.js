@@ -29,6 +29,10 @@ export default function reduce(state = initialState, action = {}) {
   }
 }
 
-export function getServicesIdArray(state) {
-  return _.keys(state.rides.services.servicesById);
+export function getServicesIdArray(state, rideId) {
+  return _.keys(state.rides.ridesById[rideId].servicesById);
+}
+
+export function getServicesById(state, rideId) {
+  return state.rides.ridesById[rideId].servicesById
 }

@@ -4,16 +4,35 @@ import { push } from 'react-router-redux';
 
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
+import Tabs, { Tab } from 'material-ui/Tabs';
+import PhoneIcon from 'material-ui-icons/Phone';
+import FavoriteIcon from 'material-ui-icons/Favorite';
+import PersonPinIcon from 'material-ui-icons/PersonPin';
 
 import RideDeleteDialog from '../../components/rides/RideDeleteDialog';
 import RideEditDialog from '../../components/rides/RideEditDialog';
 import FillUpsTable from '../../components/fillUps/FillUpsTable'
-import ServiceTable from '../services/ServiceTable'
+import ServicesTable from '../services/ServicesTable'
 
 import { fetchRideInfo, deleteRide } from '../../store/rides/actions';
 import * as ridesSelectors from '../../store/rides/reducer'
 
+function TabContainer(props) {
+  return <div>{props.children}</div>;
+}
+
 class RideShow extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: 'fillups'
+    }
+  }
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   componentDidMount() {
     if (this.props.ride) {
       this.props.fetchInfo(this.props.ride.id)
@@ -49,7 +68,24 @@ class RideShow extends Component {
             <RideEditDialog ride={this.props.ride} updateRide={this.updateRide} />
             <RideDeleteDialog ride={this.props.ride} deleteRide={this.deleteRide} />
           </Paper>
-          <FillUpsTable ride={this.props.ride} />
+          <Paper>
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+              fullWidth
+              indicatorColor="accent"
+              textColor="accent"
+            >
+              <Tab value="fillups" icon={<PhoneIcon />} label="FILLUPS" />
+              <Tab value="services" icon={<FavoriteIcon />} label="SERVICES" />
+              <Tab value="intervals" icon={<PersonPinIcon />} label="INTERVALS" />
+            </Tabs>
+          </Paper>
+          <Paper>
+            {this.state.value === 'fillups' && <TabContainer><FillUpsTable ride={this.props.ride} /></TabContainer>}
+            {this.state.value === 'services' && <TabContainer><ServicesTable ride={this.props.ride} /></TabContainer>}
+            {this.state.value === 'intervals' && <TabContainer>intervals</TabContainer>}
+          </Paper>
         </div>
       )
     } else {

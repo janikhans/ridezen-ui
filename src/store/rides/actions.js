@@ -89,3 +89,22 @@ export function deleteRideSuccess(rideId, redirect) {
     rideId
   };
 }
+
+export function fetchRideServices(rideId) {
+  return (dispatch) => {
+    apiService.getRideServices(rideId)
+      .then((response) => {
+        const servicesById = _.keyBy(response.data, (service) => service.id);
+        dispatch(fetchRideServicesSuccess(rideId, servicesById))
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function fetchRideServicesSuccess(rideId, servicesById) {
+  return {
+    type: types.RIDE_SERVICES_FETCHED,
+    rideId,
+    servicesById
+  };
+}

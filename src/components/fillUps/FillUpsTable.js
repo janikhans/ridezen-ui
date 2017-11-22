@@ -4,7 +4,6 @@ import update from 'immutability-helper'
 import FillUpRow from './FillUpRow';
 import FillUpCreateDialog from './FillUpCreateDialog';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
-import Paper from 'material-ui/Paper';
 
 class FillUpsTable extends Component {
   constructor(props) {
@@ -46,31 +45,27 @@ class FillUpsTable extends Component {
 
   render () {
     return (
-      <div>
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell numeric>Mileage</TableCell>
-                <TableCell numeric>Volume</TableCell>
-                <TableCell numeric>Price</TableCell>
-                <TableCell>Topped Off</TableCell>
-                <TableCell>Note</TableCell>
-                <TableCell><FillUpCreateDialog ride={this.state.ride} addNewFillUp={this.addNewFillUp} /></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.state.fillUps.map((fillUp) => {
-                return(
-                  <FillUpRow key={fillUp.id} fillUp={fillUp}
-                    deleteFillUp={this.deleteFillUp} />
-                )
-              })}
-            </TableBody>
-          </Table>
-        </Paper>
-      </div>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Date</TableCell>
+            <TableCell numeric>Mileage</TableCell>
+            <TableCell numeric>Volume</TableCell>
+            <TableCell numeric>Price</TableCell>
+            <TableCell>Topped Off</TableCell>
+            <TableCell>Note</TableCell>
+            <TableCell><FillUpCreateDialog ride={this.state.ride} addNewFillUp={this.addNewFillUp} /></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.state.fillUps.map((fillUp) => {
+            return(
+              <FillUpRow key={fillUp.id} fillUp={fillUp}
+                deleteFillUp={this.deleteFillUp} />
+            )
+          })}
+        </TableBody>
+      </Table>
     )
   }
 }

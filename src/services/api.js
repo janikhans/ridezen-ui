@@ -20,7 +20,7 @@ class Api {
     return axios.post(`${API_ENDPOINT}/service_items`, { service_item: service_item })
   };
 
-  getServices(rideId) {
+  getRideServices(rideId) {
     return axios.get(`${API_ENDPOINT}/rides/${rideId}/services.json`)
   };
 

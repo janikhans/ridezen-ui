@@ -1,14 +1,14 @@
 import * as types from './actionTypes';
 import _ from 'lodash';
+import { fetchRideServices } from './services/reducer'
 
 const initialState = {
   hasErrored: false,
   isLoading: false,
-  redirect: false,
   ridesById: []
 }
 
-export default function reduce(state = initialState, action = {}) {
+export default function ridesReducer(state = initialState, action = {}) {
   switch (action.type) {
     case types.RIDES_FETCHED:
       return {
@@ -49,6 +49,13 @@ export default function reduce(state = initialState, action = {}) {
       case types.RIDE_DELETED:
         var ridesById = state.ridesById
         _.omit(ridesById, action.rideId);
+        return {
+          ...state,
+          ridesById: ridesById
+        };
+      case types.RIDE_SERVICES_FETCHED:
+        var ridesById = state.ridesById
+        ridesById[action.rideId] = Object.assign({}, ridesById[action.rideId], {servicesById: action.servicesById})
         return {
           ...state,
           ridesById: ridesById
