@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Route,
-  BrowserRouter
-} from "react-router-dom";
+import { Route } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 
@@ -22,7 +19,7 @@ import Contact from "./views/Contact";
 import Vehicles from "./views/Vehicles";
 import ServiceItems from "./views/ServiceItems";
 
-import RideShow from "./components/rides/RideShow"
+import RideShow from "./containers/rides/RideShow"
 import VehicleShow from "./components/vehicles/VehicleShow"
 import ServiceItemShow from "./components/serviceItems/ServiceItemShow"
 
@@ -86,62 +83,60 @@ class App extends React.Component {
     const { classes, theme } = this.props;
 
     return (
-      <BrowserRouter>
-        <div className={classes.root}>
-          <div className={classes.appFrame}>
-            <AppBar className={classes.appBar}>
-              <Toolbar>
-                <IconButton
-                  color="contrast"
-                  aria-label="open drawer"
-                  onClick={this.handleDrawerToggle}
-                  className={classes.navIconHide}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-            <Hidden mdUp>
-              <Drawer
-                type="temporary"
-                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                open={this.state.mobileOpen}
-                classes={{
-                  paper: classes.drawerPaper,
-                }}
-                onRequestClose={this.handleDrawerToggle}
-                ModalProps={{
-                  keepMounted: true, // Better open performance on mobile.
-                }}
+      <div className={classes.root}>
+        <div className={classes.appFrame}>
+          <AppBar className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                color="contrast"
+                aria-label="open drawer"
+                onClick={this.handleDrawerToggle}
+                className={classes.navIconHide}
               >
-                <Navigation />
-              </Drawer>
-            </Hidden>
-            <Hidden mdDown implementation="css">
-              <Drawer
-                type="persistent"
-                open
-                classes={{
-                  paper: classes.drawerPaper,
-                }}
-              >
-                <Navigation />
-              </Drawer>
-            </Hidden>
-            <main className={classes.content}>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/garage" component={Garage} />
-              <Route exact path="/rides/:rideId" component={RideShow} />
-              <Route path="/contact" component={Contact} />
-              <Route exact path="/vehicles" component={Vehicles} />
-              <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
-              <Route exact path="/service-items" component={ServiceItems} />
-              <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
-            </main>
-          </div>
-          <ModalRoot />
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Hidden mdUp>
+            <Drawer
+              type="temporary"
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              open={this.state.mobileOpen}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              onRequestClose={this.handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+            >
+              <Navigation />
+            </Drawer>
+          </Hidden>
+          <Hidden mdDown implementation="css">
+            <Drawer
+              type="persistent"
+              open
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+            >
+              <Navigation />
+            </Drawer>
+          </Hidden>
+          <main className={classes.content}>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/garage" component={Garage} />
+            <Route exact path="/rides/:rideId" component={RideShow} />
+            <Route path="/contact" component={Contact} />
+            <Route exact path="/vehicles" component={Vehicles} />
+            <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
+            <Route exact path="/service-items" component={ServiceItems} />
+            <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
+          </main>
         </div>
-      </BrowserRouter>
+        <ModalRoot />
+      </div>
     );
   }
 }
