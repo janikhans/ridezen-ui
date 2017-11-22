@@ -13,6 +13,7 @@ import RideDeleteDialog from '../../components/rides/RideDeleteDialog';
 import RideEditDialog from '../../components/rides/RideEditDialog';
 import FillUpsTable from '../../components/fillUps/FillUpsTable'
 import ServicesTable from '../services/ServicesTable'
+import RideIntervalsTable from '../rideIntervals/RideIntervalsTable'
 
 import { fetchRideInfo, deleteRide, updateRide } from '../../store/rides/actions';
 import * as ridesSelectors from '../../store/rides/reducer'
@@ -82,7 +83,7 @@ class RideShow extends Component {
           <Paper>
             {this.state.value === 'fillups' && <TabContainer><FillUpsTable ride={this.props.ride} /></TabContainer>}
             {this.state.value === 'services' && <TabContainer><ServicesTable ride={this.props.ride} /></TabContainer>}
-            {this.state.value === 'intervals' && <TabContainer>intervals</TabContainer>}
+            {this.state.value === 'intervals' && <TabContainer><RideIntervalsTable ride={this.props.ride} /></TabContainer>}
           </Paper>
         </div>
       )
