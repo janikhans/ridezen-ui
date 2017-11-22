@@ -20,16 +20,20 @@ class Api {
     return axios.post(`${API_ENDPOINT}/service_items`, { service_item: service_item })
   };
 
-  getRideServices(rideId) {
-    return axios.get(`${API_ENDPOINT}/rides/${rideId}/services.json`)
-  };
-
   getRide(rideId) {
     return axios.get(`${API_ENDPOINT}/rides/${rideId}.json`)
   };
 
+  updateRide(rideId, ride) {
+    return axios.put(`${API_ENDPOINT}/rides/${rideId}.json`, { ride: ride })
+  };
+
   deleteRide(rideId) {
     return axios.delete(`${API_ENDPOINT}/rides/${rideId}`)
+  };
+
+  getRideServices(rideId) {
+    return axios.get(`${API_ENDPOINT}/rides/${rideId}/services.json`)
   };
 }
 

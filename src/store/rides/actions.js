@@ -82,11 +82,23 @@ export function deleteRide(rideId) {
   };
 }
 
-export function deleteRideSuccess(rideId, redirect) {
+export function deleteRideSuccess(rideId) {
   return {
     type: types.RIDE_DELETED,
-    redirect,
     rideId
+  };
+}
+
+export function updateRide(ride) {
+  return (dispatch) => {
+    dispatch(updateRideSuccess(ride))
+  };
+}
+
+export function updateRideSuccess(ride) {
+  return {
+    type: types.RIDE_UPDATED,
+    ride
   };
 }
 

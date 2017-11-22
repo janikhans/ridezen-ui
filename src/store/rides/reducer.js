@@ -46,6 +46,14 @@ export default function ridesReducer(state = initialState, action = {}) {
           ...state,
           ridesById: ridesById
         };
+      case types.RIDE_UPDATED:
+        var ridesById = state.ridesById
+        var ride = action.ride
+        ridesById[ride.id] = Object.assign({}, ridesById[ride.id], action.ride)
+        return {
+          ...state,
+          ridesById: ridesById
+        };
       case types.RIDE_DELETED:
         var ridesById = state.ridesById
         _.omit(ridesById, action.rideId);

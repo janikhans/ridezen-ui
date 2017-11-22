@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import apiService from '../../services/api'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -32,12 +32,7 @@ class RideEditDialog extends Component {
     const ride = {
       name: this.state.name
     }
-
-    axios.put(
-      `http://localhost:3001/api/v1/rides/${this.props.ride.id}`,
-      {
-        ride: ride
-      })
+    apiService.updateRide(this.props.ride.id, ride)
     .then(response => {
       this.props.updateRide(response.data)
       this.resetForm()

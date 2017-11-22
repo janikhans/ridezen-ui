@@ -14,7 +14,7 @@ import RideEditDialog from '../../components/rides/RideEditDialog';
 import FillUpsTable from '../../components/fillUps/FillUpsTable'
 import ServicesTable from '../services/ServicesTable'
 
-import { fetchRideInfo, deleteRide } from '../../store/rides/actions';
+import { fetchRideInfo, deleteRide, updateRide } from '../../store/rides/actions';
 import * as ridesSelectors from '../../store/rides/reducer'
 
 function TabContainer(props) {
@@ -46,9 +46,7 @@ class RideShow extends Component {
   }
 
   updateRide = (ride) => {
-    this.setState({
-      ride: ride
-    })
+    this.props.updateRide(ride)
   }
 
   render () {
@@ -99,8 +97,7 @@ class RideShow extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    ride: ridesSelectors.getRideById(state, ownProps.match.params.rideId),
-    redirect: state.rediret
+    ride: ridesSelectors.getRideById(state, ownProps.match.params.rideId)
   };
 };
 
@@ -108,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchInfo: (rideId) => dispatch(fetchRideInfo(rideId)),
     deleteRide: (rideId) => dispatch(deleteRide(rideId)),
+    updateRide: (ride) => dispatch(updateRide(ride)),
     garageRedirect: () => dispatch(push('/garage'))
   };
 };
