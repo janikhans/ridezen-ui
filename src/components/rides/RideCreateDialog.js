@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import apiService from '../../services/api'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -29,7 +29,7 @@ class RideCreateDialog extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/v1/vehicles.json')
+    apiService.getVehicles()
     .then(response => {
       this.setState({vehicles: response.data})
     })
@@ -55,11 +55,7 @@ class RideCreateDialog extends Component {
       starting_mileage: this.state.startingMileage
     }
 
-    axios.post(
-      `http://localhost:3001/api/v1/rides`,
-      {
-        ride: ride
-      })
+    apiService.createRide(ride)
     .then(response => {
       this.props.addNewRide(response.data)
       this.resetForm()

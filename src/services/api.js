@@ -24,6 +24,10 @@ class Api {
     return axios.get(`${API_ENDPOINT}/rides/${rideId}.json`)
   };
 
+  createRide(ride) {
+    return axios.post(`${API_ENDPOINT}/rides`, { ride: ride })
+  };
+
   updateRide(rideId, ride) {
     return axios.put(`${API_ENDPOINT}/rides/${rideId}.json`, { ride: ride })
   };

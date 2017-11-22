@@ -18,19 +18,21 @@ export function fetchRides() {
   };
 }
 
-export function ridesHasErrored(bool) {
+function ridesHasErrored(bool) {
   return {
     type: types.RIDES_HAS_ERRORED,
     hasErrored: bool
   };
 }
-export function ridesIsLoading(bool) {
+
+function ridesIsLoading(bool) {
   return {
     type: types.RIDES_IS_LOADING,
     isLoading: bool
   };
 }
-export function fetchRidesSuccess(ridesById) {
+
+function fetchRidesSuccess(ridesById) {
   return {
     type: types.RIDES_FETCHED,
     ridesById
@@ -49,21 +51,21 @@ export function fetchRideInfo(rideId) {
   };
 }
 
-export function rideInfoHasErrored(rideId, bool) {
+function rideInfoHasErrored(rideId, bool) {
   return {
     type: types.RIDE_INFO_HAS_ERRORED,
     rideId,
     hasErrored: bool
   };
 }
-export function rideInfoIsLoading(rideId, bool) {
+function rideInfoIsLoading(rideId, bool) {
   return {
     type: types.RIDE_INFO_IS_LOADING,
     rideId,
     isLoading: bool
   };
 }
-export function fetchRideInfoSuccess(rideId, ride) {
+function fetchRideInfoSuccess(rideId, ride) {
   return {
     type: types.RIDE_INFO_FETCHED,
     rideId,
@@ -82,7 +84,7 @@ export function deleteRide(rideId) {
   };
 }
 
-export function deleteRideSuccess(rideId) {
+function deleteRideSuccess(rideId) {
   return {
     type: types.RIDE_DELETED,
     rideId
@@ -90,16 +92,18 @@ export function deleteRideSuccess(rideId) {
 }
 
 export function updateRide(ride) {
-  return (dispatch) => {
-    dispatch(updateRideSuccess(ride))
-  };
-}
-
-export function updateRideSuccess(ride) {
   return {
     type: types.RIDE_UPDATED,
     ride
   };
+}
+
+export function createRide(ride) {
+  var rideById = { [ride.id]: ride }
+  return {
+    type: types.RIDE_CREATED,
+    rideById
+  }
 }
 
 export function fetchRideServices(rideId) {
@@ -113,7 +117,7 @@ export function fetchRideServices(rideId) {
   };
 }
 
-export function fetchRideServicesSuccess(rideId, servicesById) {
+function fetchRideServicesSuccess(rideId, servicesById) {
   return {
     type: types.RIDE_SERVICES_FETCHED,
     rideId,

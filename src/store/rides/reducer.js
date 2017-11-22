@@ -46,6 +46,11 @@ export default function ridesReducer(state = initialState, action = {}) {
           ...state,
           ridesById: ridesById
         };
+      case types.RIDE_CREATED:
+        return {
+          ...state,
+          ridesById: Object.assign({}, state.ridesById, action.rideById)
+        };
       case types.RIDE_UPDATED:
         var ridesById = state.ridesById
         var ride = action.ride

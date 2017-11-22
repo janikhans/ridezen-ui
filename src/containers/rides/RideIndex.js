@@ -3,7 +3,7 @@ import update from 'immutability-helper'
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchRides } from '../../store/rides/actions';
+import { fetchRides, createRide } from '../../store/rides/actions';
 import * as ridesSelectors from '../../store/rides/reducer';
 
 import RideCard from '../../components/rides/RideCard';
@@ -19,12 +19,7 @@ class RideIndex extends Component {
   }
 
   addNewRide = (ride) => {
-    const rides = update(this.state.rides, {
-      $push: [ride]
-    })
-    this.setState({
-      rides: rides
-    })
+    this.props.createRide(ride)
   }
 
   render () {
@@ -35,7 +30,7 @@ class RideIndex extends Component {
     if (this.props.isLoading) {
       return <p>Loading…</p>;
     }
-    
+
     return (
       <div>
         <div>
@@ -52,7 +47,7 @@ class RideIndex extends Component {
       </div>
     )
   }
-  
+
   renderCardById(rideId) {
     const ride = _.get(this.props.ridesById, rideId)
     return (
@@ -72,7 +67,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(fetchRides())
+    fetchData: () => dispatch(fetchRides()),
+    createRide: (ride) => dispatch(createRide(ride))
   };
 };
 
