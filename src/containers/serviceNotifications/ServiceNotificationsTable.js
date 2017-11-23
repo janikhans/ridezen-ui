@@ -1,0 +1,65 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+
+import { fetchRideServiceNotifications } from '../../store/serviceNotifications/actions';
+import { fetchServiceItems } from '../../store/serviceItems/actions';
+import * as serviceNotifictionSelectors from '../../store/serviceNotifications/reducer';
+
+import ServiceNotificationRow from '../../components/serviceNotifications/ServiceNotificationRow';
+
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+
+class ServiceNotificationsTable extends Component {
+  componentDidMount() {
+    if (this.props.serviceItemsById.length === 0){
+      this.props.fetchServiceItemsData()
+    }
+    this.props.fetchServiceNotificationData(this.props.ride.id)
+  }
+
+  renderIntervalById(serviceNotificationId) {
+    const serviceNotification = this.props.serviceNotificationsById[serviceNotificationId]
+    const serviceItem = this.props.serviceItemsById[serviceNotification.service_item_id]
+    return (
+      <ServiceNotificationRow key={serviceNotification.id} serviceNotification={serviceNotification} serviceItem={serviceItem}/>
+    )
+  }
+
+  render () {
+    return (
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Service</TableCell>
+            <TableCell numeric>Distance</TableCell>
+            <TableCell numeric>Due In</TableCell>
+            <TableCell numeric>Status</TableCell>
+            <TableCell numeric></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {_.map(this.props.serviceNotificationsIdArray, this.renderIntervalById.bind(this))}
+        </TableBody>
+      </Table>
+    )
+  }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  const rideId = ownProps.ride.id
+  return {
+    serviceNotificationsIdArray: serviceNotifictionSelectors.getServiceNotificationsIdArray(state, rideId),
+    serviceNotificationsById: serviceNotifictionSelectors.getServiceNotificationsById(state, rideId),
+    serviceItemsById: state.serviceItems.serviceItemsById
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchServiceNotificationData: (rideId) => dispatch(fetchRideServiceNotifications(rideId)),
+    fetchServiceItemsData: () => dispatch(fetchServiceItems())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceNotificationsTable)

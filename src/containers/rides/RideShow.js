@@ -14,6 +14,7 @@ import RideEditDialog from '../../components/rides/RideEditDialog';
 import FillUpsTable from '../../components/fillUps/FillUpsTable'
 import ServicesTable from '../services/ServicesTable'
 import RideIntervalsTable from '../rideIntervals/RideIntervalsTable'
+import ServiceNotificationsTable from '../serviceNotifications/ServiceNotificationsTable'
 
 import { fetchRideInfo, deleteRide, updateRide } from '../../store/rides/actions';
 import * as ridesSelectors from '../../store/rides/reducer'
@@ -78,12 +79,14 @@ class RideShow extends Component {
               <Tab value="fillups" icon={<PhoneIcon />} label="FILLUPS" />
               <Tab value="services" icon={<FavoriteIcon />} label="SERVICES" />
               <Tab value="intervals" icon={<PersonPinIcon />} label="INTERVALS" />
+              <Tab value="notifications" icon={<PersonPinIcon />} label="NOTIFICATIONS" />
             </Tabs>
           </Paper>
           <Paper>
             {this.state.value === 'fillups' && <TabContainer><FillUpsTable ride={this.props.ride} /></TabContainer>}
             {this.state.value === 'services' && <TabContainer><ServicesTable ride={this.props.ride} /></TabContainer>}
             {this.state.value === 'intervals' && <TabContainer><RideIntervalsTable ride={this.props.ride} /></TabContainer>}
+            {this.state.value === 'notifications' && <TabContainer><ServiceNotificationsTable ride={this.props.ride} /></TabContainer>}
           </Paper>
         </div>
       )

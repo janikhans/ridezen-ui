@@ -44,6 +44,10 @@ class Api {
     return axios.get(`${API_ENDPOINT}/rides/${rideId}/intervals.json`)
   };
 
+  getRideServiceNotifications(rideId) {
+    return axios.get(`${API_ENDPOINT}/rides/${rideId}/service_notifications.json`)
+  };
+
   createRideService(rideId, service) {
     return axios.post(`${API_ENDPOINT}/rides/${rideId}/services`, { service: service })
   };
