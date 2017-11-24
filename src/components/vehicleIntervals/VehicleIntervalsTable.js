@@ -66,7 +66,7 @@ class VehicleIntervalsTable extends Component {
     const vehicleIntervals = update(this.state.vehicleIntervals, { $splice: [[intervalIndex, 1]]})
     this.setState({vehicleIntervals: vehicleIntervals})
   }
-  
+
   renderVehicleIntervalRow(vehicleInterval) {
     const serviceItem = this.props.serviceItemsById[vehicleInterval.service_item_id]
     return (
@@ -102,7 +102,7 @@ class VehicleIntervalsTable extends Component {
 }
 
 function mapStateToProps(state) {
-  return { 
+  return {
     serviceItemsById: state.serviceItems.serviceItemsById
   };
 }

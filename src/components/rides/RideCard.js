@@ -12,7 +12,7 @@ class RideCard extends Component {
         <Card>
           <CardContent>
             <Typography type="body1">
-              Ride #{this.props.ride.id}
+              {this.props.vehicle.year} {this.props.vehicle.make} {this.props.vehicle.model}
             </Typography>
             <Typography type="headline" component="h2">
               {this.props.ride.name}

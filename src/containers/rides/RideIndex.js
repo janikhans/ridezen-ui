@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { fetchRides, createRide } from '../../store/rides/actions';
+
+import * as vehiclesSelectors from '../../store/vehicles/reducer'
 import * as ridesSelectors from '../../store/rides/reducer';
 
 import RideCard from '../../components/rides/RideCard';
@@ -49,8 +51,9 @@ class RideIndex extends Component {
 
   renderCardById(rideId) {
     const ride = _.get(this.props.ridesById, rideId)
+    const vehicle = _.get(this.props.vehiclesById, ride.vehicle_id)
     return (
-      <RideCard key={rideId} ride={ride} />
+      <RideCard key={rideId} ride={ride} vehicle={vehicle}/>
     )
   }
 }
@@ -60,7 +63,8 @@ const mapStateToProps = (state) => {
     hasErrored: state.rides.hasErrored,
     isLoading: state.rides.isLoading,
     ridesById: state.rides.ridesById,
-    ridesIdArray: ridesSelectors.getRidesIdArray(state)
+    ridesIdArray: ridesSelectors.getRidesIdArray(state),
+    vehiclesById: vehiclesSelectors.getVehiclesById(state)
   };
 };
 

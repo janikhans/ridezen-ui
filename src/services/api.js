@@ -3,13 +3,24 @@ import axios from 'axios';
 const API_ENDPOINT = 'http://localhost:3001/api/v1/';
 
 class Api {
-
-  getRides() {
-    return axios.get(`${API_ENDPOINT}/rides.json`)
-  }
-
   getVehicles() {
     return axios.get(`${API_ENDPOINT}/vehicles.json`)
+  };
+
+  getVehicle(vehicleId) {
+    return axios.get(`${API_ENDPOINT}/vehicles/${vehicleId}.json`)
+  }
+
+  createVehicle(vehicle) {
+    return axios.post(`${API_ENDPOINT}/vehicles`, { vehicle: vehicle })
+  };
+
+  updateVehicle(vehicleId, vehicle) {
+    return axios.put(`${API_ENDPOINT}/vehicles/${vehicleId}`, { vehicle: vehicle })
+  };
+
+  deleteVehicle(vehicleId) {
+    return axios.delete(`${API_ENDPOINT}/vehicles/${vehicleId}`)
   };
 
   getServiceItems() {
@@ -19,6 +30,10 @@ class Api {
   createServiceItem(service_item) {
     return axios.post(`${API_ENDPOINT}/service_items`, { service_item: service_item })
   };
+
+  getRides() {
+    return axios.get(`${API_ENDPOINT}/rides.json`)
+  }
 
   getRide(rideId) {
     return axios.get(`${API_ENDPOINT}/rides/${rideId}.json`)

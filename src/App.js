@@ -20,7 +20,7 @@ import Vehicles from "./views/Vehicles";
 import ServiceItems from "./views/ServiceItems";
 
 import RideShow from "./containers/rides/RideShow"
-import VehicleShow from "./components/vehicles/VehicleShow"
+import VehicleShow from "./containers/vehicles/VehicleShow"
 import ServiceItemShow from "./components/serviceItems/ServiceItemShow"
 
 const drawerWidth = 240;

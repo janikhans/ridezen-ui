@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import VehicleIndex from '../components/vehicles/VehicleIndex';
+import VehicleIndex from '../containers/vehicles/VehicleIndex';
 
 class Vehicles extends Component {
   render() {

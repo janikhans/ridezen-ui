@@ -17,7 +17,9 @@ import RideIntervalsTable from '../rideIntervals/RideIntervalsTable'
 import ServiceNotificationsTable from '../serviceNotifications/ServiceNotificationsTable'
 
 import { fetchRideInfo, deleteRide, updateRide } from '../../store/rides/actions';
-import * as ridesSelectors from '../../store/rides/reducer'
+
+import { getVehicleById } from '../../store/vehicles/reducer'
+import { getRideById } from '../../store/rides/reducer'
 
 function TabContainer(props) {
   return <div>{props.children}</div>;
@@ -58,6 +60,9 @@ class RideShow extends Component {
           <Paper className="paper-header" elevation={1}>
             <Typography type="display1" component="h2">
               {this.props.ride.name}
+            </Typography>
+            <Typography type="display1" component="h3">
+              {this.props.vehicle.year} {this.props.vehicle.make} {this.props.vehicle.model}
             </Typography>
             <Typography type="subheading" component="p">
               Starting Mileage: {this.props.ride.starting_mileage}
@@ -100,8 +105,10 @@ class RideShow extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const ride = getRideById(state, ownProps.match.params.rideId)
   return {
-    ride: ridesSelectors.getRideById(state, ownProps.match.params.rideId)
+    ride: ride,
+    vehicle: getVehicleById(state, ride.vehicle_id)
   };
 };
 
