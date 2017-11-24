@@ -88,3 +88,7 @@ export function getRidesIdArray(state) {
 export function getRideById(state, rideId) {
   return state.rides.ridesById[rideId];
 }
+
+export function isRidesLoaded(state) {
+  return Object.keys(state.rides.ridesById).length > 0;
+}

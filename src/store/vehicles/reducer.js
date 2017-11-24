@@ -78,3 +78,7 @@ export function getVehicleById(state, vehicleId) {
 export function getVehiclesById(state) {
   return state.vehicles.vehiclesById;
 }
+
+export function isVehiclesLoaded(state) {
+  return Object.keys(state.vehicles.vehiclesById).length > 0;
+}

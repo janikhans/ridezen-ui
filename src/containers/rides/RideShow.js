@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
@@ -38,11 +37,7 @@ class RideShow extends Component {
   };
 
   componentDidMount() {
-    if (this.props.ride) {
-      this.props.fetchInfo(this.props.ride.id)
-    } else {
-      this.props.garageRedirect()
-    }
+    this.props.fetchInfo(this.props.ride.id)
   }
 
   deleteRide = (id) => {
@@ -116,8 +111,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchInfo: (rideId) => dispatch(fetchRideInfo(rideId)),
     deleteRide: (rideId) => dispatch(deleteRide(rideId)),
-    updateRide: (ride) => dispatch(updateRide(ride)),
-    garageRedirect: () => dispatch(push('/garage'))
+    updateRide: (ride) => dispatch(updateRide(ride))
   };
 };
 

@@ -57,3 +57,7 @@ export function getServiceItemsIdArray(state) {
 export function getServiceItems(state) {
   return _.values(state.serviceItems.serviceItemsById);
 }
+
+export function isServiceItemsLoaded(state) {
+  return Object.keys(state.serviceItems.serviceItemsById).length > 0;
+}

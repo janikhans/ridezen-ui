@@ -1,7 +1,17 @@
 import React from 'react';
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
+import { connect } from 'react-redux'
+import compose from 'recompose/compose';
+
+import * as ridesSelectors from './store/rides/reducer'
+import * as vehiclesSelectors from './store/vehicles/reducer'
+import * as serviceItemsSelectors from './store/serviceItems/reducer'
+
+import { fetchRides } from './store/rides/actions'
+import { fetchVehicles } from './store/vehicles/actions'
+import { fetchServiceItems } from './store/serviceItems/actions'
 
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
@@ -75,6 +85,18 @@ class App extends React.Component {
     mobileOpen: false,
   };
 
+  componentDidMount() {
+    if (!this.props.vehiclesLoaded) {
+      this.props.fetchVehiclesData()
+    }
+    if (!this.props.ridesLoaded) {
+      this.props.fetchRidesData()
+    }
+    if (!this.props.serviceItemsLoaded) {
+      this.props.fetchServiceItemsData()
+    }
+  }
+
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
@@ -82,6 +104,24 @@ class App extends React.Component {
   render() {
     const { classes, theme } = this.props;
 
+    let content = ''
+
+    if (this.props.ridesLoaded && this.props.vehiclesLoaded && this.props.serviceItemsLoaded) {
+      content =
+        <main className={classes.content}>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/garage" component={Garage} />
+          <Route exact path="/rides/:rideId" component={RideShow} />
+          <Route path="/contact" component={Contact} />
+          <Route exact path="/vehicles" component={Vehicles} />
+          <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
+          <Route exact path="/service-items" component={ServiceItems} />
+          <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
+        </main>
+    } else {
+      content = <main className={classes.content}>Loading...</main>
+    }
+    
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -124,16 +164,7 @@ class App extends React.Component {
               <Navigation />
             </Drawer>
           </Hidden>
-          <main className={classes.content}>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/garage" component={Garage} />
-            <Route exact path="/rides/:rideId" component={RideShow} />
-            <Route path="/contact" component={Contact} />
-            <Route exact path="/vehicles" component={Vehicles} />
-            <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
-            <Route exact path="/service-items" component={ServiceItems} />
-            <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
-          </main>
+          {content}
         </div>
         <ModalRoot />
       </div>
@@ -146,4 +177,27 @@ App.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(App);
+const mapStateToProps = (state) => {
+  return {
+    serviceItemsLoaded: serviceItemsSelectors.isServiceItemsLoaded(state),
+    ridesLoaded: ridesSelectors.isRidesLoaded(state),
+    vehiclesLoaded: vehiclesSelectors.isVehiclesLoaded(state)
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchRidesData: () => dispatch(fetchRides()),
+    fetchServiceItemsData: () => dispatch(fetchServiceItems()),
+    fetchVehiclesData: () => dispatch(fetchVehicles())
+  };
+};
+
+export default withRouter(
+  compose(
+    withStyles(styles, {
+      withTheme: true
+    }),
+    connect(mapStateToProps, mapDispatchToProps)
+  )(App)
+)
