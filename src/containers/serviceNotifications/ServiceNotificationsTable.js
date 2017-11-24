@@ -32,9 +32,7 @@ class ServiceNotificationsTable extends Component {
         <TableHead>
           <TableRow>
             <TableCell>Service</TableCell>
-            <TableCell numeric>Distance</TableCell>
-            <TableCell numeric>Due In</TableCell>
-            <TableCell numeric>Status</TableCell>
+            <TableCell numeric>Due</TableCell>
             <TableCell numeric></TableCell>
           </TableRow>
         </TableHead>

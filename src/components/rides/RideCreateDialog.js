@@ -90,7 +90,7 @@ class RideCreateDialog extends Component {
               updates on maintenance and other goodness.`}
             </DialogContentText>
             {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
-            <FormControl>
+            <FormControl style={{minWidth: '100%'}}>
               <InputLabel htmlFor="vehicle-id">Vehicle</InputLabel>
               <Select value={this.state.vehicleId}
                 autoWidth

@@ -25,3 +25,7 @@ body {
 .inline-block {
   display: inline-block;
 }
+
+.red-text {
+  color:red;
+}

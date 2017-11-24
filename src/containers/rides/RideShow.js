@@ -61,7 +61,7 @@ class RideShow extends Component {
             <Typography type="display1" component="h2">
               {this.props.ride.name}
             </Typography>
-            <Typography type="display1" component="h3">
+            <Typography component="h3">
               {this.props.vehicle.year} {this.props.vehicle.make} {this.props.vehicle.model}
             </Typography>
             <Typography type="subheading" component="p">

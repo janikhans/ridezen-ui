@@ -6,6 +6,8 @@ import Button from 'material-ui/Button';
 
 class RideIntervalRow extends Component {
   render () {
+    let source = this.props.rideInterval.oem_interval_id ? 'OEM' : 'DEFAULT'
+
     return (
       <TableRow>
         <TableCell>
@@ -16,7 +18,7 @@ class RideIntervalRow extends Component {
         <TableCell numeric>
           { "every " + this.props.rideInterval.distance + " " + this.props.rideInterval.units }
         </TableCell>
-        <TableCell numeric>Default</TableCell>
+        <TableCell numeric>{this.props.rideInterval.source}</TableCell>
         <TableCell numeric>
           <Button dense color="primary">Action</Button>
         </TableCell>

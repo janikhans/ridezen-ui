@@ -6,6 +6,18 @@ import Button from 'material-ui/Button';
 
 class ServiceNotificationRow extends Component {
   render () {
+    let status = ''
+
+    if (this.props.serviceNotification.due_in >= 0) {
+      status = "in " + this.props.serviceNotification.due_in + " " + this.props.serviceNotification.units
+
+    } else {
+      status =
+        <span className="red-text">
+          {this.props.serviceNotification.due_in + " " + this.props.serviceNotification.units + " ago"}
+        </span>
+    }
+
     return (
       <TableRow>
         <TableCell>
@@ -14,10 +26,8 @@ class ServiceNotificationRow extends Component {
           </Link>
         </TableCell>
         <TableCell numeric>
-          {this.props.serviceNotification.distance}
+          {status}
         </TableCell>
-        <TableCell numeric>{this.props.serviceNotification.due_in + " " + this.props.serviceNotification.units}</TableCell>
-        <TableCell numeric>{this.props.serviceNotification.status}</TableCell>
         <TableCell numeric>
           <Button dense color="primary">Action</Button>
         </TableCell>

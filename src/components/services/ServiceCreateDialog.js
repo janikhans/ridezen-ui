@@ -19,7 +19,7 @@ class ServiceCreateDialog extends Component {
     this.state = {
       date: '',
       serviceItemId: '',
-      mileage: '',
+      mileage: this.props.ride.current_mileage,
       price: '',
       note: '',
       open: false,
@@ -43,10 +43,9 @@ class ServiceCreateDialog extends Component {
       price: this.state.price,
       note: this.state.note,
     }
-    console.log('preparing to submit request')
+
     apiService.createRideService(this.props.ride.id, new_service)
     .then(response => {
-      console.log('request accepted')
       this.props.addRideService(this.props.ride.id, response.data)
       this.resetForm()
     })
