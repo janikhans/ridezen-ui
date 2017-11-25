@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-import apiService from '../../services/api';
+import serviceItemsApi from '../../services/serviceItems';
 import * as types from './actionTypes'
 
 export function fetchServiceItems() {
   return (dispatch) => {
     dispatch(serviceItemsIsLoading(true));
-    apiService.getServiceItems()
+    serviceItemsApi.getServiceItems()
       .then((response) => {
         dispatch(serviceItemsIsLoading(false));
         const serviceItemsById = _.keyBy(response.data, (serviceItem) => serviceItem.id);
@@ -22,7 +22,7 @@ export function fetchServiceItems() {
 export function createServiceItem(serviceItem) {
   return (dispatch) => {
     dispatch(serviceItemsIsSaving(true));
-    apiService.createServiceItem(serviceItem)
+    serviceItemsApi.createServiceItem(serviceItem)
       .then((response) => {
         dispatch(serviceItemsIsSaving(false));
         dispatch(createServiceItemSuccess(response.data))

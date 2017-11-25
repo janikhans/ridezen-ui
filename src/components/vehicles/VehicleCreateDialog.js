@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiService from '../../services/api'
+import vehiclesApi from '../../services/vehicles'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -37,7 +37,7 @@ class VehicleCreateDialog extends Component {
       year: this.state.year
     }
 
-    apiService.createVehicle(vehicle)
+    vehiclesApi.createVehicle(vehicle)
     .then(response => {
       this.props.addNewVehicle(response.data)
       this.resetForm()

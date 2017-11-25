@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiService from '../../services/api'
+import ridesApi from '../../services/rides'
 
 import ErrorsContainer from '../shared/ErrorsContainer'
 import ServiceItemSelect from '../../containers/shared/ServiceItemSelect'
@@ -44,7 +44,7 @@ class ServiceCreateDialog extends Component {
       note: this.state.note,
     }
 
-    apiService.createRideService(this.props.ride.id, new_service)
+    ridesApi.createRideService(this.props.ride.id, new_service)
     .then(response => {
       this.props.addRideService(this.props.ride.id, response.data)
       this.resetForm()

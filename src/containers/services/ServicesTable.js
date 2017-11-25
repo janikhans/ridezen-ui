@@ -58,7 +58,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     servicesIdArray: serviceSelectors.getServicesIdArray(state, rideId),
     servicesById: serviceSelectors.getServicesById(state, rideId),
-    serviceItemsById: serviceItemsSelectors.getServiceItemsById()
+    serviceItemsById: serviceItemsSelectors.getServiceItemsById(state)
   };
 };
 

@@ -38,7 +38,7 @@ class RideIndex extends Component {
           <Paper className="paper-header" elevation={1}>
             <Typography type="headline" component="h2">
               Your Garage
-              <RideCreateDialog addNewRide={this.addNewRide} />
+              <RideCreateDialog addNewRide={this.addNewRide} vehicles={this.props.vehicles}/>
             </Typography>
           </Paper>
         </div>
@@ -64,7 +64,8 @@ const mapStateToProps = (state) => {
     isLoading: state.rides.isLoading,
     ridesById: ridesSelectors.getRidesById(state),
     ridesIdArray: ridesSelectors.getRidesIdArray(state),
-    vehiclesById: vehiclesSelectors.getVehiclesById(state)
+    vehiclesById: vehiclesSelectors.getVehiclesById(state),
+    vehicles: vehiclesSelectors.getVehicles(state)
   };
 };
 

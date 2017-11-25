@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 
-import apiService from '../../services/api';
+import vehiclesApi from '../../services/vehicles';
 import * as types from './actionTypes'
 
 // Related to all vehicles for user
 export function fetchVehicles() {
   return (dispatch) => {
     dispatch(vehiclesIsLoading(true));
-    apiService.getVehicles()
+    vehiclesApi.getVehicles()
       .then((response) => {
         dispatch(vehiclesIsLoading(false));
         const vehiclesById = _.keyBy(response.data, (vehicle) => vehicle.id);
@@ -43,7 +43,7 @@ function fetchVehiclesSuccess(vehiclesById) {
 export function fetchVehicleInfo(vehicleId) {
   return (dispatch) => {
     dispatch(vehicleInfoIsLoading(vehicleId, true));
-    apiService.getVehicle(vehicleId)
+    vehiclesApi.getVehicle(vehicleId)
       .then((response) => {
         dispatch(vehicleInfoIsLoading(vehicleId, false));
         dispatch(fetchVehicleInfoSuccess(vehicleId, response.data))
@@ -76,7 +76,7 @@ function fetchVehicleInfoSuccess(vehicleId, vehicle) {
 
 export function deleteVehicle(vehicleId) {
   return (dispatch) => {
-    apiService.deleteVehicle(vehicleId)
+    vehiclesApi.deleteVehicle(vehicleId)
       .then((response) => {
         dispatch(deleteVehicleSuccess(vehicleId, true))
         dispatch(push('/vehicles'))

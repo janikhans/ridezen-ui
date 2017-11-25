@@ -13,9 +13,6 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 
 class ServiceNotificationsTable extends Component {
   componentDidMount() {
-    if (this.props.serviceItemsById.length === 0){
-      this.props.fetchServiceItemsData()
-    }
     this.props.fetchServiceNotificationData(this.props.ride.id)
   }
 
@@ -50,14 +47,13 @@ const mapStateToProps = (state, ownProps) => {
   return {
     serviceNotificationsIdArray: serviceNotifictionSelectors.getServiceNotificationsIdArray(state, rideId),
     serviceNotificationsById: serviceNotifictionSelectors.getServiceNotificationsById(state, rideId),
-    serviceItemsById: serviceItemsSelectors.getServiceItemsById()
+    serviceItemsById: serviceItemsSelectors.getServiceItemsById(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchServiceNotificationData: (rideId) => dispatch(fetchRideServiceNotifications(rideId)),
-    fetchServiceItemsData: () => dispatch(fetchServiceItems())
+    fetchServiceNotificationData: (rideId) => dispatch(fetchRideServiceNotifications(rideId))
   };
 };
 

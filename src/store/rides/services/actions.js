@@ -1,13 +1,13 @@
 import _ from 'lodash';
 
-import apiService from '../../../services/api';
+import ridesApi from '../../../services/rides';
 import * as types from './actionTypes'
 
 // Fetch Services for a given ride
 export function fetchRideServices(rideId) {
   return (dispatch) => {
     dispatch(rideServicesIsLoading(rideId, true));
-    apiService.getRideServices(rideId)
+    ridesApi.getRideServices(rideId)
       .then((response) => {
         dispatch(rideServicesIsLoading(rideId, false));
         const servicesById = _.keyBy(response.data, (service) => service.id);

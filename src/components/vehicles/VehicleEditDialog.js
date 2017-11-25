@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import apiService from '../../services/api'
+import vehiclesApi from '../../services/vehicles'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -37,7 +37,7 @@ class VehicleEditDialog extends Component {
       year: this.state.year
     }
 
-    apiService.updateVehicle(this.props.vehicle.id, vehicle)
+    vehiclesApi.updateVehicle(this.props.vehicle.id, vehicle)
     .then(response => {
       this.props.updateVehicle(response.data)
       this.resetForm()

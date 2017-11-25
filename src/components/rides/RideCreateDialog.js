@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiService from '../../services/api'
+import ridesApi from '../../services/rides'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -19,21 +19,12 @@ class RideCreateDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      vehicles: [],
       vehicleId: '',
       name: '',
       startingMileage: '',
       errors: null,
       open: false
     }
-  }
-
-  componentDidMount() {
-    apiService.getVehicles()
-    .then(response => {
-      this.setState({vehicles: response.data})
-    })
-    .catch(error => console.log(error))
   }
 
   handleClickOpen = () => {
@@ -55,7 +46,7 @@ class RideCreateDialog extends Component {
       starting_mileage: this.state.startingMileage
     }
 
-    apiService.createRide(ride)
+    ridesApi.createRide(ride)
     .then(response => {
       this.props.addNewRide(response.data)
       this.resetForm()
@@ -99,13 +90,11 @@ class RideCreateDialog extends Component {
                 onChange={this.handleSelect('vehicleId')}
                 input={<Input id="vehicle-id" />}
               >
-                if (this.state.vehicles){
-                  this.state.vehicles.map((vehicle) => {
-                    return (
-                      <MenuItem key={vehicle.id} value={vehicle.id}>{vehicle.year + " " + vehicle.make + " " + vehicle.model}</MenuItem>
-                    )}
-                  )
-                }
+                {this.props.vehicles.map((vehicle) => {
+                  return (
+                    <MenuItem key={vehicle.id} value={vehicle.id}>{vehicle.year + " " + vehicle.make + " " + vehicle.model}</MenuItem>
+                  )}
+                )}
               </Select>
             </FormControl>
             <TextField

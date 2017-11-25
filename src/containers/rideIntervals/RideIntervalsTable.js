@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { fetchRideIntervals } from '../../store/rideIntervals/actions';
-import { fetchServiceItems } from '../../store/serviceItems/actions';
 import * as rideIntervalSelectors from '../../store/rideIntervals/reducer';
 import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
 
@@ -13,9 +12,6 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 
 class RideIntervalsTable extends Component {
   componentDidMount() {
-    if (this.props.serviceItemsById.length === 0){
-      this.props.fetchServiceItemsData()
-    }
     this.props.fetchIntervalData(this.props.ride.id)
   }
 
@@ -61,8 +57,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchIntervalData: (rideId) => dispatch(fetchRideIntervals(rideId)),
-    fetchServiceItemsData: () => dispatch(fetchServiceItems())
+    fetchIntervalData: (rideId) => dispatch(fetchRideIntervals(rideId))
   };
 };
 

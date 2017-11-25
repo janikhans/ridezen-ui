@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import apiService from '../../services/api'
+import ridesApi from '../../services/rides'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -32,7 +32,7 @@ class RideEditDialog extends Component {
     const ride = {
       name: this.state.name
     }
-    apiService.updateRide(this.props.ride.id, ride)
+    ridesApi.updateRide(this.props.ride.id, ride)
     .then(response => {
       this.props.updateRide(response.data)
       this.resetForm()

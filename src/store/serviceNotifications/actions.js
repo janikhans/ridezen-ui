@@ -1,13 +1,13 @@
 import _ from 'lodash';
 
-import apiService from '../../services/api';
+import ridesApi from '../../services/rides';
 import * as types from './actionTypes'
 
 // Fetch Intervals for a given ride
 export function fetchRideServiceNotifications(rideId) {
   return (dispatch) => {
     dispatch(rideServiceNotificationsIsLoading(true));
-    apiService.getRideServiceNotifications(rideId)
+    ridesApi.getRideServiceNotifications(rideId)
       .then((response) => {
         dispatch(rideServiceNotificationsIsLoading(false));
         const serviceNotificationsById = _.keyBy(response.data, (notification) => notification.ride_id + '_' + notification.service_item_id);
