@@ -16,6 +16,7 @@ import NegativeIntervalsTable from '../../components/negativeIntervals/NegativeI
 
 import { fetchVehicleInfo, deleteVehicle, updateVehicle } from '../../store/vehicles/actions';
 import * as vehiclesSelectors from '../../store/vehicles/reducer'
+import * as serviceItemsSelectors from '../../store/serviceItems/reducer'
 
 function TabContainer(props) {
   return <div>{props.children}</div>;
@@ -73,8 +74,18 @@ class VehicleShow extends Component {
             </Tabs>
           </Paper>
           <Paper>
-            {this.state.value === 'intervals' && <TabContainer><VehicleIntervalsTable vehicle={this.props.vehicle} /></TabContainer>}
-            {this.state.value === 'negativeIntervals' && <TabContainer><NegativeIntervalsTable vehicle={this.props.vehicle} /></TabContainer>}
+            {
+              this.state.value === 'intervals' &&
+              <TabContainer>
+                <VehicleIntervalsTable vehicle={this.props.vehicle} serviceItemsById={this.props.serviceItemsById}/>
+              </TabContainer>
+            }
+            {
+              this.state.value === 'negativeIntervals' &&
+              <TabContainer>
+                <NegativeIntervalsTable vehicle={this.props.vehicle} serviceItemsById={this.props.serviceItemsById}/>
+              </TabContainer>
+            }
           </Paper>
         </div>
       )
@@ -89,7 +100,8 @@ class VehicleShow extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    vehicle: vehiclesSelectors.getVehicleById(state, ownProps.match.params.vehicleId)
+    vehicle: vehiclesSelectors.getVehicleById(state, ownProps.match.params.vehicleId),
+    serviceItemsById: serviceItemsSelectors.getServiceItemsById(state)
   };
 };
 

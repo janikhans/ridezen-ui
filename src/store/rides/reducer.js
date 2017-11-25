@@ -4,6 +4,7 @@ import _ from 'lodash';
 const initialState = {
   hasErrored: false,
   isLoading: false,
+  hasLoaded: false,
   ridesById: []
 }
 
@@ -13,7 +14,8 @@ export default function ridesReducer(state = initialState, action = {}) {
     case types.RIDES_FETCHED:
       return {
         ...state,
-        ridesById: action.ridesById
+        ridesById: action.ridesById,
+        hasLoaded: action.hasLoaded
       };
     case types.RIDES_HAS_ERRORED:
       return {
@@ -90,5 +92,5 @@ export function getRideById(state, rideId) {
 }
 
 export function isRidesLoaded(state) {
-  return Object.keys(state.rides.ridesById).length > 0;
+  return state.rides.hasLoaded
 }

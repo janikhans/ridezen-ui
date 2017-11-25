@@ -35,7 +35,8 @@ function vehiclesIsLoading(bool) {
 function fetchVehiclesSuccess(vehiclesById) {
   return {
     type: types.VEHICLES_FETCHED,
-    vehiclesById
+    vehiclesById,
+    hasLoaded: true
   };
 }
 

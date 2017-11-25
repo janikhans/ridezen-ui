@@ -49,7 +49,8 @@ export function serviceItemsIsLoading(bool) {
 export function fetchServiceItemsSuccess(serviceItemsById) {
   return {
     type: types.SERVICE_ITEMS_FETCHED,
-    serviceItemsById
+    serviceItemsById,
+    hasLoaded: true
   };
 }
 

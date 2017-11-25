@@ -4,6 +4,7 @@ import _ from 'lodash';
 const initialState = {
   hasErrored: false,
   isLoading: false,
+  hasLoaded: false,
   vehiclesById: []
 }
 
@@ -13,7 +14,8 @@ export default function vehiclesReducer(state = initialState, action = {}) {
     case types.VEHICLES_FETCHED:
       return {
         ...state,
-        vehiclesById: action.vehiclesById
+        vehiclesById: action.vehiclesById,
+        hasLoaded: action.hasLoaded
       };
     case types.VEHICLES_HAS_ERRORED:
       return {
@@ -80,5 +82,5 @@ export function getVehiclesById(state) {
 }
 
 export function isVehiclesLoaded(state) {
-  return Object.keys(state.vehicles.vehiclesById).length > 0;
+  return state.vehicles.hasLoaded;
 }

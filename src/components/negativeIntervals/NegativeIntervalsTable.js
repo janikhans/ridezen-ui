@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
+import _ from 'lodash';
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
@@ -36,6 +37,17 @@ class NegativeIntervalsTable extends Component {
     .catch(error => console.log(error))
   }
 
+  renderNegativeIntervalRow(negativeInterval) {
+    const serviceItem = this.props.serviceItemsById[negativeInterval.service_item_id]
+    return (
+      <NegativeIntervalRow key={negativeInterval.id}
+        negativeInterval={negativeInterval}
+        deleteNegativeInterval={this.deleteNegativeInterval}
+        serviceItem={serviceItem}
+      />
+    )
+  }
+
   render () {
     return (
       <div>
@@ -48,12 +60,7 @@ class NegativeIntervalsTable extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.negativeIntervals.map((negativeInterval, index) => {
-                return(
-                  <NegativeIntervalRow key={index} negativeInterval={negativeInterval}
-                    deleteNegativeInterval={this.deleteNegativeInterval} />
-                )
-              })}
+              {_.map(this.state.negativeIntervals, this.renderNegativeIntervalRow.bind(this))}
             </TableBody>
           </Table>
         </Paper>

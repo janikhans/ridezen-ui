@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import update from 'immutability-helper'
-import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
@@ -101,10 +100,4 @@ class VehicleIntervalsTable extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    serviceItemsById: state.serviceItems.serviceItemsById
-  };
-}
-
-export default connect(mapStateToProps)(VehicleIntervalsTable)
+export default VehicleIntervalsTable

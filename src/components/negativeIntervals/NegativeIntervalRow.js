@@ -15,8 +15,8 @@ class NegativeIntervalRow extends Component {
     return (
       <TableRow>
         <TableCell>
-          <Link className="no-decoration" to={'/service-items/' + this.props.negativeInterval.service_item_id}>
-            {this.props.negativeInterval.service_item_id}
+          <Link className="no-decoration" to={'/service-items/' + this.props.serviceItem.id}>
+            {this.props.serviceItem.name}
           </Link>
         </TableCell>
         <TableCell numeric>

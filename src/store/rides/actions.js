@@ -35,7 +35,8 @@ function ridesIsLoading(bool) {
 function fetchRidesSuccess(ridesById) {
   return {
     type: types.RIDES_FETCHED,
-    ridesById
+    ridesById,
+    hasLoaded: true
   };
 }
 
