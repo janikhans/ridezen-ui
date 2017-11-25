@@ -4,6 +4,7 @@ import modals from './modals/reducer'
 import rideIntervals from './rideIntervals/reducer'
 import serviceNotifications from './serviceNotifications/reducer'
 import vehicles from './vehicles/reducer'
+import user from './user/reducer'
 
 export {
   rides,
@@ -11,5 +12,6 @@ export {
   modals,
   rideIntervals,
   serviceNotifications,
-  vehicles
+  vehicles,
+  user
 };
