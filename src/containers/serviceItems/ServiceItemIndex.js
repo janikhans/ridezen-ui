@@ -16,7 +16,7 @@ class ServiceItemIndex extends Component {
   componentDidMount() {
     this.props.fetchData()
   }
-  
+
   renderServiceItemById(serviceItemId) {
     const serviceItem = this.props.serviceItemsById[serviceItemId]
     return (
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => {
   return {
     hasErrored: state.serviceItems.hasErrored,
     isLoading: state.serviceItems.isLoading,
-    serviceItemsById: state.serviceItems.serviceItemsById,
+    serviceItemsById: serviceItemsSelectors.getServiceItemsById(state),
     serviceItemsIdArray: serviceItemsSelectors.getServiceItemsIdArray(state)
   };
 };

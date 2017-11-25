@@ -62,7 +62,7 @@ const mapStateToProps = (state) => {
   return {
     hasErrored: state.rides.hasErrored,
     isLoading: state.rides.isLoading,
-    ridesById: state.rides.ridesById,
+    ridesById: ridesSelectors.getRidesById(state),
     ridesIdArray: ridesSelectors.getRidesIdArray(state),
     vehiclesById: vehiclesSelectors.getVehiclesById(state)
   };

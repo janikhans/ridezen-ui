@@ -83,6 +83,10 @@ export default function ridesReducer(state = initialState, action = {}) {
 }
 
 // Selectors
+export function getRidesById(state) {
+  return state.rides.ridesById;
+}
+
 export function getRidesIdArray(state) {
   return _.keys(state.rides.ridesById);
 }

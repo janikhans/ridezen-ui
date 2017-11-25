@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { fetchRideServiceNotifications } from '../../store/serviceNotifications/actions';
 import { fetchServiceItems } from '../../store/serviceItems/actions';
 import * as serviceNotifictionSelectors from '../../store/serviceNotifications/reducer';
+import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
 
 import ServiceNotificationRow from '../../components/serviceNotifications/ServiceNotificationRow';
 
@@ -49,7 +50,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     serviceNotificationsIdArray: serviceNotifictionSelectors.getServiceNotificationsIdArray(state, rideId),
     serviceNotificationsById: serviceNotifictionSelectors.getServiceNotificationsById(state, rideId),
-    serviceItemsById: state.serviceItems.serviceItemsById
+    serviceItemsById: serviceItemsSelectors.getServiceItemsById()
   };
 };
 

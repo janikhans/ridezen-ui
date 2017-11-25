@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { fetchRideIntervals } from '../../store/rideIntervals/actions';
 import { fetchServiceItems } from '../../store/serviceItems/actions';
 import * as rideIntervalSelectors from '../../store/rideIntervals/reducer';
+import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
 
 import RideIntervalRow from '../../components/rideIntervals/RideIntervalRow';
 
@@ -22,7 +23,11 @@ class RideIntervalsTable extends Component {
     const rideInterval = this.props.rideIntervalsById[rideIntervalId]
     const serviceItem = this.props.serviceItemsById[rideInterval.service_item_id]
     return (
-      <RideIntervalRow key={rideInterval.id} rideInterval={rideInterval} serviceItem={serviceItem}/>
+      <RideIntervalRow
+        key={rideIntervalId}
+        rideInterval={rideInterval}
+        serviceItem={serviceItem}
+      />
     )
   }
 
@@ -50,7 +55,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     rideIntervalsIdArray: rideIntervalSelectors.getRideIntervalsIdArray(state, rideId),
     rideIntervalsById: rideIntervalSelectors.getRideIntervalsById(state, rideId),
-    serviceItemsById: state.serviceItems.serviceItemsById
+    serviceItemsById: serviceItemsSelectors.getServiceItemsById(state)
   };
 };
 

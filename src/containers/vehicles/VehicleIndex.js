@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
   return {
     hasErrored: state.vehicles.hasErrored,
     isLoading: state.vehicles.isLoading,
-    vehiclesById: state.vehicles.vehiclesById,
+    vehiclesById: vehiclesSelectors.getVehiclesById(state),
     vehiclesIdArray: vehiclesSelectors.getVehiclesIdArray(state)
   };
 };

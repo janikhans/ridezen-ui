@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { fetchRideServices, addRideService } from '../../store/rides/actions';
 import { fetchServiceItems } from '../../store/serviceItems/actions';
 import * as serviceSelectors from '../../store/rides/services/reducer';
+import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
 
 import ServiceRow from '../../components/services/ServiceRow';
 import ServiceCreateDialog from '../../components/services/ServiceCreateDialog';
@@ -57,7 +58,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     servicesIdArray: serviceSelectors.getServicesIdArray(state, rideId),
     servicesById: serviceSelectors.getServicesById(state, rideId),
-    serviceItemsById: state.serviceItems.serviceItemsById
+    serviceItemsById: serviceItemsSelectors.getServiceItemsById()
   };
 };
 
