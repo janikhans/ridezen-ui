@@ -8,10 +8,12 @@ import compose from 'recompose/compose';
 import * as ridesSelectors from '../../store/rides/reducer'
 import * as vehiclesSelectors from '../../store/vehicles/reducer'
 import * as serviceItemsSelectors from '../../store/serviceItems/reducer'
+import * as userSelectors from '../../store/user/reducer'
 
 import { fetchRides } from '../../store/rides/actions'
 import { fetchVehicles } from '../../store/vehicles/actions'
 import { fetchServiceItems } from '../../store/serviceItems/actions'
+import { logoutUser } from '../../store/user/actions'
 
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
@@ -19,6 +21,8 @@ import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
 import MenuIcon from 'material-ui-icons/Menu';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
 
 import Navigation from '../../components/layout/Navigation'
 import ModalRoot from '../../containers/modals/modalRoot';
@@ -81,9 +85,13 @@ const styles = theme => ({
 });
 
 class Member extends Component {
-  state = {
-    mobileOpen: false,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      mobileOpen: false,
+      anchorEl: null,
+    }
+  }
 
   componentDidMount() {
     if (!this.props.vehiclesLoaded) {
@@ -101,9 +109,22 @@ class Member extends Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
 
+  handleMenu = (e) => {
+    this.setState({ anchorEl: e.currentTarget });
+  };
+
+  handleRequestClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleLogout = () => {
+    this.props.logoutUser()
+  };
+
   render() {
     const { classes, theme } = this.props;
-
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
     let content = ''
 
     if (this.props.ridesLoaded && this.props.vehiclesLoaded && this.props.serviceItemsLoaded) {
@@ -135,6 +156,31 @@ class Member extends Component {
               >
                 <MenuIcon />
               </IconButton>
+              <IconButton
+                aria-owns={open ? 'menu-appbar' : null}
+                aria-haspopup="true"
+                onClick={this.handleMenu}
+                color="contrast"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onRequestClose={this.handleRequestClose}
+              >
+                <MenuItem onClick={this.handleRequestClose}>Profile</MenuItem>
+                <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+              </Menu>
             </Toolbar>
           </AppBar>
           <Hidden mdUp>
@@ -181,7 +227,8 @@ const mapStateToProps = (state) => {
   return {
     serviceItemsLoaded: serviceItemsSelectors.isServiceItemsLoaded(state),
     ridesLoaded: ridesSelectors.isRidesLoaded(state),
-    vehiclesLoaded: vehiclesSelectors.isVehiclesLoaded(state)
+    vehiclesLoaded: vehiclesSelectors.isVehiclesLoaded(state),
+    user: state.user.user
   };
 };
 
@@ -189,7 +236,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchRidesData: () => dispatch(fetchRides()),
     fetchServiceItemsData: () => dispatch(fetchServiceItems()),
-    fetchVehiclesData: () => dispatch(fetchVehicles())
+    fetchVehiclesData: () => dispatch(fetchVehicles()),
+    logoutUser: () => dispatch(logoutUser())
   };
 };
 

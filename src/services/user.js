@@ -9,9 +9,13 @@ class UserApi {
     return client.post(`auth`, credentials)
   };
 
-  logoutUser(uid) {
-    return client.delete(`auth`)
+  logoutUser() {
+    return client.delete(`auth/sign_out`)
   };
+
+  verifyToken() {
+    return client.get('auth/validate_token')
+  }
 }
 
 export default new UserApi();

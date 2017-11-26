@@ -9,11 +9,13 @@ export function loginUser(credentials) {
     dispatch(loginRequestIsSubmitting())
     userApi.loginUser(credentials)
     .then(response => {
+      console.log(response.headers)
       localStorage.setItem('expiry', response.headers.expiry)
-      localStorage.setItem('access_token', response.headers['access-token'])
+      localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client', response.headers.client)
-      localStorage.setItem('u_id', response.headers.uid)
-      dispatch(loginSuccessful(response.data))
+      localStorage.setItem('uid', response.headers.uid)
+      localStorage.setItem('token-type', response.headers['token-type'])
+      dispatch(loginSuccessful(response.data.data))
       dispatch(push('/'))
     })
     .catch(error => {
@@ -35,9 +37,7 @@ function loginSuccessful(user) {
     type: types.LOGIN_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    access_token: user.access_token,
-    email: user.email,
-    username: user.username
+    user
   }
 }
 
@@ -56,10 +56,11 @@ export function signUpUser(credentials) {
     userApi.signUpUser(credentials)
     .then(response => {
       localStorage.setItem('expiry', response.headers.expiry)
-      localStorage.setItem('access_token', response.headers['access-token'])
+      localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client', response.headers.client)
-      localStorage.setItem('u_id', response.headers.uid)
-      dispatch(signUpSuccessful(response.data))
+      localStorage.setItem('uid', response.headers.uid)
+      localStorage.setItem('token-type', response.headers['token-type'])
+      dispatch(signUpSuccessful(response.data.data))
       dispatch(push('/'))
     })
     .catch(error => {
@@ -81,9 +82,7 @@ function signUpSuccessful(user) {
     type: types.SIGNUP_SUCCESS,
     isFetching: false,
     isAuthenticated: true,
-    access_token: user.access_token,
-    email: user.email,
-    username: user.username
+    user
   }
 }
 
@@ -93,5 +92,68 @@ function signUpError(errors) {
     isFetching: false,
     isAuthenticated: false,
     errors
+  }
+}
+
+export function logoutUser() {
+  return dispatch => {
+    userApi.logoutUser()
+    .then(response => {
+      localStorage.removeItem('expiry')
+      localStorage.removeItem('access-token')
+      localStorage.removeItem('client')
+      localStorage.removeItem('uid')
+      localStorage.removeItem('token-type')
+      dispatch(logoutSuccessful())
+      dispatch(push('/'))
+    })
+    .catch(error => {
+      console.log(error)
+    });
+  }
+}
+
+function logoutSuccessful() {
+  return {
+    type: types.LOGOUT_SUCCESS,
+    isAuthenticated: false
+  }
+}
+
+export function verifyToken() {
+  return dispatch => {
+    dispatch(verifyingToken())
+    userApi.verifyToken()
+    .then(response => {
+      dispatch(verifyTokenSuccess(response.data.data))
+      dispatch(push('/'))
+    })
+    .catch(error => {
+      dispatch(verifyTokenError())
+    });
+  }
+}
+
+function verifyingToken() {
+  return {
+    type: types.VERIFYING_TOKEN,
+    isFetching: true
+  }
+}
+
+function verifyTokenSuccess(user) {
+  return {
+    type: types.VERIFY_TOKEN_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    user
+  }
+}
+
+function verifyTokenError() {
+  return {
+    type: types.VERIFY_TOKEN_ERROR,
+    isFetching: false,
+    isAuthenticated: false
   }
 }

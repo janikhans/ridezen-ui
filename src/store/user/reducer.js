@@ -4,7 +4,7 @@ import _ from 'lodash';
 const initialState = {
   isFetching: false,
   isAuthenticated: false,
-  email: ''
+  user: null
 }
 
 export default function reduce(state = initialState, action = {}) {
@@ -19,9 +19,7 @@ export default function reduce(state = initialState, action = {}) {
         ...state,
         isFetching: action.isFetching,
         isAuthenticated: action.isAuthenticated,
-        access_token: action.access_token,
-        email: action.email,
-        username: action.username
+        user: action.user
       };
     case types.SIGNUP_FAILURE:
       return {
@@ -38,15 +36,27 @@ export default function reduce(state = initialState, action = {}) {
         ...state,
         isFetching: action.isFetching,
         isAuthenticated: action.isAuthenticated,
-        access_token: action.access_token,
-        email: action.email,
-        username: action.username
+        user: action.user
       };
     case types.LOGIN_FAILURE:
       return {
         ...state,
         messages: action.messages
       };
+    case types.VERIFYING_TOKEN:
+      return {
+        ...state,
+        isFetching: action.isFetching
+      };
+    case types.VERIFY_TOKEN_SUCCESS:
+      return {
+        ...state,
+        isFetching: action.isFetching,
+        isAuthenticated: action.isAuthenticated,
+        user: action.user
+      };
+    case types.LOGOUT_SUCCESS:
+      return initialState;
     default:
       return state;
   }
@@ -57,14 +67,14 @@ export function isUserLoggedIn(state) {
   return state.user.isAuthenticated;
 }
 
-export function userName(state) {
-  return state.user.username;
-}
-
 export function getMessages(state) {
   return state.user.messages
 }
 
 export function getErrors(state) {
   return state.user.errors
+}
+
+export function getUser(state) {
+  return state.user.user
 }
