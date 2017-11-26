@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import userApi from '../../services/user';
 import * as types from './actionTypes'
 import { push } from 'react-router-redux';
@@ -9,7 +7,6 @@ export function loginUser(credentials) {
     dispatch(loginRequestIsSubmitting())
     userApi.loginUser(credentials)
     .then(response => {
-      console.log(response.headers)
       localStorage.setItem('expiry', response.headers.expiry)
       localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client', response.headers.client)

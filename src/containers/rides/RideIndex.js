@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchRides, createRide } from '../../store/rides/actions';
+import { createRide } from '../../store/rides/actions';
 
 import * as vehiclesSelectors from '../../store/vehicles/reducer'
 import * as ridesSelectors from '../../store/rides/reducer';
@@ -15,10 +15,6 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
 class RideIndex extends Component {
-  componentDidMount() {
-    this.props.fetchData()
-  }
-
   addNewRide = (ride) => {
     this.props.createRide(ride)
   }
@@ -71,7 +67,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(fetchRides()),
     createRide: (ride) => dispatch(createRide(ride))
   };
 };

@@ -7,7 +7,6 @@ import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import PhoneIcon from 'material-ui-icons/Phone';
 import FavoriteIcon from 'material-ui-icons/Favorite';
-import PersonPinIcon from 'material-ui-icons/PersonPin';
 
 import VehicleDeleteDialog from '../../components/vehicles/VehicleDeleteDialog';
 import VehicleEditDialog from '../../components/vehicles/VehicleEditDialog';

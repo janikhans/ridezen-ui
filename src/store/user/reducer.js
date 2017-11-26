@@ -1,5 +1,4 @@
 import * as types from './actionTypes';
-import _ from 'lodash';
 
 const initialState = {
   isFetching: false,
@@ -77,4 +76,8 @@ export function getErrors(state) {
 
 export function getUser(state) {
   return state.user.user
+}
+
+export function isFetching(state) {
+  return state.user.isFetching
 }

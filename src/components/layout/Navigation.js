@@ -23,6 +23,31 @@ const styles = theme => ({
 class Navigation extends React.Component {
   render() {
     const { classes } = this.props;
+    let adminNav = ''
+
+    if (this.props.user.role === 'admin') {
+      adminNav =
+      <div>
+        <Divider />
+        <ListItem>
+          <Typography type="subheading" noWrap>
+            Admin
+          </Typography>
+        </ListItem>
+        <ListItem button component={NavLink} to="/vehicles">
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          Vehicles
+        </ListItem>
+        <ListItem button component={NavLink} to="/service-items">
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          Service Items
+        </ListItem>
+      </div>
+    }
 
     return (
       <div>
@@ -37,7 +62,7 @@ class Navigation extends React.Component {
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            Home
+            Dashboard
           </ListItem>
           <ListItem button component={NavLink} to="/garage">
             <ListItemIcon>
@@ -45,28 +70,19 @@ class Navigation extends React.Component {
             </ListItemIcon>
             Garage
           </ListItem>
+          <Divider />
+          <ListItem>
+            <Typography type="subheading" noWrap>
+              Support
+            </Typography>
+          </ListItem>
           <ListItem button component={NavLink} to="/contact">
             <ListItemIcon>
               <DraftsIcon />
             </ListItemIcon>
             Contact
           </ListItem>
-          <Divider />
-          <ListItem>
-            Admin
-          </ListItem>
-          <ListItem button component={NavLink} to="/vehicles">
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            Vehicles
-          </ListItem>
-          <ListItem button component={NavLink} to="/service-items">
-            <ListItemIcon>
-              <DraftsIcon />
-            </ListItemIcon>
-            Service Items
-          </ListItem>
+          {adminNav}
         </List>
       </div>
     );

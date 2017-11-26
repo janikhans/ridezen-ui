@@ -8,12 +8,35 @@ import { verifyToken } from './store/user/actions'
 import Member from './containers/layout/Member'
 import Guest from './containers/layout/Guest'
 
+var Spinner = require('react-spinkit');
+
 class App extends Component {
   componentDidMount() {
     this.props.verifyToken()
   }
 
   render() {
+    const classes = {
+      container: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        flexDirection: 'column'
+      },
+      heading: {
+        marginBottom: '35px'
+      }
+    }
+    if (this.props.isFetching) {
+      return (
+        <div style={classes.container}>
+          <h3 style={classes.heading}>TrackR Loading...</h3>
+          <Spinner name="ball-clip-rotate-multiple" fadeIn="half"/>
+        </div>
+      )
+    }
+
     return (
       this.props.userLoggedIn ? <Member /> : <Guest />
     );
@@ -22,6 +45,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    isFetching: userSelectors.isFetching(state),
     userLoggedIn: userSelectors.isUserLoggedIn(state)
   };
 };

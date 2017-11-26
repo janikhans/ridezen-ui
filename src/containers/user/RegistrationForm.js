@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import compose from 'recompose/compose'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 
 import ErrorsContainer from '../../components/shared/ErrorsContainer'
@@ -27,7 +26,7 @@ class RegistrationForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: this.props.email,
+      email: '',
       password: ''
     }
   }
@@ -57,6 +56,9 @@ class RegistrationForm extends Component {
     return (
       <div>
         <Paper className={classes.root} elevation={4}>
+          <Typography type="headline" component="h3">
+            Not a member yet? Register!
+          </Typography>
           {this.props.errors && <ErrorsContainer errors={this.props.errors}/>}
           <TextField
             autoFocus
@@ -92,7 +94,6 @@ RegistrationForm.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    email: state.user.email,
     errors: userSelectors.getErrors(state)
   };
 };

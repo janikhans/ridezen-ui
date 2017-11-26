@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import { fetchRideServiceNotifications } from '../../store/serviceNotifications/actions';
-import { fetchServiceItems } from '../../store/serviceItems/actions';
 import * as serviceNotifictionSelectors from '../../store/serviceNotifications/reducer';
 import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
 
@@ -20,7 +19,7 @@ class ServiceNotificationsTable extends Component {
     const serviceNotification = this.props.serviceNotificationsById[serviceNotificationId]
     const serviceItem = this.props.serviceItemsById[serviceNotification.service_item_id]
     return (
-      <ServiceNotificationRow key={serviceNotification.id} serviceNotification={serviceNotification} serviceItem={serviceItem}/>
+      <ServiceNotificationRow key={serviceNotificationId} serviceNotification={serviceNotification} serviceItem={serviceItem}/>
     )
   }
 

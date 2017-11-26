@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route, withRouter } from "react-router-dom";
 import { push } from 'react-router-redux';
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
@@ -12,15 +11,12 @@ import Splash from '../../views/Splash'
 import LoginForm from '../../containers/user/LoginForm'
 import RegistrationForm from '../../containers/user/RegistrationForm'
 
-import Paper from 'material-ui/Paper';
-
 const styles = theme => ({
   root: {
     background: `url(${Background}) no-repeat center`,
     display: 'flex',
     backgroundSize: 'cover',
     height: '100vh',
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',

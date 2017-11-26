@@ -27,7 +27,7 @@ import AccountCircle from 'material-ui-icons/AccountCircle';
 import Navigation from '../../components/layout/Navigation'
 import ModalRoot from '../../containers/modals/modalRoot';
 
-import Home from "../../views/Home";
+import Dashboard from "../../views/Dashboard";
 import Garage from "../../views/Garage";
 import Contact from "../../views/Contact";
 import Vehicles from "../../views/Vehicles";
@@ -38,6 +38,7 @@ import VehicleShow from "../../containers/vehicles/VehicleShow"
 import ServiceItemShow from "../../components/serviceItems/ServiceItemShow"
 
 const drawerWidth = 240;
+var Spinner = require('react-spinkit');
 
 const styles = theme => ({
   root: {
@@ -94,15 +95,9 @@ class Member extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.vehiclesLoaded) {
-      this.props.fetchVehiclesData()
-    }
-    if (!this.props.ridesLoaded) {
-      this.props.fetchRidesData()
-    }
-    if (!this.props.serviceItemsLoaded) {
-      this.props.fetchServiceItemsData()
-    }
+    this.props.fetchVehiclesData()
+    this.props.fetchRidesData()
+    this.props.fetchServiceItemsData()
   }
 
   handleDrawerToggle = () => {
@@ -122,6 +117,19 @@ class Member extends Component {
   };
 
   render() {
+    const loading =   {
+      container: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '75vh',
+        flexDirection: 'column'
+      },
+      header: {
+        marginBottom: '35px'
+      }
+    }
+
     const { classes, theme } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
@@ -130,7 +138,7 @@ class Member extends Component {
     if (this.props.ridesLoaded && this.props.vehiclesLoaded && this.props.serviceItemsLoaded) {
       content =
         <main className={classes.content}>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Dashboard} />
           <Route exact path="/garage" component={Garage} />
           <Route exact path="/rides/:rideId" component={RideShow} />
           <Route path="/contact" component={Contact} />
@@ -140,7 +148,13 @@ class Member extends Component {
           <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
         </main>
     } else {
-      content = <main className={classes.content}>Loading...</main>
+      content =
+        <main className={classes.content}>
+          <div style={loading.container}>
+            <h3 style={loading.header}>Your TrackR is Loading...</h3>
+            <Spinner name="ball-clip-rotate-multiple" fadeIn="half"/>
+          </div>
+        </main>
     }
 
     return (
@@ -196,7 +210,7 @@ class Member extends Component {
                 keepMounted: true, // Better open performance on mobile.
               }}
             >
-              <Navigation />
+              <Navigation user={this.props.user}/>
             </Drawer>
           </Hidden>
           <Hidden mdDown implementation="css">
@@ -207,7 +221,7 @@ class Member extends Component {
                 paper: classes.drawerPaper,
               }}
             >
-              <Navigation />
+              <Navigation user={this.props.user}/>
             </Drawer>
           </Hidden>
           {content}
@@ -228,7 +242,7 @@ const mapStateToProps = (state) => {
     serviceItemsLoaded: serviceItemsSelectors.isServiceItemsLoaded(state),
     ridesLoaded: ridesSelectors.isRidesLoaded(state),
     vehiclesLoaded: vehiclesSelectors.isVehiclesLoaded(state),
-    user: state.user.user
+    user: userSelectors.getUser(state)
   };
 };
 

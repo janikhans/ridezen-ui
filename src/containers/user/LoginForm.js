@@ -5,8 +5,6 @@ import compose from 'recompose/compose'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-
-import ErrorsContainer from '../../components/shared/ErrorsContainer'
 import * as userSelectors from '../../store/user/reducer'
 import { loginUser } from '../../store/user/actions'
 
@@ -27,7 +25,7 @@ class LoginForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      email: this.props.email,
+      email: '',
       password: ''
     }
   }
@@ -57,6 +55,9 @@ class LoginForm extends Component {
     return (
       <div>
         <Paper className={classes.root} elevation={4}>
+          <Typography type="headline" component="h3">
+            Already a member?
+          </Typography>
           {_.map(this.props.messages, this.renderMessage.bind(this))}
           <TextField
             autoFocus
@@ -92,7 +93,6 @@ LoginForm.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    email: state.user.email,
     messages: userSelectors.getMessages(state)
   };
 };
