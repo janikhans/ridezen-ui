@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 
-import membersApi from '../../services/member/rides';
+import membersApi from '../../services/rides';
 import * as types from './actionTypes'
 
 // Related to all rides for user

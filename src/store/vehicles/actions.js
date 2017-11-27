@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 
-import vehiclesApi from '../../services/member/vehicles';
+import vehiclesApi from '../../services/vehicles';
 import * as types from './actionTypes'
 
 // Related to all vehicles for user
-export function fetchVehicles() {
+export function fetchVehicles(args = {}) {
   return (dispatch) => {
     dispatch(vehiclesIsLoading(true));
-    vehiclesApi.getVehicles()
+    vehiclesApi.getVehicles(args)
       .then((response) => {
         dispatch(vehiclesIsLoading(false));
         const vehiclesById = _.keyBy(response.data, (vehicle) => vehicle.id);

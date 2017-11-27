@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import vehiclesApi from '../../services/member/vehicles'
+import vehiclesApi from '../../services/vehicles'
 
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'

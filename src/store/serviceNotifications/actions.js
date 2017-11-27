@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import ridesApi from '../../services/member/rides';
+import ridesApi from '../../services/rides';
 import * as types from './actionTypes'
 
 // Fetch Intervals for a given ride

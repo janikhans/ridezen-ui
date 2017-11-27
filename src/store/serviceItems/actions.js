@@ -1,12 +1,12 @@
 import _ from 'lodash';
 
-import serviceItemsApi from '../../services/member/serviceItems';
+import serviceItemsApi from '../../services/serviceItems';
 import * as types from './actionTypes'
 
-export function fetchServiceItems() {
+export function fetchServiceItems(args = {}) {
   return (dispatch) => {
     dispatch(serviceItemsIsLoading(true));
-    serviceItemsApi.getServiceItems()
+    serviceItemsApi.getServiceItems(args)
       .then((response) => {
         dispatch(serviceItemsIsLoading(false));
         const serviceItemsById = _.keyBy(response.data, (serviceItem) => serviceItem.id);

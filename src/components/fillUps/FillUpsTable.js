@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ridesApi from '../../services/member/rides'
+import ridesApi from '../../services/rides'
 import update from 'immutability-helper'
 import FillUpRow from './FillUpRow';
 import FillUpCreateDialog from './FillUpCreateDialog';

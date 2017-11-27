@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(fetchVehicles()),
+    fetchData: () => dispatch(fetchVehicles({admin: true})),
     addNewVehicle: (new_vehicle) => dispatch(addNewVehicle(new_vehicle))
   };
 };

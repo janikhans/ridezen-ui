@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(fetchServiceItems())
+    fetchData: () => dispatch(fetchServiceItems({admin: true}))
   };
 };
 

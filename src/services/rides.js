@@ -1,6 +1,6 @@
-import client from '../client';
+import client from './client';
 
-const BASE_URL = 'member/rides';
+const BASE_URL = 'rides';
 
 class RidesApi {
   getRides() {

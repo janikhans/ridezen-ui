@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ridesApi from '../../services/member/rides'
+import ridesApi from '../../services/rides'
 
 import ErrorsContainer from '../shared/ErrorsContainer'
 import ServiceItemSelect from '../../containers/shared/ServiceItemSelect'

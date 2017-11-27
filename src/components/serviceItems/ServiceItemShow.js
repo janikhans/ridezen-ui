@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import serviceItemsApi from '../../services/member/serviceItems'
+import serviceItemsApi from '../../services/serviceItems'
 import ServiceItemDeleteDialog from './ServiceItemDeleteDialog';
 import ServiceItemEditDialog from './ServiceItemEditDialog';
 import Paper from 'material-ui/Paper';
