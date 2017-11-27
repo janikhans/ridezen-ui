@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 
 const initialState = {
+  isVerifying: false,
   isFetching: false,
   isAuthenticated: false,
   user: null
@@ -45,17 +46,20 @@ export default function reduce(state = initialState, action = {}) {
     case types.VERIFYING_TOKEN:
       return {
         ...state,
-        isFetching: action.isFetching
+        isVerifying: action.isVerifying
       };
     case types.VERIFY_TOKEN_SUCCESS:
       return {
         ...state,
-        isFetching: action.isFetching,
+        isVerifying: action.isVerifying,
         isAuthenticated: action.isAuthenticated,
         user: action.user
       };
     case types.VERIFY_TOKEN_ERROR:
-      return initialState;
+      return {
+        ...initialState,
+        isVerifying: action.isVerifying
+      };
     case types.LOGOUT_SUCCESS:
       return initialState;
     default:
@@ -80,6 +84,6 @@ export function getUser(state) {
   return state.user.user
 }
 
-export function isFetching(state) {
-  return state.user.isFetching
+export function isVerifying(state) {
+  return state.user.isVerifying
 }

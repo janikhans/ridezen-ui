@@ -134,14 +134,14 @@ export function verifyToken() {
 function verifyingToken() {
   return {
     type: types.VERIFYING_TOKEN,
-    isFetching: true
+    isVerifying: true
   }
 }
 
 function verifyTokenSuccess(user) {
   return {
     type: types.VERIFY_TOKEN_SUCCESS,
-    isFetching: false,
+    isVerifying: false,
     isAuthenticated: true,
     user
   }
@@ -150,7 +150,6 @@ function verifyTokenSuccess(user) {
 function verifyTokenError() {
   return {
     type: types.VERIFY_TOKEN_ERROR,
-    isFetching: false,
-    isAuthenticated: false
+    isVerifying: false
   }
 }

@@ -28,7 +28,7 @@ class App extends Component {
         marginBottom: '35px'
       }
     }
-    if (this.props.isFetching) {
+    if (this.props.isVerifying) {
       return (
         <div style={classes.container}>
           <h3 style={classes.heading}>TrackR Loading...</h3>
@@ -45,7 +45,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: userSelectors.isFetching(state),
+    isVerifying: userSelectors.isVerifying(state),
     userLoggedIn: userSelectors.isUserLoggedIn(state)
   };
 };
