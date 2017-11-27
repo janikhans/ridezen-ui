@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 
-import vehiclesApi from '../../services/vehicles';
+import vehiclesApi from '../../services/member/vehicles';
 import * as types from './actionTypes'
 
 // Related to all vehicles for user

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_ENDPOINT = 'http://localhost:3001/api/v1/';
+const API_ENDPOINT = 'http://localhost:3001/api/v1';
 
 const config = {
   headers: {

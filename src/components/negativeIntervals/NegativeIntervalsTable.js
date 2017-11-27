@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import vehiclesApi from '../../services/member/vehicles'
 import update from 'immutability-helper'
 import _ from 'lodash';
 
@@ -18,7 +18,7 @@ class NegativeIntervalsTable extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(`http://localhost:3001/api/v1/vehicles/${this.state.vehicle.id}/negative_intervals.json`)
+    vehiclesApi.getVehicleNegativeIntervals(this.state.vehicle.id)
     .then(response => {
       this.setState({
         negativeIntervals: response.data
@@ -28,7 +28,7 @@ class NegativeIntervalsTable extends Component {
   }
 
   deleteNegativeInterval = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/vehicles/${this.state.vehicle.id}/negative_intervals/${id}`)
+    vehiclesApi.deleteVehicleNegativeInterval(this.state.vehicle.id, id)
     .then(response => {
       const negativeIntervalIndex = this.state.negativeIntervals.findIndex(x => x.id === id)
       const negativeIntervals = update(this.state.negativeIntervals, { $splice: [[negativeIntervalIndex, 1]]})

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import ridesApi from '../../services/member/rides'
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import ErrorsContainer from '../shared/ErrorsContainer'
@@ -43,11 +43,7 @@ class FillUpCreateDialog extends Component {
       note: this.state.note
     }
 
-    axios.post(
-      `http://localhost:3001/api/v1/rides/${this.props.ride.id}/fill_ups`,
-      {
-        fill_up: fillUp
-      })
+    ridesApi.createRideFillUp(this.props.ride.id, fillUp)
     .then(response => {
       this.props.addNewFillUp(response.data)
       this.resetForm()

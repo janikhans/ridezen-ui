@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import serviceItemsApi from '../../services/member/serviceItems'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'
 
@@ -38,11 +38,7 @@ class ServiceItemEditDialog extends Component {
       name: this.state.name
     }
 
-    axios.put(
-      `http://localhost:3001/api/v1/service_items/${this.props.serviceItem.id}`,
-      {
-        service_item: serviceItem
-      })
+    serviceItemsApi.updateServiceItem(this.props.serviceItem.id, serviceItem)
     .then(response => {
       this.props.updateServiceItem(response.data)
       this.resetForm()

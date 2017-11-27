@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import vehiclesApi from '../../services/member/vehicles'
 
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'
@@ -40,12 +40,7 @@ class OemIntervalCreateDialog extends Component {
       units: this.state.units,
       distance: this.state.distance,
     }
-
-    axios.post(
-      `http://localhost:3001/api/v1/vehicles/${this.props.vehicle.id}/oem_intervals`,
-      {
-        oem_interval: oemInterval
-      })
+    vehiclesApi.createVehicleOemInterval(this.props.vehicle.id, oemInterval)
     .then(response => {
       this.props.addNewOemInterval(response.data)
       this.resetForm()

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import ridesApi from '../../services/member/rides'
 import update from 'immutability-helper'
 import FillUpRow from './FillUpRow';
 import FillUpCreateDialog from './FillUpCreateDialog';
@@ -15,7 +15,7 @@ class FillUpsTable extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(`http://localhost:3001/api/v1/rides/${this.state.ride.id}/fill_ups.json`)
+    ridesApi.getRideFillUps(this.props.ride.id)
     .then(response => {
       this.setState({
         fillUps: response.data
@@ -34,7 +34,7 @@ class FillUpsTable extends Component {
   }
 
   deleteFillUp = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/rides/${this.state.ride.id}/fill_ups/${id}`)
+    ridesApi.deleteRideFillUp(this.props.ride.id, id)
     .then(response => {
       const fillUpIndex = this.state.fillUps.findIndex(x => x.id === id)
       const fillUps = update(this.state.fillUps, { $splice: [[fillUpIndex, 1]]})

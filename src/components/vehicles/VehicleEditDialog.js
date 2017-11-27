@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import vehiclesApi from '../../services/vehicles'
+import vehiclesApi from '../../services/member/vehicles'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';

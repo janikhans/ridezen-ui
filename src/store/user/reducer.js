@@ -54,6 +54,8 @@ export default function reduce(state = initialState, action = {}) {
         isAuthenticated: action.isAuthenticated,
         user: action.user
       };
+    case types.VERIFY_TOKEN_ERROR:
+      return initialState;
     case types.LOGOUT_SUCCESS:
       return initialState;
     default:

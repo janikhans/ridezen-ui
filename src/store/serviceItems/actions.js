@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import serviceItemsApi from '../../services/serviceItems';
+import serviceItemsApi from '../../services/member/serviceItems';
 import * as types from './actionTypes'
 
 export function fetchServiceItems() {

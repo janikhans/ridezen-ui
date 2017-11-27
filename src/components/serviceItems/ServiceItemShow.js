@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
-import axios from 'axios';
+import serviceItemsApi from '../../services/member/serviceItems'
 import ServiceItemDeleteDialog from './ServiceItemDeleteDialog';
 import ServiceItemEditDialog from './ServiceItemEditDialog';
 import Paper from 'material-ui/Paper';
@@ -16,7 +16,7 @@ class ServiceItemShow extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3001/api/v1/service_items/${this.props.match.params.serviceItemId}.json`)
+    serviceItemsApi.getServiceItem(this.props.match.params.serviceItemId)
     .then(response => {
       this.setState({
         serviceItem: response.data
@@ -26,7 +26,7 @@ class ServiceItemShow extends Component {
   }
 
   deleteServiceItem = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/service_items/${id}`)
+    serviceItemsApi.deleteServiceItem(id)
     .then(response => {
       this.setState({ redirect: true })
     })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import vehiclesApi from '../../services/member/vehicles'
 import update from 'immutability-helper'
 import _ from 'lodash';
 
@@ -19,7 +19,7 @@ class VehicleIntervalsTable extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(`http://localhost:3001/api/v1/vehicles/${this.state.vehicle.id}/intervals.json`)
+    vehiclesApi.getVehicleIntervals(this.state.vehicle.id)
     .then(response => {
       this.setState({
         vehicleIntervals: response.data
@@ -39,7 +39,7 @@ class VehicleIntervalsTable extends Component {
   }
 
   deleteOemInterval = (id) => {
-    axios.delete(`http://localhost:3001/api/v1/vehicles/${this.state.vehicle.id}/oem_intervals/${id}`)
+    vehiclesApi.deleteVehicleOemInterval(this.props.vehicle.id, id)
     .then(response => {
       const oemIntervalIndex = this.state.vehicleIntervals.findIndex(x => x.oem_interval_id === id)
       const vehicleIntervals = update(this.state.vehicleIntervals, { $splice: [[oemIntervalIndex, 1]]})
@@ -49,9 +49,8 @@ class VehicleIntervalsTable extends Component {
   }
 
   createNegativeInterval = (serviceItemId) => {
-    const negative_interval = { service_item_id: serviceItemId }
-    axios.post(`http://localhost:3001/api/v1/vehicles/${this.props.vehicle.id}/negative_intervals`,
-      { negative_interval: negative_interval })
+    const negativeInterval = { service_item_id: serviceItemId }
+    vehiclesApi.createNegativeInterval(this.props.vehicle.id, negativeInterval)
     .then(response => {
       this.updateNegativeInterval(response.data)
     })
