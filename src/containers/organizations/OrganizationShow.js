@@ -10,6 +10,7 @@ import PersonPinIcon from 'material-ui-icons/PersonPin';
 
 import OrganizationDeleteDialog from '../../components/organizations/OrganizationDeleteDialog';
 import OrganizationEditDialog from '../../components/organizations/OrganizationEditDialog';
+import MembershipsTable from '../../components/memberships/MembershipsTable'
 
 import { fetchOrganizationInfo, deleteOrganization, updateOrganization } from '../../store/organizations/actions';
 
@@ -69,6 +70,7 @@ class OrganizationShow extends Component {
             </Tabs>
           </Paper>
           <Paper>
+            {this.state.value === 'members' && <TabContainer><MembershipsTable organization={this.props.organization} /></TabContainer>}
           </Paper>
         </div>
       )

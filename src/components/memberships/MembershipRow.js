@@ -1,0 +1,36 @@
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+
+import MembershipDeleteDialog from './MembershipDeleteDialog'
+
+import { TableCell, TableRow } from 'material-ui/Table';
+import Button from 'material-ui/Button';
+
+class ServiceRow extends Component {
+  render () {
+    let accepted = ''
+    if (this.props.membership.accepted === null) {
+      accepted = 'Pending'
+    } else if (this.props.membership.accepted === true ){
+      accepted = 'Accepted'
+    } else {
+      accepted = 'Declined'
+    }
+    return (
+      <TableRow>
+        <TableCell>{this.props.membership.user_id}</TableCell>
+        <TableCell numeric>{this.props.membership.role}</TableCell>
+        <TableCell numeric>{accepted}</TableCell>
+        <TableCell numeric>{this.props.membership.created_at}</TableCell>
+        <TableCell numeric>
+          <MembershipDeleteDialog
+            membership={this.props.membership}
+            deleteMembership={this.props.deleteMembership}
+          />
+        </TableCell>
+      </TableRow>
+    )
+  }
+}
+
+export default ServiceRow;
