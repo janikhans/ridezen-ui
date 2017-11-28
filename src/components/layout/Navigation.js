@@ -70,6 +70,12 @@ class Navigation extends React.Component {
             </ListItemIcon>
             Garage
           </ListItem>
+          <ListItem button component={NavLink} to="/organizations">
+            <ListItemIcon>
+              <DirectionsCar />
+            </ListItemIcon>
+            Organizations
+          </ListItem>
           <Divider />
           <ListItem>
             <Typography type="subheading" noWrap>

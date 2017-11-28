@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import { push } from 'react-router-redux';
 
-import membersApi from '../../services/rides';
+import ridesApi from '../../services/rides';
 import * as types from './actionTypes'
 
 // Related to all rides for user
 export function fetchRides() {
   return (dispatch) => {
     dispatch(ridesIsLoading(true));
-    membersApi.getRides()
+    ridesApi.getRides()
       .then((response) => {
         dispatch(ridesIsLoading(false));
         const ridesById = _.keyBy(response.data, (ride) => ride.id);
@@ -43,7 +43,7 @@ function fetchRidesSuccess(ridesById) {
 export function fetchRideInfo(rideId) {
   return (dispatch) => {
     dispatch(rideInfoIsLoading(rideId, true));
-    membersApi.getRide(rideId)
+    ridesApi.getRide(rideId)
       .then((response) => {
         dispatch(rideInfoIsLoading(rideId, false));
         dispatch(fetchRideInfoSuccess(rideId, response.data))
@@ -76,7 +76,7 @@ function fetchRideInfoSuccess(rideId, ride) {
 
 export function deleteRide(rideId) {
   return (dispatch) => {
-    membersApi.deleteRide(rideId)
+    ridesApi.deleteRide(rideId)
       .then((response) => {
         dispatch(deleteRideSuccess(rideId, true))
         dispatch(push('/garage'))
@@ -118,7 +118,7 @@ export function addRideService(rideId, new_service) {
 
 export function fetchRideServices(rideId) {
   return (dispatch) => {
-    membersApi.getRideServices(rideId)
+    ridesApi.getRideServices(rideId)
       .then((response) => {
         const servicesById = _.keyBy(response.data, (service) => service.id);
         dispatch(fetchRideServicesSuccess(rideId, servicesById))

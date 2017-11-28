@@ -5,6 +5,7 @@ import rideIntervals from './rideIntervals/reducer'
 import serviceNotifications from './serviceNotifications/reducer'
 import vehicles from './vehicles/reducer'
 import user from './user/reducer'
+import organizations from './organizations/reducer'
 
 export {
   rides,
@@ -13,5 +14,6 @@ export {
   rideIntervals,
   serviceNotifications,
   vehicles,
-  user
+  user,
+  organizations
 };

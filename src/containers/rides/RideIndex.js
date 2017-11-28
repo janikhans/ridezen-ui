@@ -19,6 +19,14 @@ class RideIndex extends Component {
     this.props.createRide(ride)
   }
 
+  renderCardById(rideId) {
+    const ride = _.get(this.props.ridesById, rideId)
+    const vehicle = _.get(this.props.vehiclesById, ride.vehicle_id)
+    return (
+      <RideCard key={rideId} ride={ride} vehicle={vehicle}/>
+    )
+  }
+
   render () {
     if (this.props.hasErrored) {
       return <p>Sorry! There was an error loading the items</p>;
@@ -42,14 +50,6 @@ class RideIndex extends Component {
           {_.map(this.props.ridesIdArray, this.renderCardById.bind(this))}
         </Grid>
       </div>
-    )
-  }
-
-  renderCardById(rideId) {
-    const ride = _.get(this.props.ridesById, rideId)
-    const vehicle = _.get(this.props.vehiclesById, ride.vehicle_id)
-    return (
-      <RideCard key={rideId} ride={ride} vehicle={vehicle}/>
     )
   }
 }

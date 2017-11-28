@@ -13,6 +13,7 @@ import * as userSelectors from '../../store/user/reducer'
 import { fetchRides } from '../../store/rides/actions'
 import { fetchVehicles } from '../../store/vehicles/actions'
 import { fetchServiceItems } from '../../store/serviceItems/actions'
+import { fetchOrganizations } from '../../store/organizations/actions'
 import { logoutUser } from '../../store/user/actions'
 
 import Drawer from 'material-ui/Drawer';
@@ -32,10 +33,12 @@ import Garage from "../../views/Garage";
 import Contact from "../../views/Contact";
 import Vehicles from "../../views/Vehicles";
 import ServiceItems from "../../views/ServiceItems";
+import Organizations from "../../views/Organizations";
 
 import RideShow from "../../containers/rides/RideShow"
 import VehicleShow from "../../containers/vehicles/VehicleShow"
 import ServiceItemShow from "../../components/serviceItems/ServiceItemShow"
+import OrganizationShow from "../../containers/organizations/OrganizationShow"
 
 const drawerWidth = 240;
 var Spinner = require('react-spinkit');
@@ -98,6 +101,7 @@ class Member extends Component {
     this.props.fetchVehiclesData()
     this.props.fetchRidesData()
     this.props.fetchServiceItemsData()
+    this.props.fetchOrganizationsData()
   }
 
   handleDrawerToggle = () => {
@@ -146,6 +150,8 @@ class Member extends Component {
           <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
           <Route exact path="/service-items" component={ServiceItems} />
           <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
+          <Route exact path="/organizations" component={Organizations} />
+          <Route exact path="/organizations/:organizationId" component={OrganizationShow} />
         </main>
     } else {
       content =
@@ -251,6 +257,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchRidesData: () => dispatch(fetchRides()),
     fetchServiceItemsData: () => dispatch(fetchServiceItems()),
     fetchVehiclesData: () => dispatch(fetchVehicles()),
+    fetchOrganizationsData: () => dispatch(fetchOrganizations()),
     logoutUser: () => dispatch(logoutUser())
   };
 };
