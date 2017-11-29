@@ -50,7 +50,7 @@ class VehicleIntervalsTable extends Component {
 
   createNegativeInterval = (serviceItemId) => {
     const negativeInterval = { service_item_id: serviceItemId }
-    vehiclesApi.createNegativeInterval(this.props.vehicle.id, negativeInterval)
+    vehiclesApi.createVehicleNegativeInterval(this.props.vehicle.id, negativeInterval)
     .then(response => {
       this.updateNegativeInterval(response.data)
     })
