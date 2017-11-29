@@ -9,8 +9,6 @@ import * as vehiclesSelectors from '../../store/vehicles/reducer';
 import RideRow from '../../components/rides/RideRow';
 import RideCreateDialog from '../../components/rides/RideCreateDialog';
 
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class RidesTable extends Component {

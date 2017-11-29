@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import PhoneIcon from 'material-ui-icons/Phone';
-import FavoriteIcon from 'material-ui-icons/Favorite';
+import DirectionsCar from 'material-ui-icons/DirectionsCar';
 import PersonPinIcon from 'material-ui-icons/PersonPin';
 
 import OrganizationDeleteDialog from '../../components/organizations/OrganizationDeleteDialog';
@@ -67,8 +66,8 @@ class OrganizationShow extends Component {
               indicatorColor="accent"
               textColor="accent"
             >
-              <Tab value="members" icon={<PhoneIcon />} label="Members" />
-              <Tab value="rides" icon={<PhoneIcon />} label="Rides" />
+              <Tab value="members" icon={<PersonPinIcon />} label="Members" />
+              <Tab value="rides" icon={<DirectionsCar />} label="Rides" />
             </Tabs>
           </Paper>
           <Paper>

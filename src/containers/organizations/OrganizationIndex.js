@@ -11,7 +11,6 @@ import OrganizationCreateDialog from '../../components/organizations/Organizatio
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 
 class OrganizationIndex extends Component {
   addNewOrganization = (organization) => {

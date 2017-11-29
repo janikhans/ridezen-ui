@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 
 import MembershipDeleteDialog from './MembershipDeleteDialog'
 
 import { TableCell, TableRow } from 'material-ui/Table';
-import Button from 'material-ui/Button';
 
 class ServiceRow extends Component {
   render () {
