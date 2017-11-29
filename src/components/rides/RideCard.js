@@ -12,6 +12,9 @@ class RideCard extends Component {
         <Card>
           <CardContent>
             <Typography type="body1">
+              {this.props.organization.name}
+            </Typography>
+            <Typography type="body1">
               {this.props.vehicle.year} {this.props.vehicle.make} {this.props.vehicle.model}
             </Typography>
             <Typography type="headline" component="h2">
@@ -19,7 +22,7 @@ class RideCard extends Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button dense color="primary" component={Link} to={'/rides/' + this.props.ride.id}>View</Button>
+            <Button dense color="primary" component={Link} to={`organizations/${this.props.ride.organization_id}/rides/${this.props.ride.id}`}>View</Button>
           </CardActions>
         </Card>
       </Grid>

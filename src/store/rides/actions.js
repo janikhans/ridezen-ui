@@ -78,8 +78,8 @@ export function deleteRide(rideId) {
   return (dispatch) => {
     ridesApi.deleteRide(rideId)
       .then((response) => {
-        dispatch(deleteRideSuccess(rideId, true))
         dispatch(push('/garage'))
+        dispatch(deleteRideSuccess(rideId))
       })
       .catch((error) => console.log(error));
   };
@@ -99,7 +99,7 @@ export function updateRide(ride) {
   };
 }
 
-export function createRide(ride) {
+export function addNewRide(ride) {
   var rideById = { [ride.id]: ride }
   return {
     type: types.RIDE_CREATED,

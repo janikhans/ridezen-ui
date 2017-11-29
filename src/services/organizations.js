@@ -34,6 +34,14 @@ class OrganizationsApi {
   deleteOrganizationMembership(organizationId, membershipId) {
     return client.delete(`${BASE_URL}/${organizationId}/memberships/${membershipId}`)
   };
+
+  getOrganizationRides(organizationId) {
+    return client.get(`${BASE_URL}/${organizationId}/rides.json`)
+  }
+
+  createOrganizationRide(organizationId, ride) {
+    return client.post(`${BASE_URL}/${organizationId}/rides`, { ride: ride })
+  };
 }
 
 export default new OrganizationsApi();

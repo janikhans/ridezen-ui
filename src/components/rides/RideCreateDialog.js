@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ridesApi from '../../services/rides'
+import organizationsApi from '../../services/organizations'
 import ErrorsContainer from '../shared/ErrorsContainer'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -46,9 +46,9 @@ class RideCreateDialog extends Component {
       starting_mileage: this.state.startingMileage
     }
 
-    ridesApi.createRide(ride)
+    organizationsApi.createOrganizationRide(this.props.organization.id, ride)
     .then(response => {
-      this.props.addNewRide(response.data)
+      this.props.addOrganizationRide(response.data)
       this.resetForm()
     })
     .catch(error => {

@@ -19,6 +19,7 @@ import { fetchRideInfo, deleteRide, updateRide } from '../../store/rides/actions
 
 import { getVehicleById } from '../../store/vehicles/reducer'
 import { getRideById } from '../../store/rides/reducer'
+import { getOrganizationById } from '../../store/organizations/reducer'
 
 function TabContainer(props) {
   return <div>{props.children}</div>;
@@ -58,6 +59,9 @@ class RideShow extends Component {
             </Typography>
             <Typography component="h3">
               {this.props.vehicle.year} {this.props.vehicle.make} {this.props.vehicle.model}
+            </Typography>
+            <Typography component="h3">
+              Organization: {this.props.organization.name}
             </Typography>
             <Typography type="subheading" component="p">
               Starting Mileage: {this.props.ride.starting_mileage}
@@ -103,6 +107,7 @@ const mapStateToProps = (state, ownProps) => {
   const ride = getRideById(state, ownProps.match.params.rideId)
   return {
     ride: ride,
+    organization: getOrganizationById(state, ownProps.match.params.organizationId),
     vehicle: getVehicleById(state, ride.vehicle_id)
   };
 };

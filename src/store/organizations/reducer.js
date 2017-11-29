@@ -52,8 +52,7 @@ export default function reduce(state = initialState, action = {}) {
         organizationsById: newOrganizationsById
       };
     case types.ORGANIZATION_UPDATED:
-      var organization = action.organization
-      newOrganizationsById[organization.id] = Object.assign({}, newOrganizationsById[organization.id], action.organization)
+      newOrganizationsById[action.organization.id] = action.organization
       return {
         ...state,
         organizationsById: newOrganizationsById

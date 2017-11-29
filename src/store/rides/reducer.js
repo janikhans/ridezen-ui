@@ -51,14 +51,13 @@ export default function ridesReducer(state = initialState, action = {}) {
         ridesById: Object.assign({}, state.ridesById, action.rideById)
       };
     case types.RIDE_UPDATED:
-      var ride = action.ride
-      newRidesById[ride.id] = Object.assign({}, newRidesById[ride.id], action.ride)
+      newRidesById[action.ride.id] = action.ride
       return {
         ...state,
         ridesById: newRidesById
       };
     case types.RIDE_DELETED:
-      _.omit(newRidesById, action.rideId);
+      newRidesById = _.omit(newRidesById, action.rideId)
       return {
         ...state,
         ridesById: newRidesById
@@ -97,4 +96,17 @@ export function getRideById(state, rideId) {
 
 export function isRidesLoaded(state) {
   return state.rides.hasLoaded
+}
+
+export function getRidesForOrganizationById(state, organizationId) {
+  return _.mapValues(state.rides.ridesById, function (ride) {
+    if (ride.organization_id === organizationId){
+      return ride
+    }
+  });
+}
+
+export function getRidesForOrganizationIdArray(state, organizationId) {
+  var rides = getRidesForOrganizationById(state, organizationId)
+  return _.keys(_.pickBy(rides, _.identity));
 }

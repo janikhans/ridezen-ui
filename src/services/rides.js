@@ -11,10 +11,6 @@ class RidesApi {
     return client.get(`${BASE_URL}/${rideId}.json`)
   };
 
-  createRide(ride) {
-    return client.post(`${BASE_URL}`, { ride: ride })
-  };
-
   updateRide(rideId, ride) {
     return client.put(`${BASE_URL}/${rideId}`, { ride: ride })
   };

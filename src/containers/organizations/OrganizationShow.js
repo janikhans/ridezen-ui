@@ -11,6 +11,7 @@ import PersonPinIcon from 'material-ui-icons/PersonPin';
 import OrganizationDeleteDialog from '../../components/organizations/OrganizationDeleteDialog';
 import OrganizationEditDialog from '../../components/organizations/OrganizationEditDialog';
 import MembershipsTable from '../../components/memberships/MembershipsTable'
+import RidesTable from '../../containers/rides/RidesTable'
 
 import { fetchOrganizationInfo, deleteOrganization, updateOrganization } from '../../store/organizations/actions';
 
@@ -67,10 +68,12 @@ class OrganizationShow extends Component {
               textColor="accent"
             >
               <Tab value="members" icon={<PhoneIcon />} label="Members" />
+              <Tab value="rides" icon={<PhoneIcon />} label="Rides" />
             </Tabs>
           </Paper>
           <Paper>
             {this.state.value === 'members' && <TabContainer><MembershipsTable organization={this.props.organization} /></TabContainer>}
+            {this.state.value === 'rides' && <TabContainer><RidesTable organization={this.props.organization} /></TabContainer>}
           </Paper>
         </div>
       )

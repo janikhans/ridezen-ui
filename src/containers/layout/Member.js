@@ -144,7 +144,6 @@ class Member extends Component {
         <main className={classes.content}>
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/garage" component={Garage} />
-          <Route exact path="/rides/:rideId" component={RideShow} />
           <Route path="/contact" component={Contact} />
           <Route exact path="/vehicles" component={Vehicles} />
           <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
@@ -152,6 +151,7 @@ class Member extends Component {
           <Route exact path="/service-items/:serviceItemId" component={ServiceItemShow} />
           <Route exact path="/organizations" component={Organizations} />
           <Route exact path="/organizations/:organizationId" component={OrganizationShow} />
+          <Route exact path="/organizations/:organizationId/rides/:rideId" component={RideShow} />
         </main>
     } else {
       content =

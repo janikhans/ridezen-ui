@@ -2,28 +2,28 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { createRide } from '../../store/rides/actions';
-
 import * as vehiclesSelectors from '../../store/vehicles/reducer'
 import * as ridesSelectors from '../../store/rides/reducer';
+import * as organizationsSelectors from '../../store/organizations/reducer';
 
 import RideCard from '../../components/rides/RideCard';
-import RideCreateDialog from '../../components/rides/RideCreateDialog';
 
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
 class RideIndex extends Component {
-  addNewRide = (ride) => {
-    this.props.createRide(ride)
-  }
-
   renderCardById(rideId) {
     const ride = _.get(this.props.ridesById, rideId)
     const vehicle = _.get(this.props.vehiclesById, ride.vehicle_id)
+    const organization = _.get(this.props.organizationsById, ride.organization_id)
     return (
-      <RideCard key={rideId} ride={ride} vehicle={vehicle}/>
+      <RideCard
+        key={rideId}
+        ride={ride}
+        vehicle={vehicle}
+        organization={organization}
+      />
     )
   }
 
@@ -42,7 +42,6 @@ class RideIndex extends Component {
           <Paper className="paper-header" elevation={1}>
             <Typography type="headline" component="h2">
               Your Garage
-              <RideCreateDialog addNewRide={this.addNewRide} vehicles={this.props.vehicles}/>
             </Typography>
           </Paper>
         </div>
@@ -61,14 +60,9 @@ const mapStateToProps = (state) => {
     ridesById: ridesSelectors.getRidesById(state),
     ridesIdArray: ridesSelectors.getRidesIdArray(state),
     vehiclesById: vehiclesSelectors.getVehiclesById(state),
-    vehicles: vehiclesSelectors.getVehicles(state)
+    vehicles: vehiclesSelectors.getVehicles(state),
+    organizationsById: organizationsSelectors.getOrganizationsById(state)
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createRide: (ride) => dispatch(createRide(ride))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RideIndex)
+export default connect(mapStateToProps, null)(RideIndex)
