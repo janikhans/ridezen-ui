@@ -9,7 +9,7 @@ class ServiceItemRow extends Component {
     return (
       <TableRow>
         <TableCell>{this.props.serviceItem.name}</TableCell>
-        <TableCell numeric>{this.props.vehicleType.name}</TableCell>
+        <TableCell numeric>{this.props.vehicleType ? this.props.vehicleType.name : ''}</TableCell>
         <TableCell numeric>{this.props.serviceItem.distance}</TableCell>
         <TableCell numeric>{this.props.serviceItem.units}</TableCell>
         <TableCell numeric>
