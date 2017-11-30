@@ -19,7 +19,7 @@ class ServiceCreateDialog extends Component {
     this.state = {
       date: '',
       serviceItemId: '',
-      mileage: this.props.ride.current_mileage,
+      odometer: this.props.ride.current_odometer,
       price: '',
       note: '',
       open: false,
@@ -39,7 +39,7 @@ class ServiceCreateDialog extends Component {
     const new_service = {
       date: this.state.date,
       service_item_id: this.state.serviceItemId,
-      mileage: this.state.mileage,
+      odometer: this.state.odometer,
       price: this.state.price,
       note: this.state.note,
     }
@@ -63,7 +63,7 @@ class ServiceCreateDialog extends Component {
     this.setState({
       date: '',
       serviceItemId: '',
-      mileage: '',
+      odometer: '',
       price: '',
       note: '',
       open: false,
@@ -101,11 +101,11 @@ class ServiceCreateDialog extends Component {
             />
             <TextField
               margin="dense"
-              name="mileage"
-              label="Mileage"
+              name="odometer"
+              label="Odometer"
               type="number"
               fullWidth
-              value={this.state.mileage}
+              value={this.state.odometer}
               onChange={this.handleChange}
             />
             <TextField

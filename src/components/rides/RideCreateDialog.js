@@ -21,7 +21,7 @@ class RideCreateDialog extends Component {
     this.state = {
       vehicleId: '',
       name: '',
-      startingMileage: '',
+      startingOdometer: '',
       errors: null,
       open: false
     }
@@ -43,7 +43,7 @@ class RideCreateDialog extends Component {
     const ride = {
       vehicle_id: this.state.vehicleId,
       name: this.state.name,
-      starting_mileage: this.state.startingMileage
+      starting_odometer: this.state.startingOdometer
     }
 
     organizationsApi.createOrganizationRide(this.props.organization.id, ride)
@@ -62,7 +62,7 @@ class RideCreateDialog extends Component {
       open: false,
       vehicleId: null,
       name: '',
-      startingMileage: '',
+      startingOdometer: '',
       errors: null
     })
   }
@@ -109,11 +109,11 @@ class RideCreateDialog extends Component {
             />
             <TextField
               margin="dense"
-              name="startingMileage"
-              label="Starting Mileage"
+              name="startingOdometer"
+              label="Starting Odometer"
               type="number"
               fullWidth
-              value={this.state.startingMileage}
+              value={this.state.startingOdometer}
               onChange={this.handleChange}
             />
           </DialogContent>

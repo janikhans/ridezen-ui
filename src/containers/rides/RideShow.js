@@ -64,10 +64,10 @@ class RideShow extends Component {
               Organization: {this.props.organization.name}
             </Typography>
             <Typography type="subheading" component="p">
-              Starting Mileage: {this.props.ride.starting_mileage}
+              Starting Odometer: {this.props.ride.starting_odometer}
             </Typography>
             <Typography type="subheading" component="p">
-              Current Mileage: {this.props.ride.current_mileage}
+              Current Odometer: {this.props.ride.current_odometer}
             </Typography>
             <RideEditDialog ride={this.props.ride} updateRide={this.updateRide} />
             <RideDeleteDialog ride={this.props.ride} deleteRide={this.deleteRide} />

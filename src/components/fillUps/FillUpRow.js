@@ -13,7 +13,7 @@ class FillUpRow extends Component {
     return (
       <TableRow>
         <TableCell>{this.props.fillUp.date}</TableCell>
-        <TableCell numeric>{this.props.fillUp.mileage}</TableCell>
+        <TableCell numeric>{this.props.fillUp.odometer}</TableCell>
         <TableCell numeric>{this.props.fillUp.volume}</TableCell>
         <TableCell numeric>{this.props.fillUp.price}</TableCell>
         <TableCell>{this.props.fillUp.topped_off ? 'Yes' : 'No'}</TableCell>

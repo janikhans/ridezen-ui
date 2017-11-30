@@ -14,7 +14,7 @@ class FillUpCreateDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mileage: '',
+      odometer: '',
       volume: '',
       date: '',
       price: '',
@@ -35,7 +35,7 @@ class FillUpCreateDialog extends Component {
 
   handleSubmit = (e) => {
     const fillUp = {
-      mileage: this.state.mileage,
+      odometer: this.state.odometer,
       volume: this.state.volume,
       date: this.state.date,
       price: this.state.price,
@@ -56,7 +56,7 @@ class FillUpCreateDialog extends Component {
 
   resetForm = () => {
     this.setState({
-      mileage: '',
+      odometer: '',
       volume: '',
       date: '',
       price: '',
@@ -78,7 +78,7 @@ class FillUpCreateDialog extends Component {
           <DialogContent>
             <DialogContentText>
               Every time you fill up your ride, record what how much you fill up with, how much you spent and your
-              current mileage. This will be used for future calculations.
+              current odometer. This will be used for future calculations.
             </DialogContentText>
             {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
             <TextField
@@ -93,11 +93,11 @@ class FillUpCreateDialog extends Component {
             />
             <TextField
               margin="dense"
-              name="mileage"
-              label="Mileage"
+              name="odometer"
+              label="Odometer"
               type="number"
               fullWidth
-              value={this.state.mileage}
+              value={this.state.odometer}
               onChange={this.handleChange}
             />
             <TextField

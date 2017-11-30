@@ -49,7 +49,7 @@ class FillUpsTable extends Component {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell numeric>Mileage</TableCell>
+            <TableCell numeric>Odometer</TableCell>
             <TableCell numeric>Volume</TableCell>
             <TableCell numeric>Price</TableCell>
             <TableCell>Topped Off</TableCell>

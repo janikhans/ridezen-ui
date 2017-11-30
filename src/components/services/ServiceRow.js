@@ -14,7 +14,7 @@ class ServiceRow extends Component {
           </Link>
         </TableCell>
         <TableCell numeric>{this.props.service.date}</TableCell>
-        <TableCell numeric>{this.props.service.mileage}</TableCell>
+        <TableCell numeric>{this.props.service.odometer}</TableCell>
         <TableCell numeric>{this.props.service.price}</TableCell>
         <TableCell numeric>{this.props.service.note}</TableCell>
         <TableCell numeric>
