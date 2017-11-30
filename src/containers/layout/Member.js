@@ -39,7 +39,7 @@ import Organizations from "../../views/Organizations";
 
 import RideShow from "../../containers/rides/RideShow"
 import VehicleShow from "../../containers/vehicles/VehicleShow"
-import ServiceItemShow from "../../components/serviceItems/ServiceItemShow"
+import ServiceItemShow from "../../containers/serviceItems/ServiceItemShow"
 import OrganizationShow from "../../containers/organizations/OrganizationShow"
 
 const drawerWidth = 240;

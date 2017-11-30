@@ -8,9 +8,11 @@ class ServiceItemRow extends Component {
   render () {
     return (
       <TableRow>
-        <TableCell>{this.props.serviceItem.name}</TableCell>
+        <TableCell>{this.props.vehicleType.name}</TableCell>
+        <TableCell numeric>{this.props.defaultInterval.distance}</TableCell>
+        <TableCell numeric>{this.props.defaultInterval.units}</TableCell>
         <TableCell numeric>
-          <Button dense color="primary" component={Link} to={'/service-items/' + this.props.serviceItem.id}>View</Button>
+          <Button dense color="primary" component={Link} to={'/service-items/' + this.props.defaultInterval.id}>View</Button>
         </TableCell>
       </TableRow>
     )

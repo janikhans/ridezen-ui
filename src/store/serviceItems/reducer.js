@@ -9,6 +9,7 @@ const initialState = {
 }
 
 export default function reduce(state = initialState, action = {}) {
+  var newServiceItemsById = state.serviceItemsById
   switch (action.type) {
     case types.SERVICE_ITEMS_FETCHED:
       return {
@@ -31,6 +32,24 @@ export default function reduce(state = initialState, action = {}) {
         ...state,
         serviceItemsById: Object.assign({}, state.serviceItemsById, action.serviceItemById)
       };
+    case types.SERVICE_ITEM_UPDATED:
+      newServiceItemsById[action.serviceItem.id] = action.serviceItem
+      return {
+        ...state,
+        serviceItemsById: newServiceItemsById
+      };
+    case types.SERVICE_ITEM_DELETED:
+      newServiceItemsById = _.omit(newServiceItemsById, action.serviceItemId)
+      return {
+        ...state,
+        serviceItemsById: newServiceItemsById
+      };
+    case types.SERVICE_ITEM_INFO_FETCHED:
+      newServiceItemsById[action.serviceItemId] = action.serviceItem
+      return {
+        ...state,
+        serviceItemsById: newServiceItemsById
+      };
     default:
       return state;
   }
@@ -51,4 +70,8 @@ export function getServiceItems(state) {
 
 export function isServiceItemsLoaded(state) {
   return state.serviceItems.hasLoaded
+}
+
+export function getServiceItemById(state, serviceItemId) {
+  return state.serviceItems.serviceItemsById[serviceItemId];
 }

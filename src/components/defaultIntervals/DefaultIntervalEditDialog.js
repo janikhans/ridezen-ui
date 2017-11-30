@@ -15,6 +15,8 @@ class ServiceItemEditDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      distance: this.props.serviceItem.distance,
+      units: this.props.serviceItem.units,
       name: this.props.serviceItem.name,
       errors: null,
       open: false
@@ -31,6 +33,8 @@ class ServiceItemEditDialog extends Component {
 
   handleSubmit = (e) => {
     const serviceItem = {
+      distance: this.state.distance,
+      units: this.state.units,
       name: this.state.name
     }
 
@@ -53,6 +57,8 @@ class ServiceItemEditDialog extends Component {
   resetForm = () => {
     this.setState({
       open: false,
+      distance: this.props.serviceItem.distance,
+      units: this.props.serviceItem.units,
       name: this.props.serviceItem.name,
       errors: null
     })
@@ -76,6 +82,16 @@ class ServiceItemEditDialog extends Component {
               type="text"
               fullWidth
               value={this.state.name}
+              onChange={this.handleChange}
+            />
+            <UnitsSelect units={this.state.units} updateUnits={this.updateUnits}/>
+            <TextField
+              margin="dense"
+              name="distance"
+              label="Distance"
+              type="text"
+              fullWidth
+              value={this.state.distance}
               onChange={this.handleChange}
             />
           </DialogContent>

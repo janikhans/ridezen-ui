@@ -24,6 +24,22 @@ class ServiceItemsApi {
   deleteServiceItem(serviceItemId) {
     return client.delete(`${ADMIN_BASE}/${serviceItemId}`)
   };
+
+  getServiceItemDefaultIntervals(serviceItemId) {
+    return client.get(`${ADMIN_BASE}/${serviceItemId}/default_intervals.json`)
+  }
+
+  createServiceItemDefaultInterval(serviceItemId, defaultInterval) {
+    return client.post(`${ADMIN_BASE}/${serviceItemId}/default_intervals`, { default_interval: defaultInterval })
+  };
+
+  updateServiceItemDefaultInterval(serviceItemId, defaultIntervalId, defaultInterval) {
+    return client.put(`${ADMIN_BASE}/${serviceItemId}/default_intervals/${defaultIntervalId}`, { default_interval: defaultInterval })
+  };
+
+  deleteServiceItemDefaultInterval(serviceItemId, id) {
+    return client.delete(`${ADMIN_BASE}/${serviceItemId}/default_intervals/${id}`)
+  };
 }
 
 export default new ServiceItemsApi();
