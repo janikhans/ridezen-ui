@@ -14,6 +14,7 @@ import { fetchRides } from '../../store/rides/actions'
 import { fetchVehicles } from '../../store/vehicles/actions'
 import { fetchServiceItems } from '../../store/serviceItems/actions'
 import { fetchOrganizations } from '../../store/organizations/actions'
+import { fetchVehicleTypes } from '../../store/vehicleTypes/actions'
 import { logoutUser } from '../../store/user/actions'
 
 import Drawer from 'material-ui/Drawer';
@@ -103,6 +104,7 @@ class Member extends Component {
     this.props.fetchRidesData()
     this.props.fetchServiceItemsData()
     this.props.fetchOrganizationsData()
+    this.props.fetchVehicleTypesData()
   }
 
   handleDrawerToggle = () => {
@@ -260,6 +262,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchServiceItemsData: () => dispatch(fetchServiceItems()),
     fetchVehiclesData: () => dispatch(fetchVehicles()),
     fetchOrganizationsData: () => dispatch(fetchOrganizations()),
+    fetchVehicleTypesData: () => dispatch(fetchVehicleTypes()),
     logoutUser: () => dispatch(logoutUser())
   };
 };

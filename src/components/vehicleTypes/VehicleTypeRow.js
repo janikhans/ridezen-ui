@@ -14,13 +14,13 @@ class VehicleTypeRow extends Component {
             vehicleType={this.props.vehicleType}
             updateVehicleType={this.props.updateVehicleType}
           />
-          </TableCell>
+        </TableCell>
         <TableCell numeric>
           <VehicleTypeDeleteDialog
             vehicleType={this.props.vehicleType}
             deleteVehicleType={this.props.deleteVehicleType}
           />
-          </TableCell>
+        </TableCell>
       </TableRow>
     )
   }

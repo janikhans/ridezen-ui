@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import { fetchServiceItems, addServiceItem } from '../../store/serviceItems/actions';
 import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
+import * as vehicleTypesSelectors from '../../store/vehicleTypes/reducer';
 
 import ServiceItemRow from '../../components/serviceItems/ServiceItemRow';
 import ServiceItemCreateDialog from '../../components/serviceItems/ServiceItemCreateDialog';
@@ -19,8 +20,13 @@ class ServiceItemIndex extends Component {
 
   renderServiceItemById(serviceItemId) {
     const serviceItem = this.props.serviceItemsById[serviceItemId]
+    const vehicleType = this.props.vehicleTypesById[serviceItem.vehicle_type_id]
     return (
-      <ServiceItemRow key={serviceItem.id} serviceItem={serviceItem}/>
+      <ServiceItemRow
+        key={serviceItem.id}
+        serviceItem={serviceItem}
+        vehicleType={vehicleType}
+      />
     )
   }
 
@@ -37,6 +43,7 @@ class ServiceItemIndex extends Component {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
+                <TableCell numeric>Vehicle Type</TableCell>
                 <TableCell numeric>Distance</TableCell>
                 <TableCell numeric>Units</TableCell>
                 <TableCell numeric><ServiceItemCreateDialog addServiceItem={this.props.addServiceItem}/></TableCell>
@@ -54,10 +61,9 @@ class ServiceItemIndex extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    hasErrored: state.serviceItems.hasErrored,
-    isLoading: state.serviceItems.isLoading,
     serviceItemsById: serviceItemsSelectors.getServiceItemsById(state),
-    serviceItemsIdArray: serviceItemsSelectors.getServiceItemsIdArray(state)
+    serviceItemsIdArray: serviceItemsSelectors.getServiceItemsIdArray(state),
+    vehicleTypesById: vehicleTypesSelectors.getVehicleTypesById(state)
   };
 };
 

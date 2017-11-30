@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import * as vehicleTypesSelectors from '../../store/vehicleTypes/reducer';
 
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
@@ -33,4 +36,10 @@ class VehicleTypeSelect extends Component {
   }
 }
 
-export default VehicleTypeSelect;
+const mapStateToProps = (state) => {
+  return {
+    vehicleTypes: vehicleTypesSelectors.getVehicleTypes(state)
+  };
+};
+
+export default connect(mapStateToProps)(VehicleTypeSelect)

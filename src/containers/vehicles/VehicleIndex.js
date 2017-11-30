@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import { fetchVehicles, addNewVehicle } from '../../store/vehicles/actions';
 import * as vehiclesSelectors from '../../store/vehicles/reducer';
+import * as vehicleTypesSelectors from '../../store/vehicleTypes/reducer';
 
 import VehicleRow from '../../components/vehicles/VehicleRow';
 import VehicleCreateDialog from '../../components/vehicles/VehicleCreateDialog';
@@ -23,8 +24,13 @@ class VehicleIndex extends Component {
 
   renderVehicleById(vehicleId) {
     const vehicle = this.props.vehiclesById[vehicleId]
+    const vehicleType = this.props.vehicleTypesById[vehicle.vehicle_type_id]
     return (
-      <VehicleRow key={vehicle.id} vehicle={vehicle}/>
+      <VehicleRow
+        key={vehicle.id}
+        vehicle={vehicle}
+        vehicleType={vehicleType}
+      />
     )
   }
 
@@ -40,9 +46,10 @@ class VehicleIndex extends Component {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell numeric>Distance</TableCell>
-                <TableCell numeric>Units</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell numeric>Year</TableCell>
+                <TableCell numeric>Make</TableCell>
+                <TableCell numeric>Model</TableCell>
                 <TableCell numeric><VehicleCreateDialog addNewVehicle={this.addNewVehicle} /></TableCell>
               </TableRow>
             </TableHead>
@@ -58,10 +65,9 @@ class VehicleIndex extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    hasErrored: state.vehicles.hasErrored,
-    isLoading: state.vehicles.isLoading,
     vehiclesById: vehiclesSelectors.getVehiclesById(state),
-    vehiclesIdArray: vehiclesSelectors.getVehiclesIdArray(state)
+    vehiclesIdArray: vehiclesSelectors.getVehiclesIdArray(state),
+    vehicleTypesById: vehicleTypesSelectors.getVehicleTypesById(state)
   };
 };
 

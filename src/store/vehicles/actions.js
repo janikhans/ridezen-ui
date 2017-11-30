@@ -18,6 +18,44 @@ export function fetchVehicles(args = {}) {
   };
 }
 
+export function fetchVehicleInfo(vehicleId) {
+  return (dispatch) => {
+    dispatch(vehicleInfoIsLoading(vehicleId, true));
+    vehiclesApi.getVehicle(vehicleId)
+      .then((response) => {
+        dispatch(vehicleInfoIsLoading(vehicleId, false));
+        dispatch(fetchVehicleInfoSuccess(vehicleId, response.data))
+      })
+      .catch(() => dispatch(vehicleInfoHasErrored(vehicleId, true)));
+  };
+}
+
+export function deleteVehicle(vehicleId) {
+  return (dispatch) => {
+    vehiclesApi.deleteVehicle(vehicleId)
+      .then((response) => {
+        dispatch(deleteVehicleSuccess(vehicleId, true))
+        dispatch(push('/vehicles'))
+      })
+      .catch((error) => console.log(error));
+  };
+}
+
+export function updateVehicle(vehicle) {
+  return {
+    type: types.VEHICLE_UPDATED,
+    vehicle
+  };
+}
+
+export function addNewVehicle(vehicle) {
+  var vehicleById = { [vehicle.id]: vehicle }
+  return {
+    type: types.VEHICLE_CREATED,
+    vehicleById
+  }
+}
+
 function vehiclesHasErrored(bool) {
   return {
     type: types.VEHICLES_HAS_ERRORED,
@@ -37,18 +75,6 @@ function fetchVehiclesSuccess(vehiclesById) {
     type: types.VEHICLES_FETCHED,
     vehiclesById,
     hasLoaded: true
-  };
-}
-
-export function fetchVehicleInfo(vehicleId) {
-  return (dispatch) => {
-    dispatch(vehicleInfoIsLoading(vehicleId, true));
-    vehiclesApi.getVehicle(vehicleId)
-      .then((response) => {
-        dispatch(vehicleInfoIsLoading(vehicleId, false));
-        dispatch(fetchVehicleInfoSuccess(vehicleId, response.data))
-      })
-      .catch(() => dispatch(vehicleInfoHasErrored(vehicleId, true)));
   };
 }
 
@@ -74,35 +100,9 @@ function fetchVehicleInfoSuccess(vehicleId, vehicle) {
   };
 }
 
-export function deleteVehicle(vehicleId) {
-  return (dispatch) => {
-    vehiclesApi.deleteVehicle(vehicleId)
-      .then((response) => {
-        dispatch(deleteVehicleSuccess(vehicleId, true))
-        dispatch(push('/vehicles'))
-      })
-      .catch((error) => console.log(error));
-  };
-}
-
 function deleteVehicleSuccess(vehicleId) {
   return {
     type: types.VEHICLE_DELETED,
     vehicleId
   };
-}
-
-export function updateVehicle(vehicle) {
-  return {
-    type: types.VEHICLE_UPDATED,
-    vehicle
-  };
-}
-
-export function addNewVehicle(vehicle) {
-  var vehicleById = { [vehicle.id]: vehicle }
-  return {
-    type: types.VEHICLE_CREATED,
-    vehicleById
-  }
 }

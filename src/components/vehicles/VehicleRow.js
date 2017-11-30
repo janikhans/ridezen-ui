@@ -8,7 +8,8 @@ class VehicleRow extends Component {
   render () {
     return (
       <TableRow>
-        <TableCell>{this.props.vehicle.year}</TableCell>
+        <TableCell>{this.props.vehicleType.name}</TableCell>
+        <TableCell numeric>{this.props.vehicle.year}</TableCell>
         <TableCell numeric>{this.props.vehicle.make}</TableCell>
         <TableCell numeric>{this.props.vehicle.model}</TableCell>
         <TableCell numeric>

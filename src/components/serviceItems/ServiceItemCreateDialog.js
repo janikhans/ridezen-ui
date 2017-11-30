@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createServiceItem } from '../../store/serviceItems/actions';
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'
-import VehicleTypeSelect from '../shared/VehicleTypeSelect'
+import VehicleTypeSelect from '../../containers/shared/VehicleTypeSelect'
 
 import vehicleTypesApi from '../../services/vehicleTypes'
 import serviceItemsApi from '../../services/serviceItems'

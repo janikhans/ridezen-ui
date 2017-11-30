@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import VehicleTypesTable from '../components/vehicleTypes/VehicleTypesTable';
+import VehicleTypesIndex from '../containers/vehicleTypes/VehicleTypesIndex';
 
 class VehicleTypes extends Component {
   render() {
     return (
-      <VehicleTypesTable />
+      <VehicleTypesIndex />
     );
   }
 }
