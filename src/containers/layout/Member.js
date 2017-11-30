@@ -32,6 +32,7 @@ import Dashboard from "../../views/Dashboard";
 import Garage from "../../views/Garage";
 import Contact from "../../views/Contact";
 import Vehicles from "../../views/Vehicles";
+import VehicleTypes from "../../views/VehicleTypes";
 import ServiceItems from "../../views/ServiceItems";
 import Organizations from "../../views/Organizations";
 
@@ -145,6 +146,7 @@ class Member extends Component {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/garage" component={Garage} />
           <Route path="/contact" component={Contact} />
+          <Route exact path="/vehicle-types" component={VehicleTypes} />
           <Route exact path="/vehicles" component={Vehicles} />
           <Route exact path="/vehicles/:vehicleId" component={VehicleShow} />
           <Route exact path="/service-items" component={ServiceItems} />

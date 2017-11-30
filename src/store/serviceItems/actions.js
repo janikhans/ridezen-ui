@@ -19,19 +19,12 @@ export function fetchServiceItems(args = {}) {
   };
 }
 
-export function createServiceItem(serviceItem) {
-  return (dispatch) => {
-    dispatch(serviceItemsIsSaving(true));
-    serviceItemsApi.createServiceItem(serviceItem)
-      .then((response) => {
-        dispatch(serviceItemsIsSaving(false));
-        dispatch(createServiceItemSuccess(response.data))
-      })
-      .catch((error) => {
-        dispatch(serviceItemsIsSaving(false));
-        dispatch(createServiceItemHasErrored(error.response.data))
-      });
-  };
+export function addServiceItem(serviceItem) {
+  var serviceItemById = { [serviceItem.id]: serviceItem }
+  return {
+    type: types.SERVICE_ITEM_CREATED,
+    serviceItemById
+  }
 }
 
 export function serviceItemsHasErrored(bool) {
@@ -51,24 +44,5 @@ export function fetchServiceItemsSuccess(serviceItemsById) {
     type: types.SERVICE_ITEMS_FETCHED,
     serviceItemsById,
     hasLoaded: true
-  };
-}
-
-export function createServiceItemHasErrored(errors) {
-  return {
-    type: types.CREATE_SERVICE_ITEM_HAS_ERRORED,
-    errors: errors
-  };
-}
-export function serviceItemsIsSaving(bool) {
-  return {
-    type: types.SERVICE_ITEM_IS_SAVING,
-    isLoading: bool
-  };
-}
-export function createServiceItemSuccess(serviceItemById) {
-  return {
-    type: types.CREATED_SERVICE_ITEM,
-    serviceItemById
   };
 }

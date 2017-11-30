@@ -46,6 +46,12 @@ class Navigation extends React.Component {
           </ListItemIcon>
           Service Items
         </ListItem>
+        <ListItem button component={NavLink} to="/vehicle-types">
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          Vehicle Types
+        </ListItem>
       </div>
     }
 

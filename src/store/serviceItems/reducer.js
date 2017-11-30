@@ -2,12 +2,10 @@ import * as types from './actionTypes';
 import _ from 'lodash';
 
 const initialState = {
-  isSaving: false,
   hasErrored: false,
   isLoading: false,
   hasLoaded: false,
-  serviceItemsById: [],
-  errors: null
+  serviceItemsById: []
 }
 
 export default function reduce(state = initialState, action = {}) {
@@ -28,22 +26,10 @@ export default function reduce(state = initialState, action = {}) {
         ...state,
         isLoading: action.isLoading
       };
-    case types.CREATE_SERVICE_ITEM_HAS_ERRORED:
+    case types.SERVICE_ITEM_CREATED:
       return {
         ...state,
-        errors: action.errors
-      };
-    case types.SERVICE_ITEM_IS_SAVING:
-      return {
-        ...state,
-        isSaving: action.isSaving
-      };
-    case types.CREATED_SERVICE_ITEM:
-      var serviceItems = state.serviceItemsById
-      serviceItems[action.serviceItemById.id] = action.serviceItemById
-      return {
-        ...state,
-        serviceItemsById: serviceItems
+        serviceItemsById: Object.assign({}, state.serviceItemsById, action.serviceItemById)
       };
     default:
       return state;

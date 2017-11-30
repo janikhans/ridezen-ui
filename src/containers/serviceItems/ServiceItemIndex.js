@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchServiceItems } from '../../store/serviceItems/actions';
+import { fetchServiceItems, addServiceItem } from '../../store/serviceItems/actions';
 import * as serviceItemsSelectors from '../../store/serviceItems/reducer';
 
 import ServiceItemRow from '../../components/serviceItems/ServiceItemRow';
@@ -39,7 +39,7 @@ class ServiceItemIndex extends Component {
                 <TableCell>Name</TableCell>
                 <TableCell numeric>Distance</TableCell>
                 <TableCell numeric>Units</TableCell>
-                <TableCell numeric><ServiceItemCreateDialog /></TableCell>
+                <TableCell numeric><ServiceItemCreateDialog addServiceItem={this.props.addServiceItem}/></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -63,7 +63,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(fetchServiceItems({admin: true}))
+    fetchData: () => dispatch(fetchServiceItems({admin: true})),
+    addServiceItem: (serviceItem) => dispatch(addServiceItem(serviceItem))
   };
 };
 

@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { createServiceItem } from '../../store/serviceItems/actions';
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'
+import VehicleTypeSelect from '../shared/VehicleTypeSelect'
+
+import vehicleTypesApi from '../../services/vehicleTypes'
+import serviceItemsApi from '../../services/serviceItems'
 
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -21,8 +25,23 @@ class ServiceItemCreateDialog extends Component {
       name: '',
       units: '',
       distance: '',
-      open: false
+      vehicleTypeId: '',
+      open: false,
+      vehicleTypes: [],
+      errors: null
     }
+  }
+
+  componentDidMount() {
+    vehicleTypesApi.getVehicleTypes()
+    .then(response => {
+      this.setState({
+        vehicleTypes: response.data
+      });
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 
   handleClickOpen = () => {
@@ -37,10 +56,18 @@ class ServiceItemCreateDialog extends Component {
     const serviceItem = {
       name: this.state.name,
       units: this.state.units,
-      distance: this.state.distance
+      distance: this.state.distance,
+      vehicle_type_id: this.state.vehicleTypeId
     }
-    
-    this.props.createServiceItem(serviceItem)
+
+    serviceItemsApi.createServiceItem(serviceItem)
+    .then(response => {
+      this.props.addServiceItem(response.data)
+      this.resetForm()
+    })
+    .catch(error => {
+      this.setState({ errors: error.response.data })
+    })
     e.preventDefault();
   }
 
@@ -48,12 +75,18 @@ class ServiceItemCreateDialog extends Component {
     this.setState({ units: units })
   }
 
+  updateVehicleType = (vehicleTypeId) => {
+    this.setState({ vehicleTypeId: vehicleTypeId })
+  }
+
   resetForm = () => {
     this.setState({
       open: false,
       units: '',
       distance: '',
-      name: ''
+      name: '',
+      vehicleTypeId: '',
+      errors: null
     })
   }
 
@@ -64,12 +97,12 @@ class ServiceItemCreateDialog extends Component {
           Add
         </Button>
         <Dialog open={this.state.open} onRequestClose={this.resetForm}>
-          <DialogTitle>Add to Garage</DialogTitle>
+          <DialogTitle>Add Service Item</DialogTitle>
           <DialogContent>
             <DialogContentText>
               {`Add new service items that will be used for all vehicles. Select the default distance and units.`}
             </DialogContentText>
-            {this.props.errors && <ErrorsContainer errors={this.props.errors}/>}
+            {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
             <TextField
               autoFocus
               margin="dense"
@@ -80,7 +113,15 @@ class ServiceItemCreateDialog extends Component {
               value={this.state.name}
               onChange={this.handleChange}
             />
-            <UnitsSelect units={this.state.units} updateUnits={this.updateUnits}/>
+            <VehicleTypeSelect
+              vehicleTypes={this.state.vehicleTypes}
+              updateVehicleType={this.updateVehicleType}
+              vehicleTypeId={this.state.vehicleTypeId}
+            />
+            <UnitsSelect
+              units={this.state.units}
+              updateUnits={this.updateUnits}
+            />
             <TextField
               margin="dense"
               name="distance"
@@ -105,18 +146,4 @@ class ServiceItemCreateDialog extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isSaving: state.serviceItems.isSaving,
-    errors: state.serviceItems.errors
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createServiceItem: (serviceItem) => dispatch(createServiceItem(serviceItem))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceItemCreateDialog)
-
+export default ServiceItemCreateDialog
