@@ -3,7 +3,7 @@ import vehiclesApi from '../../services/vehicles'
 
 import ErrorsContainer from '../shared/ErrorsContainer'
 import UnitsSelect from '../shared/UnitsSelect'
-import ServiceItemSelect from '../../containers/shared/ServiceItemSelect'
+import ServiceItemSelect from '../shared/ServiceItemSelect'
 
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
@@ -86,7 +86,11 @@ class OemIntervalCreateDialog extends Component {
               Add an OEM interval for this vehicle.
             </DialogContentText>
             {this.state.errors && <ErrorsContainer errors={this.state.errors}/>}
-            <ServiceItemSelect serviceItemId={this.state.serviceItemId} updateServiceItem={this.updateServiceItem}/>
+            <ServiceItemSelect
+              serviceItemId={this.state.serviceItemId}
+              updateServiceItem={this.updateServiceItem}
+              serviceItems={this.props.serviceItems}
+            />
             <UnitsSelect units={this.state.units} updateUnits={this.updateUnits}/>
             <TextField
               margin="dense"

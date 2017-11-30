@@ -33,16 +33,27 @@ class ServicesTable extends Component {
   }
 
   render () {
+    const ids = this.props.serviceItemsById
+    const selectibleServiceItems = _.map(this.props.ride.service_item_ids, function(i) {
+      return ids[i]
+    })
+
     return (
       <Table>
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell numeric>Date</TableCell>
-            <TableCell numeric>Distance</TableCell>
+            <TableCell numeric>{this.props.ride.units}</TableCell>
             <TableCell numeric>Price</TableCell>
             <TableCell numeric>Note</TableCell>
-            <TableCell numeric><ServiceCreateDialog ride={this.props.ride} addRideService={this.addRideService} /></TableCell>
+            <TableCell numeric>
+              <ServiceCreateDialog
+                ride={this.props.ride}
+                addRideService={this.addRideService}
+                serviceItems={selectibleServiceItems}
+              />
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

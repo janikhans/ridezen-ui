@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import * as serviceItemSelectors from '../../store/serviceItems/reducer';
 
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
@@ -12,7 +9,7 @@ class ServiceItemSelect extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      serviceItems: this.props.serviceItems
+      serviceItems: this.props.serviceItems || []
     }
   }
 
@@ -45,10 +42,4 @@ class ServiceItemSelect extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    serviceItems: serviceItemSelectors.getServiceItems(state)
-  };
-};
-
-export default connect(mapStateToProps)(ServiceItemSelect)
+export default ServiceItemSelect

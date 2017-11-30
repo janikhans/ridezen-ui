@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ridesApi from '../../services/rides'
 
 import ErrorsContainer from '../shared/ErrorsContainer'
-import ServiceItemSelect from '../../containers/shared/ServiceItemSelect'
+import ServiceItemSelect from '../shared/ServiceItemSelect'
 
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
