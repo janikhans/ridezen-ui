@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-import { createServiceItem } from '../../store/serviceItems/actions';
 import ErrorsContainer from '../shared/ErrorsContainer'
-
-import vehicleTypesApi from '../../services/vehicleTypes'
 import serviceItemsApi from '../../services/serviceItems'
 
 import Button from 'material-ui/Button';

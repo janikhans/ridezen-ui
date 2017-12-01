@@ -5,7 +5,6 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import PhoneIcon from 'material-ui-icons/Phone';
-import FavoriteIcon from 'material-ui-icons/Favorite';
 
 import ServiceItemDeleteDialog from '../../components/serviceItems/ServiceItemDeleteDialog';
 import ServiceItemEditDialog from '../../components/serviceItems/ServiceItemEditDialog';

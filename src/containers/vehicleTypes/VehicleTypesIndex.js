@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import vehicleTypesApi from '../../services/vehicleTypes'
-import update from 'immutability-helper'
 import _ from 'lodash';
 
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';

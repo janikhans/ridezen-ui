@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import serviceItemsApi from '../../services/serviceItems'
 import ErrorsContainer from '../shared/ErrorsContainer'
-import UnitsSelect from '../shared/UnitsSelect'
 
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';

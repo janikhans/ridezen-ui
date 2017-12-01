@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import Moment from 'react-moment';
 
 import { TableCell, TableRow } from 'material-ui/Table';
@@ -15,7 +14,7 @@ class ServiceNotificationRow extends Component {
     const agoSuffix = dueIn <= 0 ? 'ago' : ''
     let status = ''
 
-    if (units == 'miles' || units == 'kilometers' || units == 'hours') {
+    if (units === 'miles' || units === 'kilometers' || units === 'hours') {
       const words = [inPrefix,dueIn,units,agoSuffix]
       status = words.join(" ");
     } else {

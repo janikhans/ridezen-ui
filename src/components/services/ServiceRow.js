@@ -20,7 +20,6 @@ class ServiceRow extends Component {
             format="MM/DD/YYYY"
           />
         </TableCell>
-        <TableCell numeric>{this.props.service.date}</TableCell>
         <TableCell numeric>{this.props.service.odometer}</TableCell>
         <TableCell numeric>{this.props.service.price}</TableCell>
         <TableCell numeric>{this.props.service.note}</TableCell>
