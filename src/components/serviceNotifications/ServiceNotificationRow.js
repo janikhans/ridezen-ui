@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
 
 import { TableCell, TableRow } from 'material-ui/Table';
 import Button from 'material-ui/Button';
 
 class ServiceNotificationRow extends Component {
   render () {
+    const dueIn = this.props.serviceNotification.due_in
+    const units = this.props.serviceNotification.units
+
+    const serviceDueDate = new Date(Date.now() + dueIn * 1000);
+    const inPrefix = dueIn > 0 ? 'in' : ''
+    const agoSuffix = dueIn <= 0 ? 'ago' : ''
     let status = ''
 
-    if (this.props.serviceNotification.due_in >= 0) {
-      status = "in " + this.props.serviceNotification.due_in + " " + this.props.serviceNotification.units
-
+    if (units == 'miles' || units == 'kilometers' || units == 'hours') {
+      const words = [inPrefix,dueIn,units,agoSuffix]
+      status = words.join(" ");
     } else {
-      status =
-        <span className="red-text">
-          {this.props.serviceNotification.due_in + " " + this.props.serviceNotification.units + " ago"}
-        </span>
+      status = <Moment date={serviceDueDate} fromNow />
+    }
+
+    if (dueIn <= 0) {
+      status = <span className="red-text">{status}</span>
     }
 
     return (
       <TableRow>
         <TableCell>
-          <Link className="no-decoration" to={'/service-items/' + this.props.serviceItem.id}>
-            {this.props.serviceItem.name}
-          </Link>
+          {this.props.serviceItem.name}
         </TableCell>
         <TableCell numeric>
           {status}

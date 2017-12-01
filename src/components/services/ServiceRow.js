@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import Moment from 'react-moment';
 
 import { TableCell, TableRow } from 'material-ui/Table';
 import Button from 'material-ui/Button';
@@ -12,6 +13,12 @@ class ServiceRow extends Component {
           <Link className="no-decoration" to={'/service-items/' + this.props.serviceItem.id}>
             {this.props.serviceItem.name}
           </Link>
+        </TableCell>
+        <TableCell numeric>
+          <Moment
+            date={this.props.service.date}
+            format="MM/DD/YYYY"
+          />
         </TableCell>
         <TableCell numeric>{this.props.service.date}</TableCell>
         <TableCell numeric>{this.props.service.odometer}</TableCell>

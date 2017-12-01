@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 
 import MembershipDeleteDialog from './MembershipDeleteDialog'
 
@@ -19,7 +20,12 @@ class ServiceRow extends Component {
         <TableCell>{this.props.membership.user_id}</TableCell>
         <TableCell numeric>{this.props.membership.role}</TableCell>
         <TableCell numeric>{accepted}</TableCell>
-        <TableCell numeric>{this.props.membership.created_at}</TableCell>
+        <TableCell numeric>
+          <Moment
+            date={this.props.membership.created_at}
+            format="MM/DD/YYYY"
+          />
+        </TableCell>
         <TableCell numeric>
           <MembershipDeleteDialog
             membership={this.props.membership}
