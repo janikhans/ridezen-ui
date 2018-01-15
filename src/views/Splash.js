@@ -4,7 +4,7 @@ class Splash extends Component {
   render() {
     return (
       <div>
-        <h1>Trackr Splash page!</h1>
+        <h1>Ridezen Splash page!</h1>
       </div>
     );
   }

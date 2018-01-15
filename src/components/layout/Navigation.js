@@ -59,7 +59,7 @@ class Navigation extends React.Component {
       <div>
         <div className={classes.drawerHeader} >
           <Typography type="display1" component="h2" noWrap>
-            TrackR
+            Ridezen
           </Typography>
         </div>
         <Divider />

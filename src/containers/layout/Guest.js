@@ -53,7 +53,7 @@ class Guest extends Component {
 
     return (
       <div className={classes.root}>
-        <h1 className={classes.heading}>Start TrackR</h1>
+        <h1 className={classes.heading}>Start Ridezen</h1>
         <p className={classes.subHeading}>A better way to track things!</p>
         <Route exact path="/" component={Splash} />
         <Route exact path="/sign_in" component={LoginForm} />

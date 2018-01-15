@@ -1,12 +1,10 @@
-# Trackr UI
+# Ridezen UI
 
-Frontend UI for the Trackr app built using React.
+Frontend UI for Ridezen built using React.
 
-## Trackr
+## Ridezen
 
-Trackr is a simple (for now!) vehicle mileage tracking app. Input mileage + gas used
-and mpg will be figured out of the long term. Future features will add in notifications
-for due service.
+Ridezen is a fleet/vehicle maintenance tracking app.
 
 ## Getting started
 
@@ -16,4 +14,4 @@ To get the frontend running locally:
 - `npm install` to install all req'd dependencies
 - `npm start` to start the local server (this project uses create-react-app)
 
-Head to `localhost:3000` for all the Trackr/React UI goodness
+Head to `localhost:3000` for all the Ridezen/React UI goodness

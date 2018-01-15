@@ -161,7 +161,7 @@ class Member extends Component {
       content =
         <main className={classes.content}>
           <div style={loading.container}>
-            <h3 style={loading.header}>Your TrackR is Loading...</h3>
+            <h3 style={loading.header}>Your Ridezen is Loading...</h3>
             <Spinner name="ball-clip-rotate-multiple" fadeIn="half"/>
           </div>
         </main>

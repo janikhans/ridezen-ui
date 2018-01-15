@@ -31,7 +31,7 @@ class App extends Component {
     if (this.props.isVerifying) {
       return (
         <div style={classes.container}>
-          <h3 style={classes.heading}>TrackR Loading...</h3>
+          <h3 style={classes.heading}>Ridezen Loading...</h3>
           <Spinner name="ball-clip-rotate-multiple" fadeIn="half"/>
         </div>
       )
